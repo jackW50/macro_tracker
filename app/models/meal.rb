@@ -9,4 +9,5 @@ class Meal < ApplicationRecord
   def self.find_user_meals_today(user)
     self.today.where(user: user.id)
   end
+
 end
