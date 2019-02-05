@@ -13,4 +13,8 @@ class Meal < ApplicationRecord
   def self.calories_todays_meals(user)
     find_user_meals_today(user).collect { |meal| MealComposition.total_calories_in_meal(meal) }
   end
+
+  def calories
+    MealComposition.total_calories_in_meal(self)
+  end 
 end
