@@ -8,7 +8,7 @@ class MealComposition < ApplicationRecord
 
   def self.calories_for_each_food(meal)
     self.composition(meal).collect do |meal_comp|
-      FoodComposition.total_calories(meal_comp.food) * meal_comp.servings
+      FoodComposition.total_calories(meal_comp.food) * meal_comp.food_servings
     end
   end
 
@@ -18,7 +18,7 @@ class MealComposition < ApplicationRecord
 
   def self.calories_from_macro_for_each_food_in_meal(meal, macronutrient)
     self.composition(meal).collect do |meal_comp|
-      FoodComposition.total_calories_from_macro(meal_comp.food, macronutrient) * meal_comp.servings
+      FoodComposition.total_calories_from_macro(meal_comp.food, macronutrient) * meal_comp.food_servings
     end
   end
 
@@ -28,7 +28,7 @@ class MealComposition < ApplicationRecord
 
   def self.grams_of_macro_for_each_food_in_meal(meal, macronutrient)
     self.composition(meal).collect do |meal_comp|
-      FoodComposition.total_grams_of_macro(meal_comp.food, macronutrient) * meal_comp.servings
+      FoodComposition.total_grams_of_macro(meal_comp.food, macronutrient) * meal_comp.food_servings
     end
   end
 
@@ -37,7 +37,7 @@ class MealComposition < ApplicationRecord
   end
 
   def self.find_grams_and_servings(meal)
-    self.composition(meal).joins(food: :food_compositions).pluck('food_compositions.grams', 'meal_compositions.servings')
+    self.composition(meal).joins(food: :food_compositions).pluck('food_compositions.macronutrient_grams', 'meal_compositions.food_servings')
   end
 
   def self.collect_total_grams_of_each_food_in_meal(meal)
@@ -55,5 +55,5 @@ class MealComposition < ApplicationRecord
   def self.percent_of_macro_grams(meal, macronutrient)
     (self.total_grams_of_macro_in_meal(meal, macronutrient).to_f / self.total_grams_in_meal(meal) * 100).round(2)
   end
-  
+
 end
