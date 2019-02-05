@@ -9,8 +9,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    
-
+    @meals = current_user.meals
   end
 
   def edit

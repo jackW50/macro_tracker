@@ -1,1 +1,10 @@
 <h1><%= current_user.username %></h1>
+
+<h3>Meals</h3>
+<ul>
+  <% @meals.each do |meal| %>
+    <li>
+      <%= link_to "#{meal.time.strftime('%A, %b %d, %l:%M %p')} || #{meal.calories} calories", meal_path(meal) %>
+    </li>
+  <% end %>
+</ul>
