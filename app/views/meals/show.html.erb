@@ -1,9 +1,27 @@
 <h1>Meal for <%= @meal.time.strftime('%b %e, %l:%M %p') %></h1>
 
+<h3> Foods </h3>
 <ul>
   <% @meal.foods.each do |food| %>
     <li>
       <%= link_to food.name, meal_food_path(@meal, food) %>
+    </li>
+  <% end %>
+</ul>
+
+<h5> Macronutrient Composition </h5>
+<ul>
+  <% @macronutrients.each do |macronutrient| %>
+    <li>
+      <%= macronutrient.category.upcase %>
+      <ul>
+        <li>
+          <%= "Grams: #{@meal.grams_of_macro(macronutrient)}" %>
+        </li>
+        <li>
+          <%= "Percentage of Calories: #{@meal.percent_calories_macronutrient(macronutrient)}%" %>
+        </li>
+      </ul>
     </li>
   <% end %>
 </ul>
