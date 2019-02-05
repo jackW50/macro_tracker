@@ -1,11 +1,19 @@
 <h1><%= @food.name %></h1>
-<h3>Total Calories:<%= @food.calories %></h3>
+<h3>Total Calories: <%= @food.calories %></h3>
 
 <h5> Macronutrient Composition </h5>
 <ul>
   <% @food.macronutrients.each do |macronutrient| %>
     <li>
-      <%= "#{macronutrient.category}: #{macronutrient.grams(@food)} grams accounting for: #{macronutrient.calories(@food)} calories" %>
+      <%= macronutrient.category.upcase %>
+      <ul>
+        <li>
+          <%= "Grams: #{macronutrient.grams(@food)}" %>
+        </li>
+        <li>
+          <%= "Percentage of Calories: #{macronutrient.calorie_percent(@food)}%" %>
+        </li>
+      </ul>
     </li>
   <% end %>
 </ul>

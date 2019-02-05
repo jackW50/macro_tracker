@@ -8,5 +8,10 @@ class Macronutrient < ApplicationRecord
 
   def calories(food)
     FoodComposition.total_calories_from_macro(food, self)
-  end 
+  end
+
+  def calorie_percent(food)
+    (calories(food).to_f / FoodComposition.total_calories(food) * 100).round(2)
+  end
+
 end
