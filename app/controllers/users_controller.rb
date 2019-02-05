@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    raise params.inspect
+    
 
   end
 
