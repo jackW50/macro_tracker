@@ -1,0 +1,9 @@
+<h1>Meal for <%= @meal.time %></h1>
+
+<ul>
+  <% @meal.foods.each do |food| %>
+    <li>
+      <%= link_to food.name, food_path(food) %>
+    </li>
+  <% end %>
+</ul>
