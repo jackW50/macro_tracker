@@ -1,9 +1,9 @@
-<h1>Meal for <%= @meal.time %></h1>
+<h1>Meal for <%= @meal.time.strftime('%b %e, %l:%M %p') %></h1>
 
 <ul>
   <% @meal.foods.each do |food| %>
     <li>
-      <%= link_to food.name, food_path(food) %>
+      <%= link_to food.name, meal_food_path(@meal, food) %>
     </li>
   <% end %>
 </ul>

@@ -13,8 +13,7 @@ class MealsController < ApplicationController
   end
 
   def show
-    raise params.inspect 
-    @meal = Meal.find(params[:meal_id])
+    @meal = Meal.find(params[:id])
   end
 
   def edit
