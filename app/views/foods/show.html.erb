@@ -3,7 +3,7 @@
 <ul>
   <% @food.macronutrients.each do |macronutrient| %>
     <li>
-      <%= macronutrient.category ':' macronutrient.grams(@food) %>
+      <%= macronutrient.category ':' macronutrient.grams(@food) ':' macronutrient.calories(@food) %>
     </li>
   <% end %>
 </ul>
