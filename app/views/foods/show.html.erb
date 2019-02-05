@@ -1,0 +1,9 @@
+<h1><%= @food.name %></h1>
+
+<ul>
+  <% @food.macronutrients.each do |macronutrient| %>
+    <li>
+      <%= macronutrient.category ':' macronutrient.grams(@food) %>
+    </li>
+  <% end %>
+</ul>
