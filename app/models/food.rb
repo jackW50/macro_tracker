@@ -5,5 +5,9 @@ class Food < ApplicationRecord
   has_many :macronutrients, through: :food_compositions
 
   validates :name, presence: true
-  validates :name, uniqueness: true 
+  validates :name, uniqueness: true
+
+  def calories
+    FoodComposition.total_calories(self)
+  end
 end
