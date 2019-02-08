@@ -10,4 +10,13 @@ class Food < ApplicationRecord
   def calories
     FoodComposition.total_calories(self)
   end
+
+  def macronutrients_grams=(macronutrients_grams)
+    macronutrients_grams.each do |macronutrient_grams|
+      food_composition = FoodComposition.find_by(macronutrient_id: macronutrient_grams[:id], self.id)
+      food_compisition.update(grams: macronutrient_grams[:grams])
+    end
+  end
+
+
 end

@@ -17,16 +17,20 @@ class FoodsController < ApplicationController
   end
 
   def update
-    raise params.inspect
-    meal = Meal.find(params[:meal_id])
-    food = Food.find(params[:id])
-    food.macronutrient_ids = params[:food][:macronutrient_ids]
-    redirect_to meal_food_path(meal, food)
+    #raise params.inspect
+    @meal = Meal.find(params[:meal_id])
+    @food = Food.find(params[:id])
+
+    if @food.update(macronutrients_grams: params[:food][:macronutrients_grams], macronutrient_ids: params[:food][:macronutrient_ids])
+      redirect_to meal_food_path(@meal, @food)
+    else
+      render :edit
+    end
   end
 
   private
 
   def food_params
-    params.require(:food).permit(:name, :macronutrient_ids)
+    params.require(:food).permit(:name, :macronutrient_ids, :macronutrients_grams[][:grams], :macronutrients_grams[][:name])
   end
 end

@@ -7,7 +7,8 @@
       <%= b.label %>
       <%= b.check_box %>
       <br>
-      Grams:<%= text_field_tag "food[macronutrient_ids][grams]", b.object.grams(@food) %>
+      Grams:<%= text_field_tag "food[macronutrients_grams][][grams]", b.object.grams(@food) %>
+      <%= hidden_field_tag "food[macronutrients_grams][][id]", b.object.id %>
     </p>
   <% end %>
   <br>
