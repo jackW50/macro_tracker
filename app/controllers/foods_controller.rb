@@ -1,7 +1,7 @@
 class FoodsController < ApplicationController
 
   def index
-  end 
+  end
 
   def show
     @food = Food.find(params[:id])
@@ -9,5 +9,7 @@ class FoodsController < ApplicationController
   end
 
   def edit
+    @food = Food.find(params[:id])
+    @meal = Meal.find(params[:meal_id]) if params[:meal_id].present?
   end
 end

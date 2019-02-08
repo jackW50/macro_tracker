@@ -1,1 +1,13 @@
-<h1>Edit Food</h1>
+<h1>Edit <%=@food.name%></h1>
+
+<%= form_for(@food, url: meal_food_path(@meal, @food), method: :patch) do |f| %>
+  <%= f.collection_check_boxes(:macronutrient_ids, Macronutrient.all, :id, :category) do |b|%>
+    <p>
+      <%= b.label %>
+      <%= b.check_box %> 
+    </p>
+  <% end %>
+  <br>
+  <%= f.submit %>
+
+<% end %>
