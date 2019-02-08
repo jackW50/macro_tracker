@@ -28,7 +28,7 @@ class MealComposition < ApplicationRecord
 
   def self.grams_of_macro_for_each_food_in_meal(meal, macronutrient)
     self.composition(meal).collect do |meal_comp|
-      FoodComposition.total_grams_of_macro(meal_comp.food, macronutrient) * meal_comp.food_servings
+      FoodComposition.total_grams_of_macronutrients_in_food(meal_comp.food, macronutrient) * meal_comp.food_servings
     end
   end
 

@@ -5,7 +5,7 @@ class Meal < ApplicationRecord
 
   scope :today, -> { where("time > :begin_day AND time < :end_day", begin_day: DateTime.now.midnight, end_day: DateTime.now.midnight + 1) }
   scope :chronological, -> { order(time: :asc) }
-  scope :grams_of_macronutrient, ->(macronutrient) { joins(foods: :macronutrients).where("macronutrients.id = ?", macronutrient.id).pluck(:macronutrient_grams).sum }
+
 
   def self.find_user_meals_today(user)
     self.today.where(user: user.id)
@@ -27,12 +27,8 @@ class Meal < ApplicationRecord
     (calories_from_macronutrient(macronutrient).to_f / calories * 100).round(2)
   end
 
-  def grams_of_macro(macronutrient)
-    Meal.grams_of_macronutrient(macronutrient)
+  def grams_of_macronutrient(macronutrient)
+    MealComposition.total_grams_of_macro_in_meal(self, macronutrient)
   end
-
-  #def grams_of_macronutrient(macronutrient)
-  #  FoodComposition.total_grams_of_macro_in_meal(self, macronutrient)
-  #end
 
 end

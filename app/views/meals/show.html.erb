@@ -27,7 +27,7 @@
             <tr>
           <% end %>
                 <td><%= macronutrient.category.upcase %></td>
-                <td><%= @meal.grams_of_macro(macronutrient) %></td>
+                <td><%= @meal.grams_of_macronutrient(macronutrient) %></td>
                 <td><%= @meal.percent_calories_macronutrient(macronutrient) %></td>
             </tr>
         <% end %>
