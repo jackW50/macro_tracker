@@ -2,18 +2,30 @@
 <h3>Total Calories: <%= @food.calories %></h3>
 
 <h5> Macronutrient Composition </h5>
-<ul>
-  <% @food.macronutrients.each do |macronutrient| %>
-    <li>
-      <%= macronutrient.category.upcase %>
-      <ul>
-        <li>
-          <%= "Grams: #{macronutrient.grams(@food)}" %>
-        </li>
-        <li>
-          <%= "Percentage of Calories: #{macronutrient.calorie_percent(@food)}%" %>
-        </li>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Grams</th>
+            <th>Percentage of Calories</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @food.macronutrients.each.with_index(1) do |macronutrient, i| %>
+        <% if i.odd? %>
+          <tr class="pure-table-odd" >
+        <% else %>
+          <tr>
+        <% end %>
+              <td><%= macronutrient.category.upcase %></td>
+              <td><%= macronutrient.grams(@food) %></td>
+              <td><%= macronutrient.calorie_percent(@food) %></td>
+          </tr>
+      <% end %>
+    </tbody>
+</table>
+
+<footer>
+  <a href="#">Logout</a>
+</footer>

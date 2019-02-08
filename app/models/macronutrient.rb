@@ -3,7 +3,7 @@ class Macronutrient < ApplicationRecord
   has_many :foods, through: :food_compositions
 
   def grams(food)
-    FoodComposition.total_grams_of_macro(food, self)
+    FoodComposition.total_grams_of_macronutrients_in_food(food, self)
   end
 
   def calories(food)
