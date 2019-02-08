@@ -1,96 +1,39 @@
 <h1>Meal for <%= @meal.time.strftime('%b %e, %l:%M %p') %></h1>
 
-<h3> Foods </h3>
-<ul>
-  <% @meal.foods.each do |food| %>
-    <li>
-      <%= link_to food.name, meal_food_path(@meal, food) %>
-    </li>
-  <% end %>
-</ul>
+  <h3> Foods </h3>
+  <ul>
+    <% @meal.foods.each do |food| %>
+      <li>
+        <%= link_to food.name, meal_food_path(@meal, food) %>
+      </li>
+    <% end %>
+  </ul>
 
-<h5> Macronutrient Composition </h5>
-<ul>
-  <% @macronutrients.each do |macronutrient| %>
-    <li>
-      <%= macronutrient.category.upcase %>
-      <ul>
-        <li>
-          <%= "Grams: #{@meal.grams_of_macro(macronutrient)}" %>
-        </li>
-        <li>
-          <%= "Percentage of Calories: #{@meal.percent_calories_macronutrient(macronutrient)}%" %>
-        </li>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+  <h5> Macronutrient Composition </h5>
 
-<table class="pure-table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Category</th>
-            <th>Grams</th>
-            <th>Percentage of Calories</th>
-        </tr>
-    </thead>
-    <% @macronutrients.each.with_index(1) do |macronutrient, i| %>
-      <tbody>
-          <tr class="pure-table-odd" <%= if i.odd? %> >
-              <td><%= macronutrient.category.upcase %></td>
-              <td><%= @meal.grams_of_macro(macronutrient) %></td>
-              <td><%= @meal.percent_calories_macronutrient(macronutrient) %></td>
-              <td>2009</td>
-          </tr>
-
+  <table class="pure-table">
+      <thead>
           <tr>
-              <td>2</td>
-              <td>Toyota</td>
-              <td>Camry</td>
-              <td>2012</td>
+              <th>Category</th>
+              <th>Grams</th>
+              <th>Percentage of Calories</th>
           </tr>
+      </thead>
+      <tbody>
+        <% @macronutrients.each.with_index(1) do |macronutrient, i| %>
+          <% if i.odd? %>
+            <tr class="pure-table-odd" >
+          <% else %>
+            <tr>
+          <% end %>
+                <td><%= macronutrient.category.upcase %></td>
+                <td><%= @meal.grams_of_macro(macronutrient) %></td>
+                <td><%= @meal.percent_calories_macronutrient(macronutrient) %></td>
+            </tr>
+        <% end %>
+      </tbody>
+  </table>
 
-          <tr class="pure-table-odd">
-              <td>3</td>
-              <td>Hyundai</td>
-              <td>Elantra</td>
-              <td>2010</td>
-          </tr>
-
-        <tr>
-            <td>4</td>
-            <td>Ford</td>
-            <td>Focus</td>
-            <td>2008</td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>5</td>
-            <td>Nissan</td>
-            <td>Sentra</td>
-            <td>2011</td>
-        </tr>
-
-        <tr>
-            <td>6</td>
-            <td>BMW</td>
-            <td>M3</td>
-            <td>2009</td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>7</td>
-            <td>Honda</td>
-            <td>Civic</td>
-            <td>2010</td>
-        </tr>
-
-        <tr>
-            <td>8</td>
-            <td>Kia</td>
-            <td>Soul</td>
-            <td>2010</td>
-        </tr>
-    </tbody>
-</table>
+  <footer>
+    <a href="#">Logout</a>
+  </footer>

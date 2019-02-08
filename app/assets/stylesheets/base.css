@@ -1,0 +1,54 @@
+<style>
+
+  .wrapper {
+    margin: 0 auto;
+  }
+
+  h1 {
+    text-align: center;
+    color: #100505c4;
+    background-color: coral;
+  }
+
+  h5 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em;
+  }
+
+  .wrapper {
+    background-color: #46718685;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  table.pure-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em;
+    margin-bottom: 60px;
+  }
+
+  tr {
+    background-color: #e0e0e0;
+  }
+
+  .navbar a {
+    display: block;
+  }
+
+  .food_field {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .field {
+    padding-top: 10px;
+  }
+
+  footer {
+    text-align: center;
+  }
+
+</style>
