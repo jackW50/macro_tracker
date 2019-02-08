@@ -13,8 +13,12 @@ class Food < ApplicationRecord
 
   def macronutrients_grams=(macronutrients_grams)
     macronutrients_grams.each do |macronutrient_grams|
-      food_composition = FoodComposition.find_by(macronutrient_id: macronutrient_grams[:id], self.id)
-      food_compisition.update(grams: macronutrient_grams[:grams])
+      food_composition = FoodComposition.find_by(macronutrient_id: macronutrient_grams[:id], food_id: self.id)
+      if food_composition.nil?
+        self.food_compositions.build(macronutrient_id: macronutrient_grams[:id], macronutrient_grams: macronutrient_grams[:grams])
+      else
+        food_composition.update(macronutrient_grams: macronutrient_grams[:grams])
+      end
     end
   end
 

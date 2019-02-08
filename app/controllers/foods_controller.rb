@@ -17,11 +17,10 @@ class FoodsController < ApplicationController
   end
 
   def update
-    #raise params.inspect
     @meal = Meal.find(params[:meal_id])
     @food = Food.find(params[:id])
 
-    if @food.update(macronutrients_grams: params[:food][:macronutrients_grams], macronutrient_ids: params[:food][:macronutrient_ids])
+    if @food.update(macronutrients_grams: params[:food][:macronutrients_grams])
       redirect_to meal_food_path(@meal, @food)
     else
       render :edit

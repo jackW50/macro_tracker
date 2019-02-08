@@ -34,6 +34,12 @@
       </tbody>
   </table>
 
+  <!-- dropdown menu to add existing foods to current meal -->
+
+  <%= form_tag action: meal_path, method: :patch do %>
+    <%=f.collection_select  %>
+  <% end %>
+
   <footer>
     <a href="#">Logout</a>
   </footer>

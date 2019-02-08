@@ -1,5 +1,5 @@
 <h1>Edit <%=@food.name%></h1>
-
+<h3> Change Composition(unable to remove macronutrients at this time.) </h3>
 <%= form_for(@food, url: meal_food_path(@meal, @food), method: :patch) do |f| %>
   <%= f.collection_check_boxes(:macronutrient_ids, Macronutrient.all, :id, :category) do |b|%>
     <p>
