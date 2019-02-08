@@ -17,7 +17,7 @@ class FoodsController < ApplicationController
   end
 
   def update
-    #raise params.inspect
+    raise params.inspect
     meal = Meal.find(params[:meal_id])
     food = Food.find(params[:id])
     food.macronutrient_ids = params[:food][:macronutrient_ids]

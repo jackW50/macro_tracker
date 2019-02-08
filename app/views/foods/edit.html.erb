@@ -3,8 +3,11 @@
 <%= form_for(@food, url: meal_food_path(@meal, @food), method: :patch) do |f| %>
   <%= f.collection_check_boxes(:macronutrient_ids, Macronutrient.all, :id, :category) do |b|%>
     <p>
+      <% #binding.pry %>
       <%= b.label %>
-      <%= b.check_box %> 
+      <%= b.check_box %>
+      <br>
+      Grams:<%= text_field_tag "food[macronutrient_ids][grams]", b.object.grams(@food) %>
     </p>
   <% end %>
   <br>
