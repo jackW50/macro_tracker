@@ -31,4 +31,8 @@ class Meal < ApplicationRecord
     MealComposition.total_grams_of_macro_in_meal(self, macronutrient)
   end
 
+  def add_food=(add_food)
+    self.meal_compositions.build(food_id: add_food)
+  end
+
 end

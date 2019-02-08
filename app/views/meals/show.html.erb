@@ -4,7 +4,7 @@
   <ul>
     <% @meal.foods.each do |food| %>
       <li>
-        <%= link_to food.name, meal_food_path(@meal, food) %>
+        <%= link_to food.name, meal_food_path(@meal, food) %><!-- button_tag to remove foods from meal -->
       </li>
     <% end %>
   </ul>
@@ -36,8 +36,9 @@
 
   <!-- dropdown menu to add existing foods to current meal -->
 
-  <%= form_tag action: meal_path, method: :patch do %>
-    <%=f.collection_select  %>
+  <%= form_tag(meal_path, method: :patch) do %>
+    <%= select_tag 'meal[add_food]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
+    <%= submit_tag "Add Food" %>
   <% end %>
 
   <footer>

@@ -14,7 +14,7 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
-    @macronutrients = Macronutrient.all 
+    @macronutrients = Macronutrient.all
   end
 
   def edit
@@ -22,10 +22,19 @@ class MealsController < ApplicationController
   end
 
   def update
-
+    meal = Meal.find(params[:id])
+    meal.update(add_food: params[:meal][:add_food])
+    redirect_to meal_path(meal)
   end
 
   def destroy
 
   end
+
+  private
+
+  def meal_params
+    params.require(:meal).permit(:add_food)
+  end
+
 end
