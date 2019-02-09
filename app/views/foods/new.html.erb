@@ -2,3 +2,8 @@
 
 <!-- new form for food(pull from meal new form) -->
 <!-- nested form that asscociates to meal upon creation-->
+<%= form_for(@food, url: meal_foods_path(@meal)) do |f| %>
+  <%= f.text_field :name, placeholder: "name" %>
+
+  <%= f.submit %>
+<% end %>
