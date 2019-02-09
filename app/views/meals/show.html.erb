@@ -43,8 +43,9 @@
     <%= select_tag 'meal[add_food]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
     <%= submit_tag "Add Food" %>
   <% end %>
-  <p> To create a new food click <%= link_to "Here", new_meal_food_path(@meal) %> 
-
+  <p> To create a new food click <%= link_to "Here", new_meal_food_path(@meal) %>
+<!-- link to edit meals time -->
+  <p><%= link_to "Update Time", edit_meal_path(@meal) %>
   <footer>
     <a href="#">Logout</a>
   </footer>

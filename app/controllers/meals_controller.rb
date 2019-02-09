@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :check_date, only: :create
+  before_action :date_valid?, only: :create
 
   def index
 
@@ -17,7 +17,7 @@ class MealsController < ApplicationController
       #@meal.user = current_user
       redirect_to meal_path(@meal)
     else
-      @macronutrients = Macronutrient.all 
+      @macronutrients = Macronutrient.all
       render :new
     end
   end
@@ -28,10 +28,11 @@ class MealsController < ApplicationController
   end
 
   def edit
-
+    @meal = Meal.find(params[:id])
   end
 
   def update
+    raise params.inspect
     meal = Meal.find(params[:id])
     meal.update(meal_params)
     redirect_to meal_path(meal)
@@ -43,7 +44,7 @@ class MealsController < ApplicationController
 
   private
 
-  def check_date
+  def date_valid?
     redirect_to new_meal_path, alert: "You must at least choose a month, day, and year for your meal" unless params[:meal]["time(1i)"].present? && params[:meal]["time(2i)"].present? && params[:meal]["time(3i)"].present?
   end
 

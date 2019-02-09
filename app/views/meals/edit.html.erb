@@ -1,1 +1,7 @@
 <h1> Update time of the meal </h1>
+
+<%= form_for(@meal) do |f| %>
+  <%= f.datetime_select :time %>
+  <%= f.submit "Update Meal Time" %>
+<% end %>
+<!--link to destroy meal-->
