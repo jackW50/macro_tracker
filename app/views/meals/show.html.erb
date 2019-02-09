@@ -45,7 +45,8 @@
   <% end %>
   <p> To create a new food click <%= link_to "Here", new_meal_food_path(@meal) %>
 <!-- link to edit meals time -->
-  <p><%= link_to "Update Time", edit_meal_path(@meal) %>
+  <p> <%= link_to "Update Meal", edit_meal_path(@meal) %> </p>
+  <p> <%= link_to "Create a New Food", new_meal_food_path(@meal) %> </p>
   <footer>
     <a href="#">Logout</a>
   </footer>
