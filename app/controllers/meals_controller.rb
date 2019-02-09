@@ -10,10 +10,15 @@ class MealsController < ApplicationController
   end
 
   def create
-    #raise meal_params.inspect
+    #raise params.inspect
     time = DateTime.new(params[:meal]["time(1i)"].to_i, params[:meal]["time(2i)"].to_i, params[:meal]["time(3i)"].to_i, params[:meal]["time(4i)"].to_i, params[:meal]["time(5i)"].to_i)
     @meal = Meal.new(food_attributes: params[:meal][:food_attributes], time: time, new_foods: params[:meal][:new_foods])
-    #@meal = Meal.new(meal_params)
+    if @meal.save
+      #@meal.user = current_user
+      redirect_to meal_path(@meal)
+    else
+      render :new
+    end
   end
 
   def show
@@ -37,8 +42,11 @@ class MealsController < ApplicationController
 
   private
 
+  def date_valid?
+  end 
+
   def meal_params
-    params.require(:meal).permit(:add_food, :remove_food)
+    params.require(:meal).permit(:add_food, :remove_food, :time, :food_attributes, :new_foods)
   end
 
 end

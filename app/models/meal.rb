@@ -38,9 +38,8 @@ class Meal < ApplicationRecord
   def remove_food=(remove_food)
     MealComposition.find_by(food_id: remove_food, meal_id: self.id).destroy
   end
-#"food_attributes"=>[{"food_id"=>"3", "servings"=>"2"}, {"food_id"=>"8", "servings"=>"3"}]
+
   def food_attributes=(food_attributes)
-    #raise food_attributes.inspect
     food_attributes.each do |food_attribute|
       if food_attribute[:food_id].present?
         self.meal_compositions.build(food_id: food_attribute[:food_id], food_servings: food_attribute[:servings])
@@ -50,13 +49,13 @@ class Meal < ApplicationRecord
 
   def new_foods=(new_foods)
     new_foods.each do |new_food|
-      if !new_food[:food_name].blank?
+      if new_food[:food_name].present?
         if food = Food.find_by(name: new_food[:food_name])
-          self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings])
+          self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings] ||= 1)
         else
           food = Food.create(name: new_food[:food_name])
             new_food[:macronutrient_categories].each do |macronutrient_category|
-              food.food_compositions.build(food_id: food.id, macronutrient_id: macronutrient_category[:macronutrient_id], macronutrient_grams: macronutrient_category[:grams]) if macronutrient_category[:macronutrient_id].present?
+              food.food_compositions.build(food_id: food.id, macronutrient_id: macronutrient_category[:macronutrient_id], macronutrient_grams: macronutrient_category[:grams] ||= 1) if macronutrient_category[:macronutrient_id].present?
             end
           self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings])
         end
