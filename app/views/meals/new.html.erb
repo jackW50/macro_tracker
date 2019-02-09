@@ -1,7 +1,7 @@
 <h1> Create New Meal </h1>
 
 <%= form_for(@meal) do |f| %>
-    Select Time: <%= datetime_select "meal", "time", prompt: {month: "Month", day: "Day", year: "Year", hour: "Hour", minute: "minute"}%>
+    Select Time: <%= f.datetime_select :time, prompt: {month: "Month", day: "Day", year: "Year", hour: "Hour", minute: "minute"}%>
     <div class="field">
 
       <% 5.times do %>
@@ -27,5 +27,5 @@
         </div>
       <% end %>
 
-    <%= f.submit "Add Meal" %>
+    <%= f.submit "Create Meal" %>
   <% end %>

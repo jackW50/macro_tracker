@@ -7,13 +7,14 @@ class MealsController < ApplicationController
   def new
     @meal = Meal.new
     @macronutrients = Macronutrient.all
-    @meal_composition = MealComposition.new
-    @food = Food.new
-    @food_composition = FoodComposition.new
   end
 
   def create
     raise params.inspect
+    raise meal_params.inspect
+    time = DateTime.new(params[:meal]["time(1i)"].to_i, params[:meal]["time(2i)"].to_i, params[:meal]["time(3i)"].to_i, params[:meal]["time(4i)"].to_i, params[:meal]["time(5i)"].to_i)
+    @meal = Meal.new(food_attributes: params[:meal][:food_attributes], time: time, new_foods: params[:meal][:new_foods])
+    @meal = Meal.new(meal_params)
   end
 
   def show
