@@ -3,6 +3,8 @@ class Meal < ApplicationRecord
   has_many :meal_compositions
   has_many :foods, through: :meal_compositions
 
+  validates :time, presence: true
+
   scope :today, -> { where("time > :begin_day AND time < :end_day", begin_day: DateTime.now.midnight, end_day: DateTime.now.midnight + 1) }
   scope :chronological, -> { order(time: :asc) }
 
@@ -42,6 +44,7 @@ class Meal < ApplicationRecord
   def food_attributes=(food_attributes)
     food_attributes.each do |food_attribute|
       if food_attribute[:food_id].present?
+        food_attribute[:servings] = 1 unless food_attribute[:servings].present?
         self.meal_compositions.build(food_id: food_attribute[:food_id], food_servings: food_attribute[:servings])
       end
     end
@@ -49,9 +52,10 @@ class Meal < ApplicationRecord
 
   def new_foods=(new_foods)
     new_foods.each do |new_food|
+      new_food[:food_servings] = 1 unless new_food[:food_servings].present?
       if new_food[:food_name].present?
         if food = Food.find_by(name: new_food[:food_name])
-          self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings] ||= 1)
+          self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings])
         else
           food = Food.create(name: new_food[:food_name])
             new_food[:macronutrient_categories].each do |macronutrient_category|
