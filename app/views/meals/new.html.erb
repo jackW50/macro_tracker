@@ -1,1 +1,31 @@
 <h1> Create New Meal </h1>
+
+<%= form_for(@meal) do |f| %>
+    Select Time: <%= datetime_select "meal", "time", prompt: {month: "Month", day: "Day", year: "Year", hour: "Hour", minute: "minute"}%>
+    <div class="field">
+
+      <% 5.times do %>
+        <%= select_tag 'meal[food_attributes][][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: 'select food' %>
+        <%= text_field_tag 'meal[food_attributes][][servings]', nil, placeholder: 'servings' %>
+        <br>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <header> And/Or Create Foods For Meal </header>
+      <% 5.times do %>
+        <div class="food_field">
+          <%= label_tag 'Food Name:' %>
+          <%= text_field_tag 'meal[new_foods][][new_food]' %>
+          <br>
+          <% @macronutrients.each do |macronutrient| %>
+            <%= macronutrient.category%> <%= check_box_tag 'meal[new_foods][][macronutrient_categories][][macronutrient_category]', macronutrient.category %>
+            <%= text_field_tag 'meal[new_foods][][macronutrient_categories][][grams]', nil, placeholder: 'grams' %>
+            <br>
+          <% end %>
+          <%= text_field_tag 'meal[new_foods][][food_servings]', nil, placeholder: 'servings' %>
+        </div>
+      <% end %>
+
+    <%= f.submit "Add Meal" %>
+  <% end %>

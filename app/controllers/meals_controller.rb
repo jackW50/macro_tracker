@@ -5,11 +5,15 @@ class MealsController < ApplicationController
   end
 
   def new
-
+    @meal = Meal.new
+    @macronutrients = Macronutrient.all
+    @meal_composition = MealComposition.new
+    @food = Food.new
+    @food_composition = FoodComposition.new
   end
 
   def create
-
+    raise params.inspect
   end
 
   def show
