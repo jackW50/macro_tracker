@@ -28,7 +28,6 @@ class MealsController < ApplicationController
   end
 
   def edit
-    raise inspect 
     @meal = Meal.find(params[:id])
   end
 
@@ -44,7 +43,11 @@ class MealsController < ApplicationController
   end
 
   def destroy
-    Meal.find(params[:id]).destroy
+    meal = Meal.find(params[:id])
+    meal.meal_compositions.each do |meal_composition|
+      meal_composition.destroy
+    end
+    meal.destroy
     redirect_to user_path(current_user)
   end
 
