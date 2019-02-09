@@ -23,7 +23,7 @@ class MealsController < ApplicationController
 
   def update
     meal = Meal.find(params[:id])
-    meal.update(add_food: params[:meal][:add_food])
+    meal.update(meal_params)
     redirect_to meal_path(meal)
   end
 
@@ -34,7 +34,7 @@ class MealsController < ApplicationController
   private
 
   def meal_params
-    params.require(:meal).permit(:add_food)
+    params.require(:meal).permit(:add_food, :remove_food)
   end
 
 end

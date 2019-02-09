@@ -35,4 +35,8 @@ class Meal < ApplicationRecord
     self.meal_compositions.build(food_id: add_food)
   end
 
+  def remove_food=(remove_food)
+    MealComposition.find_by(food_id: remove_food, meal_id: self.id).destroy
+  end
+
 end

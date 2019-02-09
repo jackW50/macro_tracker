@@ -51,7 +51,7 @@
     text-align: center;
   }
 
-  button {
+  .button_to {
     border: none;
     margin-left: 20px;
     display: inline-block;
@@ -61,7 +61,7 @@
     text-align: center;
   }
 
-  button:hover, button:focus {
+  .button_to:hover, button:focus {
     background: #0053ba;
   }
 
@@ -70,7 +70,7 @@
     color: black;
   }
 
-  button:focus {
+  .button_to:focus {
     outline: 1px solid #fff;
     outline-offset: -4px;
   }

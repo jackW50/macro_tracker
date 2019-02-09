@@ -7,7 +7,7 @@
         <%= link_to food.name, meal_food_path(@meal, food), class: "food-link" %>
       </li>
       <li>
-        <%= button_tag "remove", action: meal_food_path(@meal, food), method: :patch, class: "remove-food", confirm: "Are you sure you want to remove #{food.name}" %>
+        <%= button_to "remove", meal_path(@meal), method: :patch, params: {:meal => {:remove_food => food.id}}, data: {confirm: "Are you sure you want to remove #{food.name}?"} %>
       </li>
     <% end %>
   </ul>
@@ -39,7 +39,7 @@
 
   <!-- dropdown menu to add existing foods to current meal -->
 
-  <%= form_tag(meal_path, method: :patch) do %>
+  <%= form_tag(meal_path(@meal), method: :patch) do %>
     <%= select_tag 'meal[add_food]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
     <%= submit_tag "Add Food" %>
   <% end %>
