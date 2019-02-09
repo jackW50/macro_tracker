@@ -39,4 +39,17 @@ class Meal < ApplicationRecord
     MealComposition.find_by(food_id: remove_food, meal_id: self.id).destroy
   end
 
+  def food_attributes=(food_attributes)
+    raise food_attributes.inspect
+    food_attributes.each do |food_attribute|
+      if food_attribute[:food_id].present?
+        self.meal_compositions.build(food_id: food_attribute[:food_id], servings: food_attribute[:servings])
+      end
+    end
+  end
+
+  def new_foods=(new_foods)
+    raise new_foods.inspect 
+  end
+
 end
