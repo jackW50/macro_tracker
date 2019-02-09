@@ -32,9 +32,13 @@ class MealsController < ApplicationController
   end
 
   def update
-    raise params.inspect
     meal = Meal.find(params[:id])
-    meal.update(meal_params)
+    if params[:meal]["time(1i)"].present?
+      time = DateTime.new(params[:meal]["time(1i)"].to_i, params[:meal]["time(2i)"].to_i, params[:meal]["time(3i)"].to_i, params[:meal]["time(4i)"].to_i, params[:meal]["time(5i)"].to_i)
+      meal.update(time: time)
+    else
+      meal.update(meal_params)
+    end
     redirect_to meal_path(meal)
   end
 
