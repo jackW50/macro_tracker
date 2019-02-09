@@ -8,12 +8,10 @@ class FoodsController < ApplicationController
 
   def show
     @food = Food.find(params[:id])
-    @meal = Meal.find(params[:meal_id]) if params[:meal_id].present?
   end
 
   def edit
     @food = Food.find(params[:id])
-    @meal = Meal.find(params[:meal_id]) if params[:meal_id].present?
   end
 
   def update
@@ -21,7 +19,7 @@ class FoodsController < ApplicationController
     @food = Food.find(params[:id])
 
     if @food.update(macronutrients_grams: params[:food][:macronutrients_grams])
-      redirect_to meal_food_path(@meal, @food)
+      redirect_to food_path(@food)
     else
       render :edit
     end

@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :show, :create, :edit, :update]
 
   resources :meals do
-    resources :foods
-  end 
+    resources :foods, only: [:new, :index, :create]
+  end
+
+  resources :foods, only: [:show, :edit, :update, :destroy]
 
   resources :sessions, only: [:new, :create, :destroy] do
     collection do

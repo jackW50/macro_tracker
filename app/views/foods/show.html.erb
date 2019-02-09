@@ -1,3 +1,4 @@
+<!--should this view be nested?? I don't think so-->
 <h1><%= @food.name %></h1>
 <h3>Total Calories: <%= @food.calories %></h3>
 
@@ -28,6 +29,6 @@
 
 <footer>
   <a href="#">Logout</a>
-  <%= link_to "update food", edit_meal_food_path(@meal, @food) %>
-  <%= link_to "Back", meal_path(@meal) %>
+  <%= link_to "update food", edit_food_path(@food) %>
+  
 </footer>
