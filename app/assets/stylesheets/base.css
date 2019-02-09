@@ -51,4 +51,28 @@
     text-align: center;
   }
 
+  button {
+    border: none;
+    margin-left: 20px;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: .6rem;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  button:hover, button:focus {
+    background: #0053ba;
+  }
+
+  a.food-link:hover, a.food-link:focus {
+    background: silver;
+    color: black;
+  }
+
+  button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+  }
+
 </style>

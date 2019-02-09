@@ -27,6 +27,9 @@ class FoodsController < ApplicationController
     end
   end
 
+  def destroy
+  end 
+
   private
 
   def food_params
