@@ -1,3 +1,17 @@
 <h1> Index of all the Foods That Are In The Meal with their caloric count listed side by side </h1>
 
 <!-- a nested view -->
+<% @meal.foods.each do |food| %>
+  <div>
+    <ul>
+      <li>
+        <%= food.name %>
+        <ul>
+          <li>
+            <%= food.calories %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<% end %>
