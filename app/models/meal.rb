@@ -42,7 +42,6 @@ class Meal < ApplicationRecord
   end
 
   def food_attributes=(food_attributes)
-    #raise inspect
     food_attributes.each do |food_attribute|
       if food_attribute[:food_id].present?
         food_attribute[:servings] = 1 unless food_attribute[:servings].present?

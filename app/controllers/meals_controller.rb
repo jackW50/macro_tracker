@@ -14,7 +14,7 @@ class MealsController < ApplicationController
     @meal = Meal.new(meal_params)
     if @meal.save
       @meal.user = current_user
-      redirect_to meal_path(@meal)
+      redirect_to user_path(current_user)
     else
       @macronutrients = Macronutrient.all
       render :new
