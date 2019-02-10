@@ -1,16 +1,13 @@
 <h1>Edit <%=@food.name%></h1>
 <h3> Change Composition(unable to remove macronutrients at this time.) </h3>
 <%= form_for(@food, url: food_path(@food), method: :patch) do |f| %>
-  <%= f.collection_check_boxes(:macronutrient_ids, Macronutrient.all, :id, :category) do |b|%>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <% @macronutrients.each do |macronutrient| %>
     <p>
-      <%= b.label %>
-      <%= b.check_box %>
-      <br>
-      Grams:<%= text_field_tag "food[macronutrients_grams][][grams]", b.object.grams(@food) %>
-      <%= hidden_field_tag "food[macronutrients_grams][][id]", b.object.id %>
+      <%= label_tag :macronutrient_id, macronutrient.category %>
+      <%= check_box_tag "food[macronutrients_grams[][id]" %>
+      Grams:<%= text_field_tag "food[macronutrients_grams][][grams]" %>
     </p>
   <% end %>
-  <br>
-  <%= f.submit %>
-
 <% end %>

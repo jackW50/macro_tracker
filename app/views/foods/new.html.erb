@@ -1,9 +1,15 @@
 <h1> Create A New Food </h1>
-
-<!-- new form for food(pull from meal new form) -->
-<!-- nested form that asscociates to meal upon creation-->
+<!--this is nested. Associate with meal-->
 <%= form_for(@food, url: meal_foods_path(@meal)) do |f| %>
-  <%= f.text_field :name, placeholder: "name" %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <% @macronutrients.each do |macronutrient| %>
+    <p>
+      <%= label_tag :macronutrient_id, macronutrient.category %>
+      <%= check_box_tag "food[macronutrients_grams[][id]" %>
+      Grams:<%= text_field_tag "food[macronutrients_grams][][grams]" %>
+    </p>
+  <% end %>
 
   <%= f.submit %>
 <% end %>
