@@ -12,8 +12,8 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
+    @meal.user = current_user
     if @meal.save
-      @meal.user = current_user
       redirect_to user_path(current_user)
     else
       @macronutrients = Macronutrient.all
@@ -45,7 +45,7 @@ class MealsController < ApplicationController
       meal_composition.destroy
     end
     meal.destroy
-    redirect_to user_path(current_user), notice: "You just deleted a meal for #{meal.time}."
+    redirect_to user_path(current_user), notice: "You just deleted a meal for #{meal.time.strftime('%A, %b %d, %l:%M %p')}."
   end
 
   private

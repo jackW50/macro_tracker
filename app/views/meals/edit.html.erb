@@ -5,4 +5,4 @@
   <%= f.submit "Update Meal Time" %>
 <% end %>
 <!--link to destroy meal-->
-<%= button_to "Delete Meal", meal_path(@meal), method: :delete, data: {confirm: "Are you sure you want to remove this meal?"} %>
+<%= button_to "Delete Meal", meal_path(@meal), method: :delete, form_class: "delete-meal", data: {confirm: "Are you sure you want to remove this meal?"} %>
