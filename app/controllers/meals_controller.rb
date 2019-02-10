@@ -2,7 +2,7 @@ class MealsController < ApplicationController
   before_action :date_valid?, only: :create
 
   def index
-
+    @meals = current_user.meals 
   end
 
   def new
