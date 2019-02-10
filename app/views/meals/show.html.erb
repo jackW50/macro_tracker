@@ -26,6 +26,10 @@
     <%= submit_tag "Add Food" %>
   <% end %>
 
-  <p> To create a new food for meal click <%= link_to "Here", new_meal_food_path(@meal) %></p>
+  <%= content_tag :p do %>
+    To create a new food for meal click <%= link_to "Here", new_meal_food_path(@meal) %>
+  <% end %>
 <!-- link to edit meals time -->
-  <p> <%= link_to "Update Meal Time", edit_meal_path(@meal) %> </p>
+  <%= content_tag :p do %>
+   <%= link_to "Update Meal Time", edit_meal_path(@meal) %>
+  <% end %>
