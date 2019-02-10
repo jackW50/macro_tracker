@@ -11,10 +11,9 @@ class MealsController < ApplicationController
   end
 
   def create
-    time = DateTime.new(params[:meal]["time(1i)"].to_i, params[:meal]["time(2i)"].to_i, params[:meal]["time(3i)"].to_i, params[:meal]["time(4i)"].to_i, params[:meal]["time(5i)"].to_i)
-    @meal = Meal.new(food_attributes: params[:meal][:food_attributes], time: time, new_foods: params[:meal][:new_foods])
+    @meal = Meal.new(meal_params)
     if @meal.save
-      #@meal.user = current_user
+      @meal.user = current_user
       redirect_to meal_path(@meal)
     else
       @macronutrients = Macronutrient.all
@@ -32,14 +31,12 @@ class MealsController < ApplicationController
   end
 
   def update
-    meal = Meal.find(params[:id])
-    if params[:meal]["time(1i)"].present?
-      time = DateTime.new(params[:meal]["time(1i)"].to_i, params[:meal]["time(2i)"].to_i, params[:meal]["time(3i)"].to_i, params[:meal]["time(4i)"].to_i, params[:meal]["time(5i)"].to_i)
-      meal.update(time: time)
+    @meal = Meal.find(params[:id])
+    if @meal.update(meal_params)
+      redirect_to meal_path(@meal)
     else
-      meal.update(meal_params)
+      render :edit
     end
-    redirect_to meal_path(meal)
   end
 
   def destroy
@@ -58,7 +55,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:add_food, :remove_food, :time, :food_attributes, :new_foods)
+    params.require(:meal).permit(:add_food, :remove_food, :time, food_attributes: [:food_id, :servings], new_foods: [:food_name, :food_servings, macronutrient_categories: [:macronutrient_id, :grams]])
   end
 
 end
