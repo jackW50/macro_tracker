@@ -8,7 +8,7 @@
         <%= food.name %>
         <ul>
           <li>
-            <%= food.calories %>
+            <%= link_to "#{food.calories} calories", food_path(food) %>
           </li>
         </ul>
       </li>
