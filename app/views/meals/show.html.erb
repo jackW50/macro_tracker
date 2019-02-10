@@ -2,14 +2,7 @@
 
   <h3> Foods </h3>
   <ul>
-    <% @meal.foods.each do |food| %>
-      <li>
-        <%= link_to food.name, food_path(food), class: "food-link" %>
-      </li>
-      <li>
-        <%= button_to "remove", meal_path(@meal), method: :patch, params: {:meal => {:remove_food => food.id}}, data: {confirm: "Are you sure you want to remove #{food.name}?"} %>
-      </li>
-    <% end %>
+    <%= render 'meal_foods', meal: @meal %>
   </ul>
 
   <h5> Macronutrient Composition </h5>
@@ -23,17 +16,7 @@
           </tr>
       </thead>
       <tbody>
-        <% @macronutrients.each.with_index(1) do |macronutrient, i| %>
-          <% if i.odd? %>
-            <tr class="pure-table-odd" >
-          <% else %>
-            <tr>
-          <% end %>
-                <td><%= macronutrient.category.upcase %></td>
-                <td><%= @meal.grams_of_macronutrient(macronutrient) %></td>
-                <td><%= @meal.percent_calories_macronutrient(macronutrient) %></td>
-            </tr>
-        <% end %>
+        <%= render 'macronutrients_table', macronutrients: @macronutrients %>
       </tbody>
   </table>
 
@@ -43,7 +26,7 @@
     <%= select_tag 'meal[add_food]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
     <%= submit_tag "Add Food" %>
   <% end %>
-  <p> To create a new food click <%= link_to "Here", new_meal_food_path(@meal) %></p>
+  <p> To create a new food for meal click <%= link_to "Here", new_meal_food_path(@meal) %></p>
 <!-- link to edit meals time -->
   <p> <%= link_to "Update Meal Time", edit_meal_path(@meal) %> </p>
   <p> <%= link_to "Create a New Food", new_meal_food_path(@meal) %> </p>

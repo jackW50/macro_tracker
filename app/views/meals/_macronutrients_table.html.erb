@@ -1,0 +1,11 @@
+<% macronutrients.each.with_index(1) do |macronutrient, i| %>
+  <% if i.odd? %>
+    <tr class="pure-table-odd" >
+  <% else %>
+    <tr>
+  <% end %>
+        <td><%= macronutrient.category.upcase %></td>
+        <td><%= @meal.grams_of_macronutrient(macronutrient) %></td>
+        <td><%= @meal.percent_calories_macronutrient(macronutrient) %></td>
+    </tr>
+<% end %>

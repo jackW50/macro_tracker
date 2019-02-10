@@ -1,0 +1,8 @@
+<% meal.foods.each do |food| %>
+  <li>
+    <%= link_to food.name, food_path(food), class: "food-link" %>
+  </li>
+  <li>
+    <%= button_to "remove", meal_path(meal), method: :patch, params: {:meal => {:remove_food => food.id}}, data: {confirm: "Are you sure you want to remove #{food.name}?"} %>
+  </li>
+<% end %>
