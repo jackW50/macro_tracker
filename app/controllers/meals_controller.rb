@@ -45,7 +45,7 @@ class MealsController < ApplicationController
       meal_composition.destroy
     end
     meal.destroy
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: "You just deleted a meal for #{meal.time}."
   end
 
   private

@@ -36,12 +36,21 @@ class FoodsController < ApplicationController
     if @food.update(food_params)
       redirect_to food_path(@food)
     else
-      @macronutrients = Macronutrient.all 
+      @macronutrients = Macronutrient.all
       render :edit
     end
   end
 
   def destroy
+    food = Food.find(params[:id])
+    food.food_compositions.each do |f|
+      f.destroy
+    end
+    food.meal_compositions.each do |m|
+      m.destroy
+    end
+    food.destroy
+    redirect_to user_path(current_user), notice: "You just deleted #{food.name} from database."
   end
 
   private

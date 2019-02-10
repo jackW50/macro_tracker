@@ -12,3 +12,7 @@
   <% end %>
   <%= f.submit %>
 <% end %>
+
+<p>
+  <%= button_to "Delete Food", food_path(@food), method: :delete, form_class: "delet-food", data: {confirm: "Are you sure you want to delete this food?"} %>
+</p>
