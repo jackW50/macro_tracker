@@ -5,7 +5,7 @@
 <ul>
   <% @meals.each do |meal| %>
     <li>
-      <%= link_to "#{meal.time.strftime('%A, %b %d, %l:%M %p')} || #{meal.calories} calories", meal_path(meal) %>
+      <%= link_to "#{meal_time(meal)} || #{meal.calories} calories", meal_path(meal) %>
     </li>
   <% end %>
 </ul>

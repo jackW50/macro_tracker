@@ -21,12 +21,11 @@
   </table>
 
   <!-- dropdown menu to add existing foods to current meal -->
-
   <%= form_tag(meal_path(@meal), method: :patch) do %>
     <%= select_tag 'meal[add_food]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
     <%= submit_tag "Add Food" %>
   <% end %>
+
   <p> To create a new food for meal click <%= link_to "Here", new_meal_food_path(@meal) %></p>
 <!-- link to edit meals time -->
   <p> <%= link_to "Update Meal Time", edit_meal_path(@meal) %> </p>
-  <p> <%= link_to "Create a New Food", new_meal_food_path(@meal) %> </p>
