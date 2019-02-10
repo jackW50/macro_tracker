@@ -11,7 +11,7 @@ class Food < ApplicationRecord
     FoodComposition.total_calories(self)
   end
 
-  def macronutrients_grams=(macronutrients_grams)
+  def macronutrients_grams=(macronutrients_grams) 
     macronutrients_grams.each do |macronutrient_grams|
       food_composition = FoodComposition.find_by(macronutrient_id: macronutrient_grams[:id], food_id: self.id)
       if food_composition.nil?

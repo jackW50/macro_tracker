@@ -17,7 +17,7 @@ class FoodsController < ApplicationController
       redirect_to meal_path(@meal)
     else
       @macronutrients = Macronutrient.all
-      render :new 
+      render :new
       #redirect_to new_meal_food_path(@meal)
     end
   end

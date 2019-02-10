@@ -1,4 +1,12 @@
 <h1> Create A New Food </h1>
+<% if @food.errors.present? %>
+  <ul>
+  <% @food.errors.full_messages.each do |message| %>
+    <li>
+      <%= message %>
+    </li>
+  <% end %>
+<% end %>
 <!--this is nested. Associate with meal-->
 <%= form_for(@food, url: meal_foods_path(@meal)) do |f| %>
   <%= f.label :name %>
@@ -6,7 +14,7 @@
   <% @macronutrients.each do |macronutrient| %>
     <p>
       <%= label_tag :macronutrient_id, macronutrient.category %>
-      <%= check_box_tag "food[macronutrients_grams[][id]" %>
+      <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id %>
       Grams:<%= text_field_tag "food[macronutrients_grams][][grams]" %>
     </p>
   <% end %>
