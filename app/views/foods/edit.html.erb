@@ -6,8 +6,9 @@
   <% @macronutrients.each do |macronutrient| %>
     <p>
       <%= label_tag :macronutrient_id, macronutrient.category %>
-      <%= check_box_tag "food[macronutrients_grams[][id]" %>
-      Grams:<%= text_field_tag "food[macronutrients_grams][][grams]" %>
+      <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id, 'checked' if @food.macronutrient_ids.include?(macronutrient.id) %>
+      Grams:<%= text_field_tag "food[macronutrients_grams][][grams]", macronutrient.grams(@food) %>
     </p>
   <% end %>
+  <%= f.submit %>
 <% end %>

@@ -18,7 +18,6 @@ class FoodsController < ApplicationController
     else
       @macronutrients = Macronutrient.all
       render :new
-      #redirect_to new_meal_food_path(@meal)
     end
   end
 
@@ -32,12 +31,12 @@ class FoodsController < ApplicationController
   end
 
   def update
-    @meal = Meal.find(params[:meal_id])
     @food = Food.find(params[:id])
 
     if @food.update(food_params)
       redirect_to food_path(@food)
     else
+      @macronutrients = Macronutrient.all 
       render :edit
     end
   end
