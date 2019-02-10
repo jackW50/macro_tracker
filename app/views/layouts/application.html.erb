@@ -13,9 +13,11 @@
 
   <body>
     <div class="navbar">
-      <a href="#">Login</a>
-      <a href="#">Signup</a>
-      <a href="#">Your Profile</a>
+      <a href="/sessions/new">Login</a>
+      <a href="/users/new">Signup</a>
+      <% if logged_in? %>
+        <a href="/users/current_user.id">Your Profile</a>
+      <% end %>
     </div>
     <div class="wrapper">
       <% flash.each do |name, msg| -%>
@@ -25,7 +27,7 @@
       <%= yield %>
 
       <footer>
-        <%= link_to "Logout", session_path, method: :delete if logged_in? %>
+        <%= link_to "Logout", session_path(current_user), method: :delete if logged_in? %>
       </footer>
 
     </div>
