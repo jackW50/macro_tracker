@@ -1,6 +1,7 @@
-<!--should this view be nested?? I don't think so-->
-<h1><%= @food.name %></h1>
-<h3>Total Calories: <%= @food.calories %></h3>
+<!--should this view be nested?? -->
+<%= content_tag :h1, @food.name %>
+
+<%= content_tag :h3, "Total Calories: #{@food.calories}" %>
 
 <h5> Macronutrient Composition </h5>
 
@@ -17,6 +18,6 @@
     </tbody>
 </table>
 
-<footer>
-  <%= link_to "update food", edit_food_path(@food) %>
-</footer>
+<%= content_tag :footer do %>
+  <%= link_to "Update Food", edit_food_path(@food) %>
+<% end %>
