@@ -2,10 +2,11 @@ class MealsController < ApplicationController
   before_action :date_valid?, only: :create
 
   def index
-    @meals = current_user.meals 
+    @meals = current_user.meals
   end
 
   def new
+    @foods = Food.all 
     @meal = Meal.new
     @macronutrients = Macronutrient.all
   end
