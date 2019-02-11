@@ -15,11 +15,11 @@
     <div class="navbar">
       <a href="/sessions/new">Login</a>
       <a href="/users/new">Signup</a>
-      <% if logged_in? %>
-        <a href="/users/current_user.id">Your Profile</a>
-      <% end %>
+      <a href="/users/current_user.id">Your Profile</a>
     </div>
-    <div class="wrapper">
+
+    <%= content_tag :div, class: "wrapper" do %>
+
       <% flash.each do |name, msg| -%>
         <%= content_tag :div, msg, class: name %>
       <% end -%>
@@ -30,6 +30,7 @@
         <%= logout_link_display? %>
       <% end %>
 
-    </div>
+    <% end %>
+    
   </body>
 </html>
