@@ -1,7 +1,7 @@
 <% macronutrients.each.with_index(1) do |macronutrient, i| %>
   <%= tr_class(i) do %>
     <%= content_tag :td, macronutrient.category.upcase %>
-    <%= content_tag :td, @meal.grams_of_macronutrient(macronutrient) %>
-    <%= content_tag :td, @meal.percent_calories_macronutrient(macronutrient) %>
+    <%= content_tag :td, item.grams_of_macronutrient(macronutrient) %>
+    <%= content_tag :td, item.percent_calories_macronutrient(macronutrient) %>
   <% end %>
 <% end %>

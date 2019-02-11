@@ -7,6 +7,18 @@ class Food < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
+  def calories_from_macronutrient(macronutrient)
+    FoodComposition.total_calories_from_macro(self, macronutrient)
+  end
+
+  def percent_calories_macronutrient(macronutrient)
+    (calories_from_macronutrient(macronutrient).to_f / calories * 100).round(2)
+  end
+
+  def grams_of_macronutrient(macronutrient)
+    FoodComposition.total_grams_of_macronutrients_in_food(self, macronutrient)
+  end
+
   def calories
     FoodComposition.total_calories(self)
   end

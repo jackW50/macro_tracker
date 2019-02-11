@@ -13,17 +13,7 @@
         </tr>
     </thead>
     <tbody>
-      <% @food.macronutrients.each.with_index(1) do |macronutrient, i| %>
-        <% if i.odd? %>
-          <tr class="pure-table-odd" >
-        <% else %>
-          <tr>
-        <% end %>
-              <td><%= macronutrient.category.upcase %></td>
-              <td><%= macronutrient.grams(@food) %></td>
-              <td><%= macronutrient.calorie_percent(@food) %></td>
-          </tr>
-      <% end %>
+      <%= render '/meals/macronutrients_table', macronutrients: @food.macronutrients, item: @food %>
     </tbody>
 </table>
 

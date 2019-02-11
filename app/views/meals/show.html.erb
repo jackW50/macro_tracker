@@ -1,7 +1,7 @@
 <%= content_tag :h1, "Meal for #{meal_time(@meal)}" %>
 
   <h3> Foods </h3>
-  
+
   <%= content_tag :ul do %>
     <%= render 'meal_foods', meal: @meal %>
   <% end %>
@@ -17,7 +17,7 @@
           </tr>
       </thead>
       <tbody>
-        <%= render 'macronutrients_table', macronutrients: @macronutrients %>
+        <%= render 'macronutrients_table', macronutrients: @macronutrients, item: @meal %>
       </tbody>
   </table>
 
