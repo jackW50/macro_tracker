@@ -54,19 +54,26 @@ class Meal < ApplicationRecord
     new_foods.each do |new_food|
       new_food[:food_servings] = 1 unless new_food[:food_servings].present?
       if new_food[:food_name].present?
-        if food = Food.find_by(name: new_food[:food_name])
-          self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings])
-        else
-          food = Food.create(name: new_food[:food_name])
-
-          new_food[:macronutrient_categories].each do |macronutrient_category|
-            macronutrient_category[:grams] = 1 unless macronutrient_category[:grams].present?
-            food.food_compositions.build(food_id: food.id, macronutrient_id: macronutrient_category[:macronutrient_id], macronutrient_grams: macronutrient_category[:grams]) if macronutrient_category[:macronutrient_id].present?
-          end
-          food.save
-          self.meal_compositions.build(food_id: food.id, food_servings: new_food[:food_servings])
-        end
+        find_or_create_food(food_name: new_food[:food_name], food_servings: new_food[:food_servings], attributes: new_food[:macronutrient_categories])
       end
+    end
+  end
+
+  def find_or_create_food(food_name:, food_servings:, attributes:)
+    if food = Food.find_by(name: food_name)
+      self.meal_compositions.build(food_id: food.id, food_servings: food_servings)
+    else
+      food = Food.create(name: food_name)
+      assign_food_composition(attributes: attributes, food: food)
+      food.save
+      self.meal_compositions.build(food_id: food.id, food_servings: food_servings)
+    end
+  end
+
+  def assign_food_composition(attributes:, food:)
+    attributes.each do |attribute|
+      attribute[:grams] = 1 unless attribute[:grams].present?
+      food.food_compositions.build(food_id: food.id, macronutrient_id: attribute[:macronutrient_id], macronutrient_grams: attribute[:grams]) if attribute[:macronutrient_id].present?
     end
   end
 
