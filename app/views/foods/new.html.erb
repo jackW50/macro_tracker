@@ -2,7 +2,6 @@
 
 <%= errors_list(@food) %>
 
-
 <%= form_for(@food, url: meal_foods_path(@meal)) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>

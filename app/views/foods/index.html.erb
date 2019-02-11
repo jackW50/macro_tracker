@@ -1,4 +1,4 @@
-<h1> Index of all the Foods That Are In The Meal with their caloric count listed side by side </h1>
+<%= content_tag :h1, "Foods for #{meal_time(@meal)}" %>
 
 <!-- a nested view -->
 <% @meal.foods.each do |food| %>
