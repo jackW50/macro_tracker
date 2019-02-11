@@ -1,25 +1,9 @@
 <% macronutrients.each do |macronutrient| %>
-  <% if @food.errors[:food_compositions].present? %>
-    <%= content_tag :p, class: "field_with_errors" do %>
-      <%= label_tag macronutrient.category %>
-      <% if @food.macronutrient_ids.include?(macronutrient.id) %>
-        <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id, 'checked' %>
-      <% else %>
-        <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id %>
-      <% end %>
-        <%= label_tag "Grams:" %>
-        <%= text_field_tag "food[macronutrients_grams][][grams]", macronutrient.grams(@food) %>
-    <% end %>
-  <% else %>
-    <%= content_tag :p do %>
-      <%= label_tag macronutrient.category %>
-      <% if @food.macronutrient_ids.include?(macronutrient.id) %>
-        <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id, 'checked' %>
-      <% else %>
-        <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id %>
-      <% end %>
-        <%= label_tag "Grams:" %>
-        <%= text_field_tag "food[macronutrients_grams][][grams]", macronutrient.grams(@food) %>
-    <% end %>
+
+  <%= errors_present?(food) do %>
+    <%= label_tag macronutrient.category %>
+      <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id, checked?(food, macronutrient) %>
+      <%= label_tag "Grams:" %>
+      <%= text_field_tag "food[macronutrients_grams][][grams]", food_grams?(food, macronutrient) %>
   <% end %>
 <% end %>

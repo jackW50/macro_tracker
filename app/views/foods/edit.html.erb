@@ -7,7 +7,7 @@
 <%= form_for(@food, url: food_path(@food), method: :patch) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= render 'food_macronutrients', macronutrients: @macronutrients %>
+  <%= render 'food_macronutrients', macronutrients: @macronutrients, food: @food %>
 
   <%= f.submit %>
 <% end %>
