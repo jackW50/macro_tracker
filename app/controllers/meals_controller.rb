@@ -1,5 +1,4 @@
 class MealsController < ApplicationController
-  #before_action :date_valid?, only: :create
 
   def index
     @meals = current_user.meals
@@ -52,10 +51,6 @@ class MealsController < ApplicationController
   end
 
   private
-
-  def date_valid?
-    redirect_to new_meal_path, alert: "You must at least choose a month, day, and year for your meal" unless params[:meal]["time(1i)"].present? && params[:meal]["time(2i)"].present? && params[:meal]["time(3i)"].present?
-  end
 
   def meal_params
     params.require(:meal).permit(:add_food, :remove_food, :time, food_attributes: [:food_id, :servings], new_foods: [:food_name, :food_servings, macronutrient_categories: [:macronutrient_id, :grams]])
