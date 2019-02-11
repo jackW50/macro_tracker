@@ -36,8 +36,8 @@ class MealComposition < ApplicationRecord
     self.grams_of_macro_for_each_food_in_meal(meal, macronutrient).sum
   end
 
-  def self.find_grams_and_servings(meal)
-    self.composition(meal).joins(food: :food_compositions).pluck('food_compositions.macronutrient_grams', 'meal_compositions.food_servings')
+  def self.find_servings_of_food_in_meal(meal, food)
+    self.composition(meal).where(food_id: food.id).pluck('meal_compositions.food_servings').first 
   end
 
   def self.collect_total_grams_of_each_food_in_meal(meal)

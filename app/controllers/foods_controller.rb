@@ -14,12 +14,10 @@ class FoodsController < ApplicationController
     @meal = Meal.find(params[:meal_id])
     @food = Food.new(food_params)
     if @food.save
-      #raise @food.inspect
       @meal.meal_compositions.create(food_id: @food.id)
       redirect_to meal_path(@meal)
     else
       @macronutrients = Macronutrient.all
-      #raise @food.inspect
       render :new
     end
   end

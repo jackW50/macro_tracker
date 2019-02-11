@@ -2,6 +2,8 @@
 
   <%= content_tag :li do %>
     <%= link_to food.name, food_path(food), class: "food-link" %>
+    <%= tag :br %>
+    <%= "Servings: #{food.servings(meal)}" %>
   <% end %>
 
   <%= content_tag :li do %>
