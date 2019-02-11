@@ -1,17 +1,19 @@
 <%= form_for(meal) do |f| %>
-  <%= f.datetime_select :time %>
-  <%= div_tag_for_food_attributes(foods) do %>
+
+  <%= f.datetime_select :time, prompt: {day: 'Choose day', month: 'month', year: 'year', hour: "hour", minute: "min"} %>
+
+  <%= meal_errors_present?(meal) do%>
     <% 5.times do %>
       <%= select_tag 'meal[food_attributes][][food_id]', options_from_collection_for_select(foods, :id, :name), prompt: 'select food' %>
       <%= text_field_tag 'meal[food_attributes][][servings]', nil, placeholder: 'servings' %>
-    <br>
+    <%= tag :br %>
     <% end %>
   <% end %>
 
-  <%= div_tag_for_new_foods do %>
+  <%= div_tag_for_food_attributes do %>
     <%= content_tag(:p, "And/Or Create Foods For Meal") %>
     <% 5.times do %>
-      <%= content_tag :div, class: "food_field" do %>
+      <%= meal_errors_present?(meal) do%>
         <%= label_tag 'Food Name:' %>
         <%= text_field_tag 'meal[new_foods][][food_name]' %>
         <%= tag(:br) %>

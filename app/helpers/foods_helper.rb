@@ -1,6 +1,6 @@
 module FoodsHelper
 
-  def errors_present?(food)
+  def food_errors_present?(food)
     if food.errors[:food_compositions].present?
       content_tag :p, class: "field_with_errors" do
         yield

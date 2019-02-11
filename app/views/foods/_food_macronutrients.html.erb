@@ -1,6 +1,6 @@
 <% macronutrients.each do |macronutrient| %>
 
-  <%= errors_present?(food) do %>
+  <%= food_errors_present?(food) do %>
     <%= label_tag macronutrient.category %>
       <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id, checked?(food, macronutrient) %>
       <%= label_tag "Grams:" %>

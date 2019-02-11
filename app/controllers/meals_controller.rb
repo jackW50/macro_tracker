@@ -1,12 +1,12 @@
 class MealsController < ApplicationController
-  before_action :date_valid?, only: :create
+  #before_action :date_valid?, only: :create
 
   def index
     @meals = current_user.meals
   end
 
   def new
-    @foods = Food.all 
+    @foods = Food.all
     @meal = Meal.new
     @macronutrients = Macronutrient.all
   end
@@ -14,9 +14,11 @@ class MealsController < ApplicationController
   def create
     @meal = Meal.new(meal_params)
     @meal.user = current_user
+
     if @meal.save
       redirect_to user_path(current_user)
     else
+      @foods = Food.all
       @macronutrients = Macronutrient.all
       render :new
     end
