@@ -1,35 +1,13 @@
 <h1> Create A New Food </h1>
-<% if @food.errors.any? %>
-  <div>
-    <h2><%= pluralize(@food.errors.count, "error") %> </h2>
 
-    <ul>
-    <% @food.errors.full_messages.each do |message| %>
-      <li>
-        <%= message %>
-      </li>
-    <% end %>
-  </div>
-<% end %>
-<!--this is nested. Associate with meal-->
+<%= errors_list(@food) %>
+
+
 <%= form_for(@food, url: meal_foods_path(@meal)) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <% @macronutrients.each do |macronutrient| %>
-    <% if @food.errors[:food_compositions].present? %>
-      <p>
-        <%= label_tag macronutrient.category, nil, class: "field_with_errors" %>
-        <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id %>
-        Grams:<%= text_field_tag "food[macronutrients_grams][][grams]", nil, class: "field-with-errors" %>
-      </p>
-    <% else %>
-      <p>
-        <%= label_tag :macronutrient_id, macronutrient.category %>
-        <%= check_box_tag "food[macronutrients_grams[][id]", macronutrient.id %>
-        Grams:<%= text_field_tag "food[macronutrients_grams][][grams]" %>
-      </p>
-    <% end %>
-  <% end %>
+
+  <%= render 'food_macronutrients', macronutrients: @macronutrients %>
 
   <%= f.submit %>
 <% end %>
