@@ -1,15 +1,10 @@
-<h1><%= current_user.username %></h1>
+<%= content_tag :h1, current_user.username %>
 
 <!-- want this to just display the meals for the user for the current day -->
 <h3>Meals</h3>
-<ul>
-  <% @meals.each do |meal| %>
-    <li>
-      <%= link_to "#{meal_time(meal)} || #{meal.calories} calories", meal_path(meal) %>
-    </li>
-  <% end %>
-</ul>
 
-<p>
+<%= render 'meals/meals_list', meals: @meals %>
+
+<%= content_tag :p do %>
   <%= link_to "Create a New Meal", new_meal_path %>
-</p>
+<% end %>

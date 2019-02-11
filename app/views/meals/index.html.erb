@@ -1,12 +1,3 @@
 <%= content_tag :h1, current_user.username %>
 
-<% @meals.each do |meal| %>
-  <%= content_tag :div do %>
-    <%= link_to meal_time(meal), meal_path(meal) %>
-  <% end %>
-
-  <%= content_tag :p do %>
-    <%= meal.calories %> calories
-  <% end %>
-
-<% end %>
+<%= render 'meals_list', meals: @meals %>
