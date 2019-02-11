@@ -16,5 +16,4 @@ module MealsHelper
     end
   end
 
-
 end

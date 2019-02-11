@@ -1,9 +1,10 @@
-<h1>Meal for <%= meal_time(@meal) %> </h1>
+<%= content_tag :h1, "Meal for #{meal_time(@meal)}" %>
 
   <h3> Foods </h3>
-  <ul>
+  
+  <%= content_tag :ul do %>
     <%= render 'meal_foods', meal: @meal %>
-  </ul>
+  <% end %>
 
   <h5> Macronutrient Composition </h5>
 
