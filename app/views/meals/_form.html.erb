@@ -14,12 +14,12 @@
       <%= content_tag :div, class: "food_field" do %>
         <%= label_tag 'Food Name:' %>
         <%= text_field_tag 'meal[new_foods][][food_name]' %>
-        <br>
+        <%= tag(:br) %>
 
-        <%= macronutrients.each do |macronutrient| %>
+        <% macronutrients.each do |macronutrient| %>
           <%= macronutrient.category%> <%= check_box_tag 'meal[new_foods][][macronutrient_categories][][macronutrient_id]', macronutrient.id %>
           <%= text_field_tag 'meal[new_foods][][macronutrient_categories][][grams]', nil, placeholder: 'grams' %>
-          <br>
+          <%= tag(:br) %>
         <% end %>
 
         <%= text_field_tag 'meal[new_foods][][food_servings]', nil, placeholder: 'servings' %>

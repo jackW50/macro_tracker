@@ -26,9 +26,9 @@
 
       <%= yield %>
 
-      <footer>
-        <%= link_to "Logout", session_path(current_user), method: :delete if logged_in? %>
-      </footer>
+      <%= content_tag :footer do %>
+        <%= logout_link_display? %>
+      <% end %>
 
     </div>
   </body>

@@ -13,4 +13,8 @@ module ApplicationHelper
     end
   end
 
+  def logout_link_display?
+    link_to "Logout", session_path(current_user), method: :delete if logged_in?
+  end 
+
 end
