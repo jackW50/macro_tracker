@@ -16,4 +16,16 @@ module MealsHelper
     end
   end
 
+  def tr_class(index)
+    if index.odd?
+      content_tag :tr, class: "pure-table-odd" do
+        yield
+      end
+    else
+      content_tag :tr do
+        yield
+      end 
+    end
+  end
+
 end
