@@ -1,8 +1,9 @@
-<h1>Edit <%=@food.name%></h1>
+<%= content_tag :h1, "Edit #{@food.name}" %>
 
 <%= errors_list(@food) %>
 
 <h3> Change Composition(unable to remove macronutrients at this time.) </h3>
+
 <%= form_for(@food, url: food_path(@food), method: :patch) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -11,6 +12,6 @@
   <%= f.submit %>
 <% end %>
 
-<p>
+<%= content_tag :p do %>
   <%= button_to "Delete Food", food_path(@food), method: :delete, form_class: "delet-food", data: {confirm: "Are you sure you want to delete this food?"} %>
-</p>
+<% end %>
