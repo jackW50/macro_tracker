@@ -10,6 +10,7 @@ class User < ApplicationRecord
     self.where(username: auth[:info][:name]).first_or_create do |u|
       u.username = auth[:info][:name]
       u.uid = auth[:uid]
+      u.password = SecureRandom.hex 
     end
   end
 end
