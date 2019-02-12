@@ -21,7 +21,7 @@
     <%= content_tag :div, class: "wrapper" do %>
 
       <% flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, class: name %>
+        <%= content_tag :div, msg, class: "flash-errors" %>
       <% end -%>
 
       <%= yield %>
@@ -31,6 +31,6 @@
       <% end %>
 
     <% end %>
-    
+
   </body>
 </html>

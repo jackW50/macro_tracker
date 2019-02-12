@@ -81,4 +81,8 @@
     display: table;
   }
 
+  .flash-errors {
+    color: red;
+  }
+
 </style>
