@@ -13,8 +13,8 @@ class FoodsController < ApplicationController
   def create
     @meal = Meal.find(params[:meal_id])
     @food = Food.new(food_params)
+    associate_to_meal(@meal, @food, params[:food_servings])
     if @food.save
-      @meal.meal_compositions.create(food_id: @food.id)
       redirect_to meal_path(@meal)
     else
       @macronutrients = Macronutrient.all
@@ -57,7 +57,12 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, macronutrients_grams: [:id, :grams])
+    params.require(:food).permit(:name, :food_servings, macronutrients_grams: [:id, :grams])
+  end
+
+  def associate_to_meal(meal, food, params_servings)
+    params_servings = 1 unless params_servings.present?
+    food.meal_compositions.build(meal_id: meal.id, food_servings: params_servings)
   end
 
 end

@@ -8,5 +8,6 @@
 
   <%= render 'food_macronutrients', macronutrients: @macronutrients, food: @food %>
 
+  <%= text_field_tag 'food_servings', nil, placeholder: 'servings' %>
   <%= f.submit %>
 <% end %>
