@@ -34,7 +34,7 @@ class Meal < ApplicationRecord
   end
 
   def add_food=(add_food)
-    self.meal_compositions.build(food_id: add_food)
+    self.meal_compositions.build(food_id: add_food[:food_id], food_servings: add_food[:servings])
   end
 
   def remove_food=(remove_food)

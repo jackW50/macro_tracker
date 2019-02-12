@@ -23,7 +23,8 @@
 
   <!-- dropdown menu to add existing foods to current meal -->
   <%= form_tag(meal_path(@meal), method: :patch) do %>
-    <%= select_tag 'meal[add_food]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
+    <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
+    <%= text_field_tag 'meal[add_food][servings]', nil, placeholder: 'servings' %>
     <%= submit_tag "Add Food" %>
   <% end %>
 
