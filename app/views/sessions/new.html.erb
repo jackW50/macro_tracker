@@ -2,5 +2,6 @@
 
 <%= form_tag(sessions_path, method: :post) do %>
   <%= text_field_tag "user[username]", nil, placeholder: "username" %>
+  <%= password_field_tag "user[passowrd]", nil, placeholder: "password" %> 
   <%= submit_tag "Login" %>
 <% end %>
