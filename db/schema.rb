@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_162707) do
+ActiveRecord::Schema.define(version: 2019_02_12_183312) do
 
   create_table "food_compositions", force: :cascade do |t|
     t.integer "macronutrient_grams"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_162707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "uid"
   end
 
 end

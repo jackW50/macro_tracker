@@ -6,4 +6,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def self.find_or_create_by_auth(auth)
+    self.where(username: auth[:info][:name]).first_or_create do |u|
+      u.username = auth[:info][:name]
+      u.uid = auth[:uid]
+    end
+  end
 end

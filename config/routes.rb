@@ -16,4 +16,6 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/auth/facebook/callback' => 'sessions#create'
+
 end
