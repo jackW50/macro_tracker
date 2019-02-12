@@ -1,4 +1,4 @@
-<%= content_tag :h1, "Foods for #{meal_time(@meal)}" %>
+<%= content_tag :h1, "Foods for meal on #{meal_time(@meal)}" %>
 
 <!-- a nested view -->
 <% @meal.foods.each do |food| %>

@@ -1,5 +1,7 @@
 <h1> Signup </h1>
 
+<%= errors_list(@user) %>
+
 <%= form_for(@user) do |f| %>
   <%= f.text_field :username, placeholder: "username" %>
   <%= f.password_field :password, placeholder: "password" %>
