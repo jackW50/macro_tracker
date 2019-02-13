@@ -39,3 +39,7 @@
   <%= content_tag :p do %>
    <%= link_to "Update Meal Time", edit_meal_path(@meal) %>
   <% end %>
+
+  <%= content_tag :p do %>
+   <%= link_to "See All Foods", meal_foods_path(@meal) %>
+  <% end %>
