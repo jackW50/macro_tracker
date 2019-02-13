@@ -8,7 +8,7 @@
     <%= render 'meal_foods', meal: @meal %>
   <% end %>
 
-  <h5> Macronutrient Composition </h5>
+  <h5 id="meal_show_macro"> Macronutrient Tracker </h5>
   <table class="pure-table">
       <thead>
           <tr>
@@ -25,9 +25,11 @@
 
   <!-- dropdown menu to add existing foods to current meal -->
   <%= form_tag(meal_path(@meal), method: :patch) do %>
-    <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
-    <%= text_field_tag 'meal[add_food][servings]', nil, placeholder: 'servings' %>
-    <%= submit_tag "Add Food" %>
+    <%= meal_errors_present?(@meal) do %>
+      <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
+      <%= text_field_tag 'meal[add_food][servings]', nil, placeholder: 'servings' %>
+      <%= submit_tag "Add Food" %>
+    <% end %>
   <% end %>
 
   <%= content_tag :p do %>

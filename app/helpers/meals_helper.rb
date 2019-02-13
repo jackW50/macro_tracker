@@ -1,7 +1,7 @@
 module MealsHelper
 
   def meal_errors_present?(meal)
-    if meal.errors[:food_compositions].present?
+    if meal.errors[:food_compositions].present? || meal.errors[:meal_compositions].present?
       content_tag :div, class: "field_with_errors" do
         yield
       end
