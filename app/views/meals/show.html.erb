@@ -1,13 +1,14 @@
 <%= content_tag :h1, "Meal for #{meal_time(@meal)}" %>
 
+<%= errors_list(@meal) %>
+
   <h3> Foods </h3>
 
-  <%= content_tag :ul do %>
+  <%= content_tag :ul, class: "col-1" do %>
     <%= render 'meal_foods', meal: @meal %>
   <% end %>
 
   <h5> Macronutrient Composition </h5>
-
   <table class="pure-table">
       <thead>
           <tr>
@@ -20,6 +21,7 @@
         <%= render 'macronutrients_table', macronutrients: @macronutrients, item: @meal %>
       </tbody>
   </table>
+
 
   <!-- dropdown menu to add existing foods to current meal -->
   <%= form_tag(meal_path(@meal), method: :patch) do %>

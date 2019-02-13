@@ -37,7 +37,8 @@ class MealsController < ApplicationController
     if @meal.update(meal_params)
       redirect_to meal_path(@meal)
     else
-      render :edit
+      @macronutrients = Macronutrient.all
+      render :show
     end
   end
 

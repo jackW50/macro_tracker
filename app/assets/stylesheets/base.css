@@ -12,7 +12,7 @@
 
   h5 {
     text-align: center;
-    margin-left: auto;
+    margin-left: 50%;
     margin-right: auto;
     width: 8em;
   }
@@ -81,12 +81,16 @@
     display: table;
   }
 
-  .flash-errors {
+  .flash-errors, .errors {
     color: red;
   }
 
   .calories-list {
-    margin-left: 40px; 
+    margin-left: 40px;
+  }
+
+  .col-1 {
+    float: left;
   }
 
 </style>
