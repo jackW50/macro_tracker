@@ -5,6 +5,7 @@ class FoodsController < ApplicationController
   before_action :find_food, only: [:show, :edit, :update, :destroy]
 
   def index
+
   end
 
   def new
@@ -15,7 +16,7 @@ class FoodsController < ApplicationController
     @meal = Meal.find(params[:meal_id])
     @food = Food.new(food_params)
     associate_to_meal(@meal, @food, params[:food_servings])
-    
+
     if @food.save
       redirect_to meal_path(@meal)
     else
@@ -24,9 +25,11 @@ class FoodsController < ApplicationController
   end
 
   def show
+
   end
 
   def edit
+    
   end
 
   def update
