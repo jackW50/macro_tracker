@@ -12,6 +12,14 @@ module MealsHelper
     end
   end
 
+  def meal_time_link(meal, user)
+    if user.nil?
+      link_to meal_time(meal), meal_path(meal)
+    else
+      link_to meal_hour_min(meal), meal_path(meal)
+    end
+  end
+
   def meal_time(meal)
     meal.time.strftime('%A, %b %d, @ %l:%M %p')
   end

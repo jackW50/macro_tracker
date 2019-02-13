@@ -1,10 +1,14 @@
-<%= content_tag :h1, current_user.username %>
+<%= content_tag :h1, @user.username %>
 
 <!-- want this to just display the meals for the user for the current day -->
 <h3>Todays Meals</h3>
 
 <%= render 'meals/meals_list', meals: @meals %>
 
-<%= content_tag :p do %>
+<%= content_tag :div do %>
   <%= link_to "Create a New Meal", new_meal_path %>
+<% end %>
+
+<%= content_tag :div do %>
+  <%= link_to "See All Meals", meals_path(@meal) %>
 <% end %>
