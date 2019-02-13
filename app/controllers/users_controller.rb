@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @meals = current_user.meals
+    @meals = Meal.find_user_meals_today(current_user)
   end
 
   def edit
