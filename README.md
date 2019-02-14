@@ -6,14 +6,15 @@ This is a Rails application that allows users to create meals, and to keep track
 ## Installation
 
 1. Fork and clone the repository
-
 2. Change into app directory 
-3. Run bundle and migrate files
-        $ bundle
-        $ rake db:migrate
-        
+3. Run bundle and migrate files      
 4. To run server use the thin gem
-        $ thin start --ssl
+       
+        
+$ bundle
+$ rake db:migrate
+$ thin start --ssl
+        
 
 ## Usage
 
