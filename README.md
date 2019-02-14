@@ -19,14 +19,14 @@ This is a Rails application that allows users to create meals, and to keep track
 
 1. Login/Signup
 2. User Functionality 
-        - Users have the abilty to see their meals, and for each individual meal, they can see the foods within that meal, create add foods for that meal, and remove foods for that meal.
+        - Users have the abilty to see their meals, and for each individual meal, they can see the foods within that meal, create/add foods for that meal, and remove foods for that meal.
 3. Create Meals
 4. Update Meals
 5. Destroy Meals
 6. Update Foods
 7. Destroy Foods
 8. Logout 
-a. See Meals
+
 
 ## Contributing
 
