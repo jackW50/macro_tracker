@@ -36,4 +36,4 @@ Things you may want to cover:
 ## License
 
 This application is available as open source under the terms of the
-        <a href="macro_tracker/LICENSE.md">LICENSE</a>
+        <a href="LICENSE.md">LICENSE</a>
