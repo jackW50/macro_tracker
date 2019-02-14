@@ -5,32 +5,35 @@ This is a Rails application that allows users to create meals, and to keep track
 
 ## Installation
 
-        
-$ bundle
-$ rake db:migrate
-$ thin start --ssl
-
 1. Fork and clone the repository
-2. Change into app directory 
-3. Run bundle and migrate files      
-4. To run server use the thin gem
-       
-        
-$ bundle
-$ rake db:migrate
-$ thin start --ssl
-        
 
+2. Change into app directory 
+
+3. Run bundle and migrate files 
+
+        $ bundle
+        $ rake db:migrate
+4. To run server use the thin gem
+
+        $ thin start --ssl
+        
 ## Usage
 
 1. Login/Signup
-2. User Functionality 
-        - Users have the abilty to see their meals, and for each individual meal, they can see the foods within that meal, create/add foods for that meal, and remove foods for that meal.
-3. Create Meals
-4. Update Meals
-5. Destroy Meals
-6. Update Foods
-7. Destroy Foods
+2. User Functionality
+3. See Meals
+    
+        - See individaul meal
+        - See foods within an individual meal
+        - Create/Add foods for an individual meal
+        - Remove foods for an individual meal
+        
+3. Create Meal
+4. Update Meal
+5. Destroy Meal
+6. See Food
+6. Update Food
+7. Destroy Food
 8. Logout 
 
 
