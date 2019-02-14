@@ -1,28 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 # Macro Tracker
 
 This is a Rails application that allows users to create meals, and to keep track of the macronutrient compositions of those meals. For this app, a macronutrient composition is represented as the total grams of the macronutrient and the percentage of calories the macronutrient contributes to the meal. It was desinged with the intention to help users create meals that could align with certian dietary goals concerning amounts of carbohydrates, proteins, and fats.
@@ -43,18 +18,15 @@ This is a Rails application that allows users to create meals, and to keep track
 ## Usage
 
 1. Login/Signup
-2. User Functionality
-        1. See Meals
-                a. See the foods in the meal.
-                b. Create/Add foods to meal.
-                c. Remove foods from the meal.
-        2. Create Meals
-        3. Update Meals
-        4. Destroy Meals
-        5. Update Foods
-        6. Destroy Foods
-3. Logout
-
+2. User Functionality 
+        - Users have the abilty to see their meals, and for each individual meal, they can see the foods within that meal, create add foods for that meal, and remove foods for that meal.
+3. Create Meals
+4. Update Meals
+5. Destroy Meals
+6. Update Foods
+7. Destroy Foods
+8. Logout 
+a. See Meals
 
 ## Contributing
 
