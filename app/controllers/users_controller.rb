@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authorized?, only: :show
 
   def new
     @user = User.new
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @meals = Meal.today(current_user)
-    @user = current_user 
+    @user = current_user
   end
 
   def edit
