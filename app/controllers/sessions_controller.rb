@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     elsif @user = User.find_by(username: params[:user][:username])
+      raise @user.inspect 
       authentification?(@user, params[:user][:password])
     else
       redirect_to new_session_path, alert: "Invalid username"
@@ -28,9 +29,9 @@ class SessionsController < ApplicationController
   end
 
   def authentification?(user, password)
-    if @user.authenticate(params[:user][:password])
-      session[:user_id] = @user.id
-      redirect_to user_path(@user)
+    if user.authenticate(password)
+      session[:user_id] = user.id
+      redirect_to user_path(user)
     else
       redirect_to new_session_path, alert: "Invalid password"
     end
