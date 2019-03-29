@@ -2,8 +2,8 @@
 
   <%= food_errors_present?(food) do %>
     <%= label_tag macronutrient.category %>
-      <%= check_box_tag "food[macronutrients_grams][][id]", macronutrient.id, checked?(food, macronutrient) %>
+      <%= check_box_tag "food[macronutrients_grams][#{macronutrient.category}][id]", macronutrient.id, checked?(food, macronutrient) %>
       <%= label_tag "Grams:" %>
-      <%= text_field_tag "food[macronutrients_grams][][grams]", food_grams?(food, macronutrient) %>
+      <%= text_field_tag "food[macronutrients_grams][#{macronutrient.category}][grams]", food_grams?(food, macronutrient) %>
   <% end %>
 <% end %>

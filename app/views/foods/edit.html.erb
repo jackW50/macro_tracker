@@ -5,6 +5,7 @@
 <h3> Change Composition(unable to remove macronutrients at this time.) </h3>
 
 <%= form_for(@food, url: food_path(@food), method: :patch) do |f| %>
+
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= render 'food_macronutrients', macronutrients: @macronutrients, food: @food %>
@@ -13,5 +14,5 @@
 <% end %>
 
 <%= content_tag :p do %>
-  <%= button_to "Delete Food", food_path(@food), method: :delete, form_class: "delet-food", data: {confirm: "Are you sure you want to delete this food?"} %>
+  <%= button_to "Delete Food", food_path(@food), method: :delete, form_class: "delete-food", data: {confirm: "Are you sure you want to delete this food?"} %>
 <% end %>

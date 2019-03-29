@@ -5,7 +5,7 @@ class FoodsController < ApplicationController
   before_action :find_food, only: [:show, :edit, :update, :destroy]
 
   def index
-
+    @foods = Food.all.sort_by {|food| food.calories}
   end
 
   def new
@@ -29,11 +29,13 @@ class FoodsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
+    raise params.inspect
     if @food.update(food_params)
+
       redirect_to food_path(@food)
     else
       render :edit
@@ -54,7 +56,7 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :food_servings, macronutrients_grams: [:id, :grams])
+    params.require(:food).permit(:name, :food_servings, macronutrients_grams: [:id, :grams] )
   end
 
   def associate_to_meal(meal, food, params_servings)
