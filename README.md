@@ -39,7 +39,7 @@ This is a Rails application that allows users to create meals, and to keep track
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/kev112/PlotMaker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Code of Conduct
 
