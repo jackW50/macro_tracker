@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authorized?, only: :show
 
   def new
+    already_logged_in?
     @user = User.new
   end
 
