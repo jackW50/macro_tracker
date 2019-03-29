@@ -41,10 +41,6 @@ This is a Rails application that allows users to create meals, and to keep track
 
 Bug reports and pull requests are welcome on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-## Code of Conduct
-
-Everyone interacting in this project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/freeWillee/project-manager_001/blob/master/CODE_OF_CONDUCT.md).
-
 ## License
 
 This application is available as open source under the terms of the
