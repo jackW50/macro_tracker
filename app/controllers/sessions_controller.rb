@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-
+    already_logged_in?
   end
 
   def create
