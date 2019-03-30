@@ -30,7 +30,8 @@ class Food < ApplicationRecord
   def macronutrients_grams=(macronutrients_grams)
     macronutrients_grams.each do |macronutrient_grams|
       food_composition = FoodComposition.find_by(food_id: self.id, macronutrient_id: macronutrient_grams[:id])
-      if food_composition.nil? && macronutrient_grams[:grams].present? && macronutrient_grams[:id].present?
+      macronutrient_grams[:grams] = 0 unless macronutrient_grams[:grams].present?
+      if food_composition.nil? && macronutrient_grams[:id].present?
         self.food_compositions.build(macronutrient_id: macronutrient_grams[:id], macronutrient_grams: macronutrient_grams[:grams])
       else
         food_composition.update(macronutrient_grams: macronutrient_grams[:grams], macronutrient_id: macronutrient_grams[:id]) if macronutrient_grams[:id].present?

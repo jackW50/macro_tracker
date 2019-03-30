@@ -4,6 +4,7 @@
     <%= label_tag macronutrient.category %>
       <br>
       <%= label_tag "Grams:" %>
-      <%= text_field_tag "food[macronutrients_grams][#{macronutrient.category}][grams]", food_grams?(food, macronutrient) %>
+      <%= hidden_field_tag "food[macronutrients_grams][][id]", macronutrient.id %>
+      <%= text_field_tag "food[macronutrients_grams][][grams]", food_grams?(food, macronutrient) %>
   <% end %>
 <% end %>

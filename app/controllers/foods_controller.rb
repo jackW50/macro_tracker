@@ -13,7 +13,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    #raise params.inspect
     @meal = Meal.find(params[:meal_id])
     @food = Food.new(food_params)
     associate_to_meal(@meal, @food, params[:food_servings])
@@ -57,7 +57,7 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :food_servings, macronutrients_grams: [:id, :grams] )
+    params.require(:food).permit(:name, macronutrients_grams: [:id, :grams])
   end
 
   def associate_to_meal(meal, food, params_servings)

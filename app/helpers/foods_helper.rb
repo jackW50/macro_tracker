@@ -12,10 +12,6 @@ module FoodsHelper
     end
   end
 
-  def checked?(food, macronutrient)
-    food.macronutrient_ids.include?(macronutrient.id)
-  end
-
   def food_grams?(food, macronutrient)
     if food.grams_of_macronutrient(macronutrient) == 0
       0
