@@ -8,11 +8,23 @@ class Meal < ApplicationRecord
   scope :today, ->(user) { where("time >= :begin_day AND time <= :end_day AND user_id = :user_arg ", begin_day: DateTime.now.midnight, end_day: DateTime.now.midnight + 1, user_arg: user.id).order(time: :asc) }
 
   def self.calories_todays_meals(user)
-    find_user_meals_today(user).collect { |meal| MealComposition.total_calories_in_meal(meal) }
+    Meal.today(user).collect { |meal| MealComposition.total_calories_in_meal(meal) }.sum
   end
 
-  def self.todays_macro_totals
+  def self.todays_macronutrient_total(user, macronutrient)
+    Meal.today(user).collect { |meal| meal.grams_of_macronutrient(macronutrient) }.sum
+  end
 
+  def self.todays_macronutrient_calories(user, macronnutrient)
+    if macronutient.category != "fat"
+      Meal.todays_macronutrient_total(user, macronutrient) * 4
+    else
+      Meal.todays_macronutrient_total(user, macronutrient) * 9
+    end
+  end
+
+  def self.todays_percent_calories_of_macro(user, macronutrient)
+    (Meal.todays_macronutrient_calories(user, macronnutrient).to_f / Meal.calories_todays_meals(user) * 100).round(2)
   end
 
   def calories
