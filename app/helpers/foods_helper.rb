@@ -18,7 +18,7 @@ module FoodsHelper
 
   def food_grams?(food, macronutrient)
     if food.grams_of_macronutrient(macronutrient) == 0
-      nil
+      0
     else
       food.grams_of_macronutrient(macronutrient)
     end

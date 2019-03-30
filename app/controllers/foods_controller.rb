@@ -13,6 +13,7 @@ class FoodsController < ApplicationController
   end
 
   def create
+    raise params.inspect
     @meal = Meal.find(params[:meal_id])
     @food = Food.new(food_params)
     associate_to_meal(@meal, @food, params[:food_servings])
