@@ -34,7 +34,7 @@ class FoodsController < ApplicationController
   end
 
   def update
-    raise params.inspect
+    #raise params.inspect
     if @food.update(food_params)
 
       redirect_to food_path(@food)

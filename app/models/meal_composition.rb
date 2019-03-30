@@ -4,10 +4,8 @@ class MealComposition < ApplicationRecord
 
   validates :food_servings, numericality: true
 
-  scope :composition, ->(meal) { where('meal_compositions.meal_id = ?', meal.id) }
-
   def self.calories_for_each_food(meal)
-    self.composition(meal).collect do |meal_comp|
+    meal.meal_compositions.collect do |meal_comp|
       FoodComposition.total_calories(meal_comp.food) * meal_comp.food_servings
     end
   end
@@ -17,7 +15,7 @@ class MealComposition < ApplicationRecord
   end
 
   def self.calories_from_macro_for_each_food_in_meal(meal, macronutrient)
-    self.composition(meal).collect do |meal_comp|
+    meal.meal_compositions.collect do |meal_comp|
       FoodComposition.total_calories_from_macro(meal_comp.food, macronutrient) * meal_comp.food_servings
     end
   end
@@ -27,7 +25,7 @@ class MealComposition < ApplicationRecord
   end
 
   def self.grams_of_macro_for_each_food_in_meal(meal, macronutrient)
-    self.composition(meal).collect do |meal_comp|
+    meal.meal_compositions.collect do |meal_comp|
       FoodComposition.total_grams_of_macronutrients_in_food(meal_comp.food, macronutrient) * meal_comp.food_servings
     end
   end
@@ -37,7 +35,7 @@ class MealComposition < ApplicationRecord
   end
 
   def self.find_servings_of_food_in_meal(meal, food)
-    self.composition(meal).where(food_id: food.id).pluck('meal_compositions.food_servings').first 
+    meal.meal_compositions.where(food_id: food.id).pluck('meal_compositions.food_servings').first
   end
 
   def self.collect_total_grams_of_each_food_in_meal(meal)

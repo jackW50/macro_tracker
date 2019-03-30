@@ -13,6 +13,7 @@ class MealsController < ApplicationController
   end
 
   def create
+    raise params.inspect 
     @meal = Meal.new(meal_params)
     @meal.user = current_user
 
@@ -25,7 +26,7 @@ class MealsController < ApplicationController
   end
 
   def show
-  
+
   end
 
   def edit
@@ -33,6 +34,7 @@ class MealsController < ApplicationController
   end
 
   def update
+    raise params.inspect
     if @meal.update(meal_params)
       redirect_to meal_path(@meal)
     else
