@@ -15,8 +15,8 @@ class Meal < ApplicationRecord
     Meal.today(user).collect { |meal| meal.grams_of_macronutrient(macronutrient) }.sum
   end
 
-  def self.todays_macronutrient_calories(user, macronnutrient)
-    if macronutient.category != "fat"
+  def self.todays_macronutrient_calories(user, macronutrient)
+    if macronutrient.category != "fat"
       Meal.todays_macronutrient_total(user, macronutrient) * 4
     else
       Meal.todays_macronutrient_total(user, macronutrient) * 9
@@ -24,7 +24,7 @@ class Meal < ApplicationRecord
   end
 
   def self.todays_percent_calories_of_macro(user, macronutrient)
-    (Meal.todays_macronutrient_calories(user, macronnutrient).to_f / Meal.calories_todays_meals(user) * 100).round(2)
+    (Meal.todays_macronutrient_calories(user, macronutrient).to_f / Meal.calories_todays_meals(user) * 100).round(2)
   end
 
   def calories

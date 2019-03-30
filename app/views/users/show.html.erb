@@ -1,4 +1,4 @@
-<%= content_tag :h1, @user.username %>
+<%= content_tag :h1, current_user.username %>
 
 <!-- want this to just display the meals for the user for the current day -->
 <h3>Todays Meals</h3>
@@ -13,7 +13,7 @@
   <%= link_to "See All Meals", meals_path(@meal) %>
 <% end %>
 
-<h5 id="meal_show_macro"> Macronutrient Tracker </h5>
+<h5 id="todays_meals_show_macro"> Macronutrient Tracker </h5>
 <table class="pure-table">
     <thead>
         <tr>
@@ -23,6 +23,12 @@
         </tr>
     </thead>
     <tbody>
-
-    </tbody>
+    <% @macronutrients.each.with_index(1) do |macronutrient, i| %>
+      <%= tr_class(i) do %>
+        <%= content_tag :td, macronutrient.category.upcase %>
+        <%= content_tag :td, Meal.todays_macronutrient_total(current_user, macronutrient) %>
+        <%= content_tag :td, Meal.todays_percent_calories_of_macro(current_user, macronutrient) %>
+      <% end %>
+    <% end %>
+  </tbody>
 </table>
