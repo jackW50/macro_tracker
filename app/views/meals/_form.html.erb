@@ -16,11 +16,11 @@
     <% 5.times do %>
       <%= meal_errors_present?(meal) do%>
         <%= label_tag 'Food Name:' %>
-        <%= text_field_tag 'meal[new_foods][][food_name]' %>
+        <%= text_field_tag 'meal[new_foods][][food_name]'%>
         <%= tag(:br) %>
 
         <% macronutrients.each do |macronutrient| %>
-          <%= macronutrient.category%> <%= check_box_tag 'meal[new_foods][][macronutrient_categories][][macronutrient_id]', macronutrient.id %>
+          <%= macronutrient.category%> <%= hidden_field_tag 'meal[new_foods][][macronutrient_categories][][macronutrient_id]', macronutrient.id %>
           <%= text_field_tag 'meal[new_foods][][macronutrient_categories][][grams]', nil, placeholder: 'grams' %>
           <%= tag(:br) %>
         <% end %>
@@ -29,6 +29,6 @@
       <% end %>
     <% end %>
   <% end %>
-  
+
   <%= f.submit %>
 <% end %>

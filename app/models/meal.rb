@@ -11,6 +11,10 @@ class Meal < ApplicationRecord
     find_user_meals_today(user).collect { |meal| MealComposition.total_calories_in_meal(meal) }
   end
 
+  def self.todays_macro_totals
+
+  end
+
   def calories
     MealComposition.total_calories_in_meal(self)
   end
@@ -66,7 +70,7 @@ class Meal < ApplicationRecord
 
   def assign_food_composition(attributes:, food:)
     attributes.each do |attribute|
-      attribute[:grams] = 1 unless attribute[:grams].present?
+      attribute[:grams] = 0 unless attribute[:grams].present?
       food.food_compositions.build(food_id: food.id, macronutrient_id: attribute[:macronutrient_id], macronutrient_grams: attribute[:grams]) if attribute[:macronutrient_id].present?
     end
   end

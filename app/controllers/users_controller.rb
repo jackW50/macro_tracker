@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    #raise Meal.today(current_user).inspect
     @meals = Meal.today(current_user)
     @user = current_user
   end
