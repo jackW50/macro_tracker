@@ -28,12 +28,11 @@ class Meal < ApplicationRecord
   end
 
   def add_food=(add_food)
-    raise ''.inspect
     self.meal_compositions.build(food_id: add_food[:food_id], food_servings: add_food[:servings])
   end
 
   def remove_food=(meal_composition)
-    meal_composition.destroy
+    MealComposition.find(meal_composition).destroy
   end
 
   def food_attributes=(food_attributes)
