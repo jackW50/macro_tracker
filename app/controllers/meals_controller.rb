@@ -5,6 +5,10 @@ class MealsController < ApplicationController
 
   def index
     @meals = current_user.meals
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @meals, status: 200 }
+    end
   end
 
   def new
@@ -25,7 +29,10 @@ class MealsController < ApplicationController
   end
 
   def show
-
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @meal, status: 200}
+    end
   end
 
   def edit

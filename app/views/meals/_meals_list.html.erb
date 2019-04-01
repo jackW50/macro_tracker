@@ -1,7 +1,7 @@
 <% meals.each do |meal| %>
   <%= content_tag :ul do %>
     <%= content_tag :li do %>
-      <%= meal_time_link(meal, @user) %>
+      <%= meal_time_link(meal, current_user) %>
     <% end %>
   <% end %>
 
