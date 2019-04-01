@@ -31,3 +31,11 @@ class Meal {
     });
   }
 }
+
+class Food {
+  constructor(id, name, food_compositions) {
+    this.id = id,
+    this.name = name,
+    this.food_compositions = food_compositions
+  }
+}
