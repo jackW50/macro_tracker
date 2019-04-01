@@ -19,7 +19,11 @@ class FoodsController < ApplicationController
     associate_to_meal(@meal, @food, params[:food_servings])
 
     if @food.save
-      redirect_to meal_path(@meal)
+      #redirect_to meal_path(@meal)
+      respond_to do |format|
+        format.html { redirect_to meal_path(@meal) }
+        format.json { render json: @food, status: 201}
+      end 
     else
       render :new
     end
