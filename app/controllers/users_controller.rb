@@ -20,6 +20,10 @@ class UsersController < ApplicationController
   def show
     @meals = Meal.today(current_user)
     @macronutrients = Macronutrient.all
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: current_user }
+    end
   end
 
   def edit
