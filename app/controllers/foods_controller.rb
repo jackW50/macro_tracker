@@ -5,7 +5,6 @@ class FoodsController < ApplicationController
   before_action :find_food, only: [:show, :edit, :update, :destroy]
 
   def index
-    @foods = Food.all.sort_by {|food| food.calories}
   end
 
   def new
@@ -23,14 +22,17 @@ class FoodsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
         format.json { render json: @food, status: 201}
-      end 
+      end
     else
       render :new
     end
   end
 
   def show
-
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @food, status: 200 }
+    end
   end
 
   def edit
