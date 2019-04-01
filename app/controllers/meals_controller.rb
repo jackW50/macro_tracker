@@ -21,7 +21,11 @@ class MealsController < ApplicationController
     @meal.user = current_user
 
     if @meal.save
-      redirect_to user_path(current_user)
+      #redirect_to user_path(current_user)
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user) }
+        format.json { render json: @meal, status: 201 }
+      end
     else
       @foods = Food.all
       render :new
