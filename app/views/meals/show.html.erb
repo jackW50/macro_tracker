@@ -4,12 +4,11 @@
 
   <h3> Foods </h3>
   <div>
-    <%= button_to "See Foods", nil, form_class: "see-foods" %>
+    <%= button_tag "See Foods", type: 'button', class: "see-foods", id: "see-foods", data: "#{@meal.id}" %>
   </div>
 
-  <%= content_tag :ul, class: "col-1" do %>
-    <%= render 'meal_foods', meal: @meal %>
-  <% end %>
+  <%= content_tag :ul, nil, class: "col-1", id: "foods" %>
+
 
   <h5 id="meal_show_macro"> Macronutrient Tracker </h5>
   <table class="pure-table">
@@ -50,4 +49,19 @@
 
   <script type="text/javascript" charset="utf-8">
     console.log('hello on show');
+    $(document).on('turbolinks:load', function() {
+      console.log('log this after the document loads');
+      $('#see-foods').on('click', function(e) {
+        console.log('You just clicked the button');
+        const mealId = this.attributes.data.value;
+        $.getJSON('/meals/' + mealId, function(data) {
+          console.log('in the get response');
+          data.meal_compositions.forEach( element => {
+            console.log('we are in the iteration');
+            $('#foods').append('<li>' + element.food.name + '</li>' + '<li>Servings: ' + element.food_servings + '</li>')
+          })
+        })
+      })
+
+    });
   </script>
