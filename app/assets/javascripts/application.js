@@ -17,3 +17,17 @@
 //= require_tree .
 
 console.log('hello');
+
+class Meal {
+  constructor(id, time, mealCompositions) {
+    this.id = id;
+    this.time = time;
+    //mealCompositions is equal to an array;
+    this.mealCompositions = mealCompositions
+  }
+  foodList() {
+    return this.mealCompositions.map(element => {
+      return '<li>' + element.food.name + '</li><li>Servings: ' + element.food_servings + '</li>';
+    });
+  }
+}

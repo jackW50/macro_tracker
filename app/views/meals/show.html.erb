@@ -56,10 +56,11 @@
         const mealId = this.attributes.data.value;
         $.getJSON('/meals/' + mealId, function(data) {
           console.log('in the get response');
+          let meal = new Meal(data.id, data.time, data.meal_compositions);
           $('#title').text('Foods');
-          data.meal_compositions.forEach( element => {
+          meal.foodList().forEach( element => {
             console.log('we are in the iteration');
-            $('#foods').append('<li>' + element.food.name + '</li>' + '<li>Servings: ' + element.food_servings + '</li>')
+            $('#foods').append(element);
           })
         })
       })
