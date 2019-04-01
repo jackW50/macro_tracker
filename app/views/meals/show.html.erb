@@ -3,6 +3,10 @@
 <%= errors_list(@meal) %>
 
   <h3> Foods </h3>
+  <div>
+    <%= button_to "See Foods", nil, form_class: "see-foods" %>
+
+  </div>
 
   <%= content_tag :ul, class: "col-1" do %>
     <%= render 'meal_foods', meal: @meal %>
@@ -24,6 +28,7 @@
 
 
   <!-- dropdown menu to add existing foods to current meal -->
+  <div id="form"></div>
   <%= form_tag(meal_path(@meal), method: :patch) do %>
     <%= meal_errors_present?(@meal) do %>
       <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
@@ -43,3 +48,7 @@
   <%= content_tag :p do %>
    <%= link_to "See All Foods", meal_foods_path(@meal) %>
   <% end %>
+
+  <script type="text/javascript" charset="utf-8">
+    console.log('hello on show');
+  </script>
