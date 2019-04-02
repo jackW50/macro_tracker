@@ -69,12 +69,18 @@
         e.preventDefault();
         console.log('just clicked to create a new food for meal.');
         $('#create-title').text("Create Foods");
+        let id = $('#new-food-link')[0].attributes.data.value
+        //id is the current meals id that gets passed into the template.
         let newFoodForm = HandlebarsTemplates['new_food_form']({
-
+          mealId: id
         })
         $('#add-form').prepend(newFoodForm);
         $('#new-food-link').hide();
       })
+      function handleSubmit() {
+        $.post('/meals/' + mealId + '/foods/new', function() {
 
+        })
+      }
     });
   </script>
