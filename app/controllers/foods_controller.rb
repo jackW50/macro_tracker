@@ -12,16 +12,14 @@ class FoodsController < ApplicationController
   end
 
   def create
-    #raise params.inspect
     @meal = Meal.find(params[:meal_id])
     @food = Food.new(food_params)
     associate_to_meal(@meal, @food, params[:food_servings])
 
     if @food.save
-      #redirect_to meal_path(@meal)
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
-        format.json { render json: @food, status: 201}
+        format.json { render json: @food, status: 201 }
       end
     else
       render :new

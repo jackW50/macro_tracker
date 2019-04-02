@@ -76,11 +76,27 @@
         })
         $('#add-form').prepend(newFoodForm);
         $('#new-food-link').hide();
+        $('#new-food-form').on('submit', (function(event) {
+          event.preventDefault();
+          let mealId = $('#new-food-form')[0].attributes.data.value;
+          let values = $(this).serialize();
+          
+          $.ajax({
+            type: "POST",
+            url: "/meals/" + mealId + '/foods',
+            data: values,
+            success: function(response) {
+              console.log(response);
+            },
+            dataType: 'json'
+          });
+        //  $.post('/meals/' + mealId + '/foods', values, function(response) {
+          //  console.log(response);
+          //}, 'json')
+        }))
       })
-      function handleSubmit() {
-        $.post('/meals/' + mealId + '/foods/new', function() {
 
-        })
-      }
     });
+
+
   </script>
