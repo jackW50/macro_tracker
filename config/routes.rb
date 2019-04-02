@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :foods, only: [:new, :index, :create]
   end
 
-  resources :foods, only: [:show, :edit, :update, :destroy]
+  resources :foods, only: [:new, :show, :edit, :update, :destroy]
 
   resources :sessions, only: [:new, :create, :destroy] do
     collection do

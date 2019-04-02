@@ -15,16 +15,3 @@
     </ul>
   </div>
 <% end %>
-
-
-<% @foods.each do |food| %>
-  <ul>
-    <li>
-      <%= food.name %>
-    </li>
-
-    <li>
-      <%= link_to "#{food.calories} calories", food_path(food) %>
-    </li>
-  </ul>
-<% end %>

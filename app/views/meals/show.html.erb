@@ -35,8 +35,9 @@
     <% end %>
   <% end %>
 
+<h4 id="create-title"><h4>
   <%= content_tag :p, id: "add-form" do %>
-    To create a new food for meal click <%= link_to "Here", new_meal_food_path(@meal), id: "new-food-form", data: "#{@meal.id}" %>
+    <%= link_to "Create Food", new_meal_food_path(@meal), id: "new-food-link", data: "#{@meal.id}" %>
   <% end %>
 <!-- link to edit meals time -->
   <%= content_tag :p do %>
@@ -64,10 +65,13 @@
           })
         })
       })
-      $('#new-food-form').on('click', (e) => {
+      $('#new-food-link').on('click', (e) => {
         e.preventDefault();
         console.log('just clicked to create a new food for meal.');
-        let newFoodForm = HandlebarsTemplates['new_food_form']
+        $('#create-title').text("Create Foods");
+        let newFoodForm = HandlebarsTemplates['new_food_form']({
+
+        })
         $('#add-form').prepend(newFoodForm);
       })
     });
