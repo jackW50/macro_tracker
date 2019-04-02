@@ -78,21 +78,29 @@
         $('#new-food-link').hide();
         $('#new-food-form').on('submit', (function(event) {
           event.preventDefault();
+          $('#new-food-link').show();
           let mealId = $('#new-food-form')[0].attributes.data.value;
           let values = $(this).serialize();
-          
+
           $.ajax({
             type: "POST",
             url: "/meals/" + mealId + '/foods',
             data: values,
-            success: function(response) {
-              console.log(response);
-            },
+            success: success,
             dataType: 'json'
           });
-        //  $.post('/meals/' + mealId + '/foods', values, function(response) {
-          //  console.log(response);
-          //}, 'json')
+
+          function success(data) {
+            let meal = new Meal(data.id, data.time, data.meal_compositions);
+            $('#title').text('Foods');
+            $('#foods').text('');
+            meal.foodList().forEach( element => {
+              console.log('we are in the iteration');
+              $('#foods').append(element);
+            })
+            $('#new-food-form').remove();
+            $('#create-title').text("");
+          }
         }))
       })
 
