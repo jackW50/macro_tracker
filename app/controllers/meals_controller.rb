@@ -43,7 +43,7 @@ class MealsController < ApplicationController
 
   end
 
-  def update
+  def update 
     if @meal.update(meal_params)
       redirect_to meal_path(@meal)
     else
