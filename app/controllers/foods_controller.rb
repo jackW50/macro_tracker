@@ -22,6 +22,7 @@ class FoodsController < ApplicationController
         format.json { render json: {
           food: @food,
           food_servings: params[:food_servings],
+          table_data: NewTableDataService.new.call_meal(@meal)
            }
          }
       end
