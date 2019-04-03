@@ -58,6 +58,7 @@
         $.getJSON('/meals/' + mealId, function(data) {
           console.log('in the get response');
           let meal = new Meal(data.id, data.time, data.meal_compositions);
+          $("body").data( "meal-foods", meal);
           $('#title').text('Foods');
           meal.foodList().forEach( element => {
             console.log('we are in the iteration');
@@ -93,7 +94,12 @@
           function success(data) {
             let food = new Food(data.food.id, data.food.name);
             let servings = data.food_servings
-
+            if ($('body').data('meal-foods') === undefined) {
+              alert('You just created a food for this meal')
+            } else {
+              let listItem = '<li>' + food.name + '</li><li>' + servings + '</li>'
+              $('#foods').append(listItem);
+            }
             $('#new-food-form').remove();
             $('#create-title').text("");
           }
