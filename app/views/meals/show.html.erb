@@ -91,7 +91,8 @@
           });
 
           function success(data) {
-            let meal = new Meal(data.id, data.time, data.meal_compositions);
+            debugger
+            let meal = new Meal(data.id, data.time, data.foods);
             $('#title').text('Foods');
             $('#foods').text('');
             meal.foodList().forEach( element => {

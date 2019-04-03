@@ -25,19 +25,19 @@ class Meal {
     this.id = id;
     this.time = time;
     //mealCompositions is equal to an array;
-    this.mealCompositions = mealCompositions
+    this.mealCompositions = foods
   }
   foodList() {
-    return this.mealCompositions.map(element => {
-      return '<li>' + element.food.name + '</li><li>Servings: ' + element.food_servings + '</li>';
+    return this.foods.map(element => {
+      return '<li>' + element.name + '</li><li>Servings: ' + element.food_servings + '</li>';
     });
   }
 }
 
 class Food {
-  constructor(id, name, food_compositions) {
+  constructor(id, name, foodCompositions) {
     this.id = id,
     this.name = name,
-    this.food_compositions = food_compositions
+    this.foodCompositions = foodCompositions
   }
 }

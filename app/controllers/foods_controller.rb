@@ -19,7 +19,11 @@ class FoodsController < ApplicationController
     if @food.save
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
-        format.json { render json: @meal, status: 201 }
+        format.json { render json: {
+          food: @food,
+          food_servings: params[:food_servings],
+           }
+         }
       end
     else
       render :new

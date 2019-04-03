@@ -1,4 +1,3 @@
 class MealSerializer < ActiveModel::Serializer
-  attributes :id, :time
-  has_many :meal_compositions
+  attributes :id, :time, :meal_compositions
 end
