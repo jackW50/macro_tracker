@@ -37,7 +37,11 @@ class Meal {
       '</a>' +
       '<ul><li>Servings: ' +
       element.food_servings +
-      '</li></ul></li>';
+      '</li><li>' +
+      '<button name="button" id="remove-food" type="button" data="' +
+      element.id +
+      '">Remove</button>' +
+      '</ul></li>';
     });
   }
 }
