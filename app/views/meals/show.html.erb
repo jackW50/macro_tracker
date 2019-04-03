@@ -91,14 +91,9 @@
           });
 
           function success(data) {
-            debugger
-            let meal = new Meal(data.id, data.time, data.foods);
-            $('#title').text('Foods');
-            $('#foods').text('');
-            meal.foodList().forEach( element => {
-              console.log('we are in the iteration');
-              $('#foods').append(element);
-            })
+            let food = new Food(data.food.id, data.food.name);
+            let servings = data.food_servings
+
             $('#new-food-form').remove();
             $('#create-title').text("");
           }

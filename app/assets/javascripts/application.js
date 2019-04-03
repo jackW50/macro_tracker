@@ -35,9 +35,8 @@ class Meal {
 }
 
 class Food {
-  constructor(id, name, foodCompositions) {
+  constructor(id, name) {
     this.id = id,
     this.name = name,
-    this.foodCompositions = foodCompositions
   }
 }
