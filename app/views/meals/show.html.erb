@@ -60,6 +60,7 @@
           let meal = new Meal(data.id, data.time, data.meal_compositions);
           $("body").data( "meal-foods", meal);
           $('#title').text('Foods');
+  
           meal.foodList().forEach( element => {
             console.log('we are in the iteration');
             $('#foods').append(element);

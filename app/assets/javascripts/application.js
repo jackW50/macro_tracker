@@ -29,7 +29,7 @@ class Meal {
   }
   foodList() {
     return this.mealCompositions.map(element => {
-      return '<li>' + element.name + '</li><li>Servings: ' + element.food_servings + '</li>';
+      return '<li>' + element.food_name + '</li><li>Servings: ' + element.food_servings + '</li>';
     });
   }
 }
