@@ -60,7 +60,7 @@
           let meal = new Meal(data.id, data.time, data.meal_compositions);
           $("body").data( "meal-foods", meal);
           $('#title').text('Foods');
-  
+
           meal.foodList().forEach( element => {
             console.log('we are in the iteration');
             $('#foods').append(element);
@@ -101,6 +101,12 @@
               let listItem = '<li>' + food.name + '</li><li>' + servings + '</li>'
               $('#foods').append(listItem);
             }
+            $('tr td')[1].innerHTML = data.table_data.carbohydrate;
+            $('tr td')[2].innerHTML = data.table_data.percent_calories_of_carbohydrate
+            $('tr td')[4].innerHTML = data.table_data.protein;
+            $('tr td')[5].innerHTML = data.table_data.percent_calories_of_protein
+            $('tr td')[7].innerHTML = data.table_data.fat;
+            $('tr td')[8].innerHTML = data.table_data.percent_calories_of_fat
             $('#new-food-form').remove();
             $('#create-title').text("");
           }
