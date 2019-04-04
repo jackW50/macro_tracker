@@ -39,14 +39,14 @@
   <%= content_tag :p, id: "add-form" do %>
     <%= link_to "Create Food", new_meal_food_path(@meal), id: "new-food-link", data: "#{@meal.id}" %>
   <% end %>
+
 <!-- link to edit meals time -->
-  <%= content_tag :p do %>
+<div>
+  <%= content_tag :div do %>
    <%= link_to "Update Meal Time", edit_meal_path(@meal) %>
   <% end %>
+</div>
 
-  <%= content_tag :p do %>
-   <%= link_to "See All Foods", meal_foods_path(@meal) %>
-  <% end %>
 
   <script type="text/javascript" charset="utf-8">
     console.log('hello on show');
@@ -84,7 +84,7 @@
               //take the data and create a new table
               macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
               data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
-              //update the table on the DOM 
+              //update the table on the DOM
               macronutrientTable.updateTable();
             }
           })
@@ -94,13 +94,36 @@
         e.preventDefault();
         console.log('just clicked to create a new food for meal.');
         $('#create-title').text("Create Foods");
-        let id = $('#new-food-link')[0].attributes.data.value
+        if ($('body').data('new-form') === undefined) {
+          let id = $('#new-food-link')[0].attributes.data.value
+          //id is the current meals id that gets passed into the template.
+          let newFoodForm = HandlebarsTemplates['new_food_form']({
+            mealId: id
+          })
+          $('#add-form').prepend(newFoodForm);
+          $('body').data('new-form', newFoodForm);
+          $('#hide-form').prepend('<a id="hide-form-link" href="#">hide form</a>')
+          $('#new-food-link').hide();
+        } else {
+          console.log('In the else statement');
+          $('add-form').prepend($('body').data('new-form'))
+          $('#new-food-link').hide();
+        }
+
+        //let id = $('#new-food-link')[0].attributes.data.value
         //id is the current meals id that gets passed into the template.
-        let newFoodForm = HandlebarsTemplates['new_food_form']({
-          mealId: id
+        //let newFoodForm = HandlebarsTemplates['new_food_form']({
+          //mealId: id
+        //})
+        //$('#add-form').prepend(newFoodForm);
+        //$('body').data('new-form', newFoodForm);
+        //$('#hide-form').prepend('<a id="hide-form-link" href="#">hide form</a>')
+        //$('#new-food-link').hide();
+        $('#hide-form').on('click', function() {
+          $('#new-food-form').detach();
+          $('#create-title').text("");
+          $('#new-food-link').show();
         })
-        $('#add-form').prepend(newFoodForm);
-        $('#new-food-link').hide();
         $('#new-food-form').on('submit', (function(event) {
           event.preventDefault();
           $('#new-food-link').show();
@@ -151,7 +174,7 @@
 
         function success(data) {
 
-          console.log('the add food form ws successful', data);
+          console.log('the add food form was successful', data);
 
           let food = new Food(data.food.id, data.food.name);
           let mealComposition = new MealComposition(data.meal_composition.id,
