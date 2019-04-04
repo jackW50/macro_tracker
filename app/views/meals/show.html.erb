@@ -27,7 +27,7 @@
 
   <!-- dropdown menu to add existing foods to current meal -->
   <div id="form"></div>
-  <%= form_tag(meal_path(@meal), method: :patch, id: "add-food-form") do %>
+  <%= form_tag(meal_path(@meal), method: :patch, id: "add-food-form", data: @meal.id) do %>
     <%= meal_errors_present?(@meal) do %>
       <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
       <%= text_field_tag 'meal[add_food][servings]', nil, placeholder: 'servings' %>
@@ -115,11 +115,23 @@
         event.preventDefault();
 
         console.log('I submitted the add food form', this);
+        let values = $(this).serialize();
+        let mealId = $(this)[0].attributes.data.value;
+        $.ajax({
+          type: "PATCH",
+          url: "/meals/" + mealId,
+          data: values,
+          success: success,
+          dataType: 'json'
+        });
 
+        function success(data) {
+          console.log('the add food form ws successful', data);
+        }
         $('#add-food-form').trigger('reset');
 
       })
-      
+
     });
 
 
