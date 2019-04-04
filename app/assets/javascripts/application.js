@@ -60,6 +60,7 @@ class Food {
     this.id = id,
     this.name = name
   }
+  //This method take a MealComposition object as an argument.
   addFoodToList(meal_composition) {
     return '<li>' +
     '<a href="/foods/' +
@@ -68,7 +69,7 @@ class Food {
     this.name +
     '</a>' +
     '<ul><li>Servings: ' +
-    meal_composition.food_servings +
+    meal_composition.foodServings +
     '</li><li>' +
     '<button name="button" id="remove-food" type="button" data="' +
     meal_composition.id +

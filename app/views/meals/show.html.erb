@@ -64,7 +64,26 @@
             console.log('we are in the iteration');
             $('#foods').append(element);
           })
+          $('button#remove-food').on('click', function() {
+            console.log('In the remove food function', this);
+            let foodId = this.attributes.data.value;
+            let mealId = $('body').data('meal-foods').id
+
+            $.ajax({
+              type: "PATCH",
+              url: "/meals/" + mealId,
+              data: { meal: { remove_food: foodId } },
+              success: success,
+              dataType: 'json'
+            });
+
+            function success(data) {
+              console.log('We have data back from updating removing the food', data);
+            }
+
+          })
         })
+
       })
       $('#new-food-link').on('click', (e) => {
         e.preventDefault();
@@ -124,14 +143,18 @@
         });
 
         function success(data) {
+
           console.log('the add food form ws successful', data);
 
           let food = new Food(data.food.id, data.food.name);
-          let servings = data.food_servings
+          let mealComposition = new MealComposition(data.meal_composition.id,
+          data.meal_composition.food_id, data.meal_composition.food_servings, data.meal_composition.meal_id)
+
           if ($('body').data('meal-foods') === undefined) {
             alert('You just added a food for this meal')
           } else {
-            $('#foods').append(food.addFoodToList(servings));
+            //the add food to list function takes a meal composition object as an argument
+            $('#foods').append(food.addFoodToList(mealComposition));
           }
           macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
           data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
