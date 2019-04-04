@@ -112,12 +112,14 @@
 
           function success(data) {
             let food = new Food(data.food.id, data.food.name);
-            let servings = data.food_servings
+            let mealComposition = new MealComposition(data.meal_composition.id,
+            data.meal_composition.food_id, data.meal_composition.food_servings, data.meal_composition.meal_id)
 
             if ($('body').data('meal-foods') === undefined) {
               alert('You just created a food for this meal')
             } else {
-              $('#foods').append(food.addFoodToList(servings));
+              //the add food to list function takes a meal composition object as an argument
+              $('#foods').append(food.addFoodToList(mealComposition));
             }
             macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
             data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
@@ -166,6 +168,5 @@
       })
 
     });
-
 
   </script>
