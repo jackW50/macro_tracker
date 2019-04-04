@@ -45,12 +45,13 @@ class MealsController < ApplicationController
 
   def update
     @food = Food.find(params[:meal][:add_food][:food_id])
+    servings = params[:meal][:add_food][:servings]
     if @meal.update(meal_params)
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
         format.json { render json: {
           food: @food,
-          food_servings: params[:meal][:add_food][:servings],
+          meal_composition: @meal.meal_compositions.last,
           table_data: NewTableDataService.new.call_meal(@meal)
            }
          }

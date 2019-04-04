@@ -46,12 +46,21 @@ class Meal {
   }
 }
 
+class MealComposition {
+  constructor(id, foodId, foodServings, mealId) {
+    this.id = id,
+    this.foodId = foodId,
+    this.foodServings = foodServings,
+    this.mealId = mealId
+  }
+}
+
 class Food {
   constructor(id, name) {
     this.id = id,
     this.name = name
   }
-  addFoodToList(servings) {
+  addFoodToList(meal_composition) {
     return '<li>' +
     '<a href="/foods/' +
     this.id +
@@ -59,10 +68,10 @@ class Food {
     this.name +
     '</a>' +
     '<ul><li>Servings: ' +
-    servings +
+    meal_composition.food_servings +
     '</li><li>' +
     '<button name="button" id="remove-food" type="button" data="' +
-    this.id +
+    meal_composition.id +
     '">Remove</button>' +
     '</ul></li>';
   }
