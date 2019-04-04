@@ -66,24 +66,29 @@
           })
           $('button#remove-food').on('click', function() {
             console.log('In the remove food function', this);
-            let foodId = this.attributes.data.value;
+
+            let mealCompositionId = this.attributes.data.value;
             let mealId = $('body').data('meal-foods').id
+            $(this).closest('ul').closest('li').remove();
 
             $.ajax({
               type: "PATCH",
               url: "/meals/" + mealId,
-              data: { meal: { remove_food: foodId } },
+              data: { meal: { remove_food: mealCompositionId } },
               success: success,
               dataType: 'json'
             });
 
             function success(data) {
               console.log('We have data back from updating removing the food', data);
+              //take the data and create a new table
+              macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+              data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+              //update the table on the DOM 
+              macronutrientTable.updateTable();
             }
-
           })
         })
-
       })
       $('#new-food-link').on('click', (e) => {
         e.preventDefault();

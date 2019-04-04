@@ -44,8 +44,12 @@ class MealsController < ApplicationController
   end
 
   def update
-    @food = Food.find(params[:meal][:add_food][:food_id])
-    servings = params[:meal][:add_food][:servings]
+    if params[:meal][:add_food]
+      @food = Food.find(params[:meal][:add_food][:food_id])
+    elsif params[:meal][:remove_food]
+      @food = MealComposition.find(params[:meal][:remove_food]).food
+    end
+
     if @meal.update(meal_params)
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
