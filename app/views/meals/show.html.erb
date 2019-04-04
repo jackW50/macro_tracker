@@ -100,12 +100,10 @@
               let listItem = '<li>' + food.name + '</li><li>' + servings + '</li>'
               $('#foods').append(listItem);
             }
-            $('tr td')[1].innerHTML = data.table_data.carbohydrate;
-            $('tr td')[2].innerHTML = data.table_data.percent_calories_of_carbohydrate
-            $('tr td')[4].innerHTML = data.table_data.protein;
-            $('tr td')[5].innerHTML = data.table_data.percent_calories_of_protein
-            $('tr td')[7].innerHTML = data.table_data.fat;
-            $('tr td')[8].innerHTML = data.table_data.percent_calories_of_fat
+            macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+            data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+
+            macronutrientTable.updateTable();
             $('#new-food-form').remove();
             $('#create-title').text("");
           }
@@ -128,6 +126,10 @@
         function success(data) {
           console.log('the add food form ws successful', data);
           debugger
+          //macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+          //data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+
+          //macronutrientTable.updateTable();
         }
         $('#add-food-form').trigger('reset');
 

@@ -53,7 +53,7 @@ class Food {
   }
 }
 
-class macronutrientTable {
+class MacronutrientTable {
   constructor(carbohydrateGrams, carbohydratePercent, proteinGrams, proteinPercent, fatGrams, fatPercent) {
     this.carbohydrateGrams = carbohydrateGrams,
     this.carbohydratePercent = carbohydratePercent,
