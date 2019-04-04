@@ -27,7 +27,7 @@
 
   <!-- dropdown menu to add existing foods to current meal -->
   <div id="form"></div>
-  <%= form_tag(meal_path(@meal), method: :patch) do %>
+  <%= form_tag(meal_path(@meal), method: :patch, id: "add-food-form") do %>
     <%= meal_errors_present?(@meal) do %>
       <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
       <%= text_field_tag 'meal[add_food][servings]', nil, placeholder: 'servings' %>
@@ -111,7 +111,15 @@
           }
         }))
       })
+      $('#add-food-form').submit(function(event) {
+        event.preventDefault();
 
+        console.log('I submitted the add food form', this);
+
+        $('#add-food-form').trigger('reset');
+
+      })
+      
     });
 
 

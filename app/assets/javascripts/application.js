@@ -52,3 +52,7 @@ class Food {
     this.name = name
   }
 }
+
+function resetSubmit() {
+  $('#add-food-form input[type="submit"]').prop('disabled', false);
+}
