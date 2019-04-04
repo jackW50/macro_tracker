@@ -125,13 +125,23 @@
 
         function success(data) {
           console.log('the add food form ws successful', data);
-          debugger
-          //macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
-          //data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
 
-          //macronutrientTable.updateTable();
+          let food = new Food(data.food.id, data.food.name);
+          let servings = data.food_servings
+          if ($('body').data('meal-foods') === undefined) {
+            alert('You just added a food for this meal')
+          } else {
+            let listItem = '<li>' + food.name + '</li><li>' + servings + '</li>'
+            $('#foods').append(listItem);
+          }
+          macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+          data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+
+          macronutrientTable.updateTable();
+          $('#add-food-form').trigger('reset');
+          resetSubmit();
         }
-        $('#add-food-form').trigger('reset');
+
 
       })
 
