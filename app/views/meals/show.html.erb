@@ -94,11 +94,11 @@
           function success(data) {
             let food = new Food(data.food.id, data.food.name);
             let servings = data.food_servings
+
             if ($('body').data('meal-foods') === undefined) {
               alert('You just created a food for this meal')
             } else {
-              let listItem = '<li>' + food.name + '</li><li>' + servings + '</li>'
-              $('#foods').append(listItem);
+              $('#foods').append(food.addFoodToList(servings));
             }
             macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
             data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
@@ -131,8 +131,7 @@
           if ($('body').data('meal-foods') === undefined) {
             alert('You just added a food for this meal')
           } else {
-            let listItem = '<li>' + food.name + '</li><li>' + servings + '</li>'
-            $('#foods').append(listItem);
+            $('#foods').append(food.addFoodToList(servings));
           }
           macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
           data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
@@ -141,8 +140,6 @@
           $('#add-food-form').trigger('reset');
           resetSubmit();
         }
-
-
       })
 
     });

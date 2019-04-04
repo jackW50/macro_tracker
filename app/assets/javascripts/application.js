@@ -51,6 +51,21 @@ class Food {
     this.id = id,
     this.name = name
   }
+  addFoodToList(servings) {
+    return '<li>' +
+    '<a href="/foods/' +
+    this.id +
+    '">' +
+    this.name +
+    '</a>' +
+    '<ul><li>Servings: ' +
+    servings +
+    '</li><li>' +
+    '<button name="button" id="remove-food" type="button" data="' +
+    this.id +
+    '">Remove</button>' +
+    '</ul></li>';
+  }
 }
 
 class MacronutrientTable {
