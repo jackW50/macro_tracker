@@ -1,10 +1,12 @@
 class FoodsController < ApplicationController
   before_action :authorized?
-  before_action :find_meal, only: [:index, :new]
+  before_action :find_meal, only: [:new]
   before_action :find_macronutrients, only: [:new, :create, :edit, :update]
   before_action :find_food, only: [:show, :edit, :update, :destroy]
 
   def index
+    @foods = Food.all
+    render json: @foods
   end
 
   def new
