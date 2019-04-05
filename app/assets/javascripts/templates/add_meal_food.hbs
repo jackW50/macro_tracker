@@ -1,5 +1,7 @@
 <select>
+  <option value>select food</option>
   {{#each foods}}
   <option value="{{this.id}}">{{this.name}}</option>
   {{/each}}
 </select>
+<input type="text" name="meal[food_attributes][][servings]" id="meal_food_attributes_servings" placeholder="servings">
