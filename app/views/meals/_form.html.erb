@@ -2,6 +2,7 @@
 
   <%= f.datetime_select :time, prompt: {day: 'Choose day', month: 'month', year: 'year', hour: "hour", minute: "min"} %>
 
+  <div id="add-food-form">
   <%= meal_errors_present?(meal) do%>
     <% 3.times do %>
       <%= select_tag 'meal[food_attributes][][food_id]', options_from_collection_for_select(foods, :id, :name), prompt: 'select food' %>
@@ -9,8 +10,10 @@
     <%= tag :br %>
     <% end %>
   <% end %>
+  <a href="#">Add another food</a>
+  </div>
 
-
+  <div id="create-new-food-form">
   <%= div_tag_for_food_attributes do %>
     <%= content_tag(:p, "And/Or Create Foods For Meal") %>
 
@@ -27,5 +30,8 @@
       <%= text_field_tag 'meal[new_foods][][food_servings]', nil, placeholder: 'servings' %>
     <% end %>
   <% end %>
+  <a href="#">Create another food</a>
+  </div>
+  <%= tag(:br) %>
   <%= f.submit %>
 <% end %>
