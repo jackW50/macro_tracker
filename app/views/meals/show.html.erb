@@ -47,9 +47,35 @@
   <% end %>
 </div>
 
-
   <script type="text/javascript" charset="utf-8">
     console.log('hello on show');
+
+    function removeFoodListener() {
+      $('button#remove-food').on('click', function() {
+        console.log('In the remove food function', this);
+
+        let mealCompositionId = this.attributes.data.value;
+        let mealId = $('body').data('meal-foods').id
+        $(this).closest('ul').closest('li').remove();
+
+        $.ajax({
+          type: "PATCH",
+          url: "/meals/" + mealId,
+          data: { meal: { remove_food: mealCompositionId } },
+          success: success,
+          dataType: 'json'
+        });
+
+        function success(data) {
+          console.log('We have data back from updating removing the food', data);
+          //take the data and create a new table
+          macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+          data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+          //update the table on the DOM
+          macronutrientTable.updateTable();
+        }
+      })
+    }
     $(document).on('turbolinks:load', function() {
       console.log('log this after the document loads');
       $('#see-foods').on('click', function(e) {
@@ -64,30 +90,7 @@
             console.log('we are in the iteration');
             $('#foods').append(element);
           })
-          $('button#remove-food').on('click', function() {
-            console.log('In the remove food function', this);
-
-            let mealCompositionId = this.attributes.data.value;
-            let mealId = $('body').data('meal-foods').id
-            $(this).closest('ul').closest('li').remove();
-
-            $.ajax({
-              type: "PATCH",
-              url: "/meals/" + mealId,
-              data: { meal: { remove_food: mealCompositionId } },
-              success: success,
-              dataType: 'json'
-            });
-
-            function success(data) {
-              console.log('We have data back from updating removing the food', data);
-              //take the data and create a new table
-              macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
-              data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
-              //update the table on the DOM
-              macronutrientTable.updateTable();
-            }
-          })
+          removeFoodListener();
         })
       })
       $('#new-food-link').on('click', (e) => {
@@ -106,11 +109,13 @@
           $('#new-food-link').hide();
         } else {
           console.log('In the else statement');
-          $('add-form').prepend($('body').data('new-form'))
+          $('#add-form').prepend($('body').data('new-form'))
           $('#new-food-link').hide();
+          $('#hide-form').prepend('<a id="hide-form-link" href="#">hide form</a>')
         }
 
-        $('#hide-form').on('click', function() {
+        $('#hide-form').on('click', function(e) {
+          e.preventDefault();
           $('#new-food-form').detach();
           $('#create-title').text("");
           $('#new-food-link').show();
@@ -176,6 +181,7 @@
           } else {
             //the add food to list function takes a meal composition object as an argument
             $('#foods').append(food.addFoodToList(mealComposition));
+
           }
           macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
           data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
