@@ -10,6 +10,7 @@
     <%= tag :br %>
     <% end %>
   <% end %>
+  <div id="add-add-food-form"><div>
   <a href="#" id="add-food-form-link">Add another food</a>
   </div>
 
@@ -29,7 +30,9 @@
       <% end %>
       <%= text_field_tag 'meal[new_foods][][food_servings]', nil, placeholder: 'servings' %>
     <% end %>
+    <div id="add-new-food-form"><div>
   <% end %>
+
   <a href="#" id="create-new-food-form-link">Create another food</a>
   </div>
   <%= tag(:br) %>
@@ -43,6 +46,8 @@
     $('#create-new-food-form-link').on('click', function(e) {
       e.preventDefault();
       console.log('In the new food form click');
+      let newFoodForm = HandlebarsTemplates['new_meal_food']
+      $('#add-new-food-form').prepend(newFoodForm);
     })
 
     $('#add-food-form-link').on('click', function(e) {
