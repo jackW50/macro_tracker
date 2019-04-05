@@ -10,7 +10,7 @@
     <%= tag :br %>
     <% end %>
   <% end %>
-  <a href="#">Add another food</a>
+  <a href="#" id="add-food-form-link">>Add another food</a>
   </div>
 
   <div id="create-new-food-form">
@@ -30,8 +30,20 @@
       <%= text_field_tag 'meal[new_foods][][food_servings]', nil, placeholder: 'servings' %>
     <% end %>
   <% end %>
-  <a href="#">Create another food</a>
+  <a href="#" id="create-new-food-form-link">Create another food</a>
   </div>
   <%= tag(:br) %>
   <%= f.submit %>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  console.log('hello on new meal page');
+
+  $(document).on('turbolinks:load', function(){
+    $('#create-new-food-form-link').on('click', function(e) {
+      e.preventDefault();
+      console.log('In the new food form click');
+    })
+  });
+
+</script>
