@@ -44,14 +44,14 @@ class MealsController < ApplicationController
   end
 
   def update
-    @food = Food.find(params[:meal][:add_food][:food_id]) unless params[:meal][:add_food]
-
+    @food = Food.find(params[:meal][:add_food][:food_id]) if params[:meal][:add_food]
+    #binding.pry
     if @meal.update(meal_params)
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
         format.json { render json: {
-          food: @food ||= "",
-          meal_composition: MealComposition.where(meal_id: @meal.id).last,
+          food: @food || "",
+          meal_composition: @meal.meal_compositions.last,
           table_data: NewTableDataService.new.call_meal(@meal)
            }
          }

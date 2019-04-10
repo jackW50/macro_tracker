@@ -120,7 +120,7 @@
           $('#create-title').text("");
           $('#new-food-link').show();
         })
-        $('#new-food-form').on('submit', (function(event) {
+        $('#new-food-form').on('submit', function(event) {
           event.preventDefault();
           $('#new-food-link').show();
           let mealId = $('#new-food-form')[0].attributes.data.value;
@@ -144,6 +144,32 @@
             } else {
               //the add food to list function takes a meal composition object as an argument
               $('#foods').append(food.addFoodToList(mealComposition));
+              const $arrList = $('#foods li button')
+              $arrList.last().on('click', function(e) {
+                e.preventDefault();
+                console.log('In the remove food function', this);
+
+                let mealCompositionId = this.attributes.data.value;
+                let mealId = $('body').data('meal-foods').id
+                $(this).closest('ul').closest('li').remove();
+
+                $.ajax({
+                  type: "PATCH",
+                  url: "/meals/" + mealId,
+                  data: { meal: { remove_food: mealCompositionId } },
+                  success: success,
+                  dataType: 'json'
+                });
+
+                function success(data) {
+                  console.log('We have data back from updating removing the food', data);
+                  //take the data and create a new table
+                  macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+                  data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+                  //update the table on the DOM
+                  macronutrientTable.updateTable();
+                }
+              })
             }
             macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
             data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
@@ -152,7 +178,7 @@
             $('#new-food-form').remove();
             $('#create-title').text("");
           }
-        }))
+        })
       })
       $('#add-food-form').submit(function(event) {
         event.preventDefault();
@@ -181,7 +207,32 @@
           } else {
             //the add food to list function takes a meal composition object as an argument
             $('#foods').append(food.addFoodToList(mealComposition));
+            const $arrList = $('#foods li button')
+            $arrList.last().on('click', function(e) {
+              e.preventDefault();
+              console.log('In the remove food function', this);
 
+              let mealCompositionId = this.attributes.data.value;
+              let mealId = $('body').data('meal-foods').id
+              $(this).closest('ul').closest('li').remove();
+
+              $.ajax({
+                type: "PATCH",
+                url: "/meals/" + mealId,
+                data: { meal: { remove_food: mealCompositionId } },
+                success: success,
+                dataType: 'json'
+              });
+
+              function success(data) {
+                console.log('We have data back from updating removing the food', data);
+                //take the data and create a new table
+                macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
+                data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
+                //update the table on the DOM
+                macronutrientTable.updateTable();
+              }
+            })
           }
           macronutrientTable = new MacronutrientTable(data.table_data.carbohydrate, data.table_data.percent_calories_of_carbohydrate,
           data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
@@ -191,7 +242,6 @@
           resetSubmit();
         }
       })
-
     });
 
   </script>
