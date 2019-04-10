@@ -32,3 +32,10 @@
     <% end %>
   </tbody>
 </table>
+
+<script type="text/javascript" charset="utf-8">
+  console.log('hello on user profile.');
+  $(document).on('turbolinks:load', function() {
+    console.log('turbolinks loads');
+  })
+</script>

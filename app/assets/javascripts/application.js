@@ -18,7 +18,7 @@
 //= require turbolinks
 //= require_tree .
 
-console.log('hello');
+console.log('hello app js');
 
 class Meal {
   constructor(id, time, mealCompositions) {

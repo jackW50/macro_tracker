@@ -77,7 +77,7 @@
       })
     }
     $(document).on('turbolinks:load', function() {
-      console.log('log this after the document loads');
+      console.log('turbolinks loads');
       $('#see-foods').on('click', function(e) {
         console.log('You just clicked the button');
         const mealId = this.attributes.data.value;
