@@ -126,9 +126,12 @@
           $.get('/foods', function(data) {
             console.log(data);
             $('body').data('all-foods', data);
+            const newMealForm = HandlebarsTemplates['new_meal_form']({
+              foods: data
+            })
+            $('#new-meal-form').prepend(newMealForm);
           })
-
-        }
+        } //if statement block
       })
     }
 
