@@ -62,8 +62,9 @@
             return e.id === parseInt(mealId);
           })
           meal.foods().forEach( e => {
-            return $('span#' + mealId).append(e.foodLink() + ", ")
+            return $('ul#' + mealId).append(e.foodLink())
           })
+          $(this).replaceWith('<a href="#">hide foods</a>')
         })
       })
     })

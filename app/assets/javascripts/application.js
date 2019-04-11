@@ -54,9 +54,9 @@ class Meal {
     this.time +
     '</li><li><a href="#" data="' +
     this.id +
-    '">see foods</a></li><span id="' +
+    '">see foods</a></li><ul id="' +
      this.id +
-    '"></span></ul>'
+    '"></ul></ul>'
   }
 }
 
@@ -91,11 +91,11 @@ class Food {
     '</ul></li>';
   }
   foodLink() {
-    return '<a href="#" data="' +
+    return '<li><a href="#" data="' +
     this.id +
     '">' +
     this.name +
-    '</a>'
+    '</a></li>'
   }
 }
 
