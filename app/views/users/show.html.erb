@@ -11,6 +11,7 @@
 
 <%= content_tag :div do %>
   <%= link_to "See All Meals", meals_path(@meal), id: "all-meals" %>
+  <div id="show-meals"></div>
 <% end %>
 
 <h5 id="todays_meals_show_macro"> Macronutrient Tracker </h5>
@@ -49,7 +50,9 @@
         console.log(meals);
         if ($('body').data('meals') === undefined) {
           $('body').data('meals', meals);
-
+          meals.forEach( meal => {
+            $('#show-meals').append(meal.mealListItem());
+          })
         }
       })
     })

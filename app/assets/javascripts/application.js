@@ -43,13 +43,13 @@ class Meal {
       '">Remove</button>' +
       '</ul></li>';
     });
-    mealListItem() {
-      return '<ul><li>' +
-      this.time +
-      '</li><li><a data="' +
-      this.id +
-      '">Foods</a></li>' 
-    }
+  }
+  mealListItem() {
+    return '<ul><li>' +
+    this.time +
+    '</li><li><a href="#" data="' +
+    this.id +
+    '">Foods</a></li>'
   }
 }
 
