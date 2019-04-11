@@ -38,6 +38,33 @@
   console.log('hello on user profile.');
   $(document).on('turbolinks:load', function() {
     console.log('turbolinks loads');
+
+    function seeFoodsListener(link, foodList) {
+      $(link).on('click', function(e) {
+        e.preventDefault();
+        console.log('I just clicked to see the foods for this link', link);
+        const mealId = link[0].attributes.data.value;
+        const meal = $('body').data('meals').find( e => {
+          return e.id === parseInt(mealId);
+        })
+        foodList.show();
+        //meal.foods().forEach( e => {
+          //debugger
+          //return $('ul#' + mealId).append(e.foodLink())
+        //})
+
+        const seeFoodsLink = $(link).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
+        let hideFoods;
+
+        $('#hide-foods-' + mealId).on('click', function(e) {
+          e.preventDefault();
+          foodList = $('ul#' + mealId)
+          foodList.hide("slow")
+          hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
+          seeFoodsListener(seeFoodsLink, foodList)
+        })
+      })
+    }
     //show meals when i hit see all meals
       //each meal will have a link attached that will show us the foods for that particular meal.
     $('#all-meals').on('click', function(e) {
@@ -64,7 +91,17 @@
           meal.foods().forEach( e => {
             return $('ul#' + mealId).append(e.foodLink())
           })
-          $(this).replaceWith('<a href="#">hide foods</a>')
+
+          const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
+          let hideFoods;
+
+          $('#hide-foods-' + mealId).on('click', function(e) {
+            e.preventDefault();
+            foodList = $('ul#' + mealId)
+            foodList.hide("slow")
+            hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
+            seeFoodsListener(seeFoodsLink, foodList)
+          })
         })
       })
     })
