@@ -49,7 +49,7 @@ class Meal {
     this.time +
     '</li><li><a href="#" data="' +
     this.id +
-    '">Foods</a></li>'
+    '">see foods</a></li>'
   }
 }
 
