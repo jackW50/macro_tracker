@@ -10,7 +10,7 @@
 <% end %>
 
 <%= content_tag :div do %>
-  <%= link_to "See All Meals", meals_path(@meal) %>
+  <%= link_to "See All Meals", meals_path(@meal), id: "all-meals" %>
 <% end %>
 
 <h5 id="todays_meals_show_macro"> Macronutrient Tracker </h5>
@@ -37,5 +37,13 @@
   console.log('hello on user profile.');
   $(document).on('turbolinks:load', function() {
     console.log('turbolinks loads');
+    //show meals when i hit see all meals
+      //each meal will have a link attached that will show us the foods for that particular meal.
+    $('#all-meals').on('click', function(e) {
+      e.preventDefault();
+      $.getJSON('/meals', function(data) {
+        console.log('got data back for meals', data);
+      })
+    })
   })
 </script>
