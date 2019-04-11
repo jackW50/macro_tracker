@@ -39,48 +39,36 @@
   $(document).on('turbolinks:load', function() {
     console.log('turbolinks loads');
 
-    function seeFoodsListener(link, foodList) {
-      $(link).on('click', function(e) {
+    function seeMealsListener() {
+      $('#all-meals').on('click', function(e) {
         e.preventDefault();
-        console.log('I just clicked to see the foods for this link', link);
-        const mealId = link[0].attributes.data.value;
-        const meal = $('body').data('meals').find( e => {
-          return e.id === parseInt(mealId);
-        })
-        foodList.show();
-        //meal.foods().forEach( e => {
-          //debugger
-          //return $('ul#' + mealId).append(e.foodLink())
-        //})
-
-        const seeFoodsLink = $(link).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
-        let hideFoods;
-
-        $('#hide-foods-' + mealId).on('click', function(e) {
-          e.preventDefault();
-          foodList = $('ul#' + mealId)
-          foodList.hide("slow")
-          hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
-          seeFoodsListener(seeFoodsLink, foodList)
-        })
-      })
-    }
-    //show meals when i hit see all meals
-      //each meal will have a link attached that will show us the foods for that particular meal.
-    $('#all-meals').on('click', function(e) {
-      e.preventDefault();
-      $.getJSON('/meals', function(data) {
-        console.log('got data back for meals', data);
-        const meals = data.map( e => {
-          return new Meal(e.id, e.time, e.meal_compositions);
-        })
-        console.log(meals);
         if ($('body').data('meals') === undefined) {
-          $('body').data('meals', meals);
-          meals.forEach( meal => {
-            $('#show-meals').append(meal.mealListItem());
-          })
+          $.getJSON('/meals', function(data) {
+            console.log('got data back for meals', data);
+            const meals = data.map( e => {
+              return new Meal(e.id, e.time, e.meal_compositions);
+            })
+            console.log(meals);
+
+            $('body').data('meals', meals);
+            meals.forEach( meal => {
+              $('#show-meals').append(meal.mealListItem());
+            })
+          });
+        } else {
+          $('#show-meals').show();
         }
+
+        //hide see meals link and show a hide meals link or replace the link with hide meals
+        const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
+
+        $('#hide-meals').on('click', function(e) {
+          e.preventDefault();
+          $('#show-meals').hide();
+          $('#hide-meals').replaceWith(seeMealsLink)
+          seeMealsListener();
+        })
+
         $('#show-meals a').on('click', function(e) {
           e.preventDefault();
           console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
@@ -104,6 +92,33 @@
           })
         })
       })
-    })
+    }
+
+    function seeFoodsListener(link, foodList) {
+      $(link).on('click', function(e) {
+        e.preventDefault();
+        console.log('I just clicked to see the foods for this link', link);
+        const mealId = link[0].attributes.data.value;
+        const meal = $('body').data('meals').find( e => {
+          return e.id === parseInt(mealId);
+        })
+        foodList.show();
+
+        const seeFoodsLink = $(link).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
+        let hideFoods;
+
+        $('#hide-foods-' + mealId).on('click', function(e) {
+          e.preventDefault();
+          foodList = $('ul#' + mealId)
+          foodList.hide("slow")
+          hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
+          seeFoodsListener(seeFoodsLink, foodList)
+        })
+      })
+    }
+
+    //show meals when i hit see all meals
+      //each meal will have a link attached that will show us the foods for that particular meal.
+    seeMealsListener();
   })
 </script>
