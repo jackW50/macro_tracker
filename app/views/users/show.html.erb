@@ -54,6 +54,10 @@
             $('#show-meals').append(meal.mealListItem());
           })
         }
+        $('#show-meals a').on('click', function(e) {
+          e.preventDefault();
+          console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
+        })
       })
     })
   })

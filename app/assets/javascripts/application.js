@@ -49,7 +49,9 @@ class Meal {
     this.time +
     '</li><li><a href="#" data="' +
     this.id +
-    '">see foods</a></li>'
+    '">see foods</a></li><span id="' +
+     this.id +
+    '"></span></ul>'
   }
 }
 
