@@ -57,6 +57,13 @@
         $('#show-meals a').on('click', function(e) {
           e.preventDefault();
           console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
+          const mealId = this.attributes.data.value;
+          const meal = $('body').data('meals').find( e => {
+            return e.id === parseInt(mealId);
+          })
+          meal.foods().forEach( e => {
+            return $('span#' + mealId).append(e.foodLink() + ", ")
+          })
         })
       })
     })

@@ -27,6 +27,11 @@ class Meal {
     //mealCompositions is equal to an array;
     this.mealCompositions = mealCompositions;
   }
+  foods() {
+    return this.mealCompositions.map( e => {
+      return new Food(e.food_id, e.food_name)
+    })
+  }
   foodList() {
     return this.mealCompositions.map(element => {
       return '<li>' +
@@ -84,6 +89,13 @@ class Food {
     meal_composition.id +
     '">Remove</button>' +
     '</ul></li>';
+  }
+  foodLink() {
+    return '<a href="#" data="' +
+    this.id +
+    '">' +
+    this.name +
+    '</a>'
   }
 }
 
