@@ -121,6 +121,8 @@
     function newMealFormListener() {
       $('#new-meal-form-link').on('click', function(e) {
         e.preventDefault();
+        $('#new-meal-form-link').hide();
+
         if ($('body').data('new-meal-form') === undefined) {
           console.log('no form saved')
           $.get('/foods', function(data) {
@@ -130,6 +132,8 @@
               foods: data
             })
             $('#new-meal-form').prepend(newMealForm);
+            $('#new-meal-form').before('<a href="#" id="hide-new-meal-form">hide form</a>')
+            $('body').data('new-meal-form', newMealForm);
           })
         } //if statement block
       })
