@@ -43,6 +43,14 @@
       e.preventDefault();
       $.getJSON('/meals', function(data) {
         console.log('got data back for meals', data);
+        const meals = data.map( e => {
+          return new Meal(e.id, e.time, e.meal_compositions);
+        })
+        console.log(meals);
+        if ($('body').data('meals') === undefined) {
+          $('body').data('meals', meals);
+
+        }
       })
     })
   })
