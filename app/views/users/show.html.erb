@@ -6,8 +6,9 @@
 <%= render 'meals/meals_list', meals: @meals %>
 
 <%= content_tag :div do %>
-  <%= link_to "Create a New Meal", new_meal_path %>
+  <%= link_to "Create a New Meal", new_meal_path, id: "new-meal-form-link" %>
 <% end %>
+<div id="new-meal-form"></div>
 
 <%= content_tag :div do %>
   <%= link_to "See All Meals", meals_path(@meal), id: "all-meals" %>
@@ -117,8 +118,23 @@
       })
     }
 
+    function newMealFormListener() {
+      $('#new-meal-form-link').on('click', function(e) {
+        e.preventDefault();
+        if ($('body').data('new-meal-form') === undefined) {
+          console.log('no form saved')
+          $.get('/foods', function(data) {
+            console.log(data);
+            $('body').data('all-foods', data);
+          })
+
+        }
+      })
+    }
+
     //show meals when i hit see all meals
       //each meal will have a link attached that will show us the foods for that particular meal.
     seeMealsListener();
+    newMealFormListener();
   })
 </script>

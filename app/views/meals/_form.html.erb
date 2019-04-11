@@ -53,7 +53,6 @@
 
     $('#add-food-form-link').on('click', function(e) {
       e.preventDefault();
-      const mealId =
       console.log('In the add food form click');
       $.get('/foods', function(data) {
         console.log(data)
