@@ -156,7 +156,12 @@
 
         function success(data) {
           console.log("I created a new meal", data);
-          debugger 
+          debugger
+          if (data.meal["todays_meal?"]) {
+            const meal = new Meal(data.meal.id, data,meal.time, data.meal.meal_compositions);
+            meal.calories = data.meal.calories;
+            $("#todays-meal-list").append(mealLiLink())
+          }
         }
       })
     }
