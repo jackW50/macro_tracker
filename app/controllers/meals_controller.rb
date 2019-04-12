@@ -17,7 +17,7 @@ class MealsController < ApplicationController
   end
 
   def create
-    binding.pry
+    #binding.pry
     @meal = Meal.new(meal_params)
     @meal.user = current_user
 
@@ -25,7 +25,11 @@ class MealsController < ApplicationController
       #redirect_to user_path(current_user)
       respond_to do |format|
         format.html { redirect_to user_path(current_user) }
-        format.json { render json: @meal, status: 201 }
+        format.json { render json: {
+          meal: @meal,
+          table_data: NewTableDataService.new.call_todays_meals(current_user)
+          }
+        }
       end
     else
       @foods = Food.all
@@ -36,7 +40,7 @@ class MealsController < ApplicationController
   def show
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @meal, status: 200}
+      format.json { render json: @meal, status: 200 }
     end
   end
 

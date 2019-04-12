@@ -7,6 +7,7 @@ class MealSerializer < ActiveModel::Serializer
   end
 
   def todays_meal?
+    true 
     #true or false if it is a meal for today
   end
 end

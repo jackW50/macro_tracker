@@ -145,7 +145,7 @@
       $('#meal-form').on('submit', function(event) {
         event.preventDefault();
         let values = $(this).serialize();
-        debugger 
+        debugger
 
         $.ajax({
           type: "POST",
@@ -165,6 +165,6 @@
       //each meal will have a link attached that will show us the foods for that particular meal.
     seeMealsListener();
     createMealLinkListener();
-    //newMealFormListener();
+    
   })
 </script>
