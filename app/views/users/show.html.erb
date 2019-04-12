@@ -143,11 +143,21 @@
 
     function newMealFormListener() {
       $('#meal-form').on('submit', function(event) {
-        debugger
         event.preventDefault();
-        $.post("/meals", function(data) {
-          console.log('I just created a new meal', data);
-        }, "json");
+        let values = $(this).serialize();
+        debugger 
+
+        $.ajax({
+          type: "POST",
+          url: "/meals",
+          data: values,
+          success: success,
+          dataType: "json"
+        });
+
+        function success(data) {
+          console.log("I created a new meal", data);
+        }
       })
     }
 
