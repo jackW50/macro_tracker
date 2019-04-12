@@ -3,7 +3,7 @@ class MealSerializer < ActiveModel::Serializer
   has_many :meal_compositions
 
   def time
-    time = self.object.time.strftime('%A, %b %d, @ %l:%M %p')
+    time = self.object.time.strftime('@ %l:%M %p')
   end
 
   def todays_meal?

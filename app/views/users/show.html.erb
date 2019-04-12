@@ -160,7 +160,7 @@
           if (data.meal["todays_meal?"]) {
             const meal = new Meal(data.meal.id, data,meal.time, data.meal.meal_compositions);
             meal.calories = data.meal.calories;
-            $("#todays-meal-list").append(mealLiLink())
+            $("#todays-meal-list").append(meal.liLink())
           }
         }
       })

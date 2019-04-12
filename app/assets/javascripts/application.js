@@ -24,6 +24,7 @@ class Meal {
   constructor(id, time, mealCompositions) {
     this.id = id;
     this.time = time;
+    this.calories = ''
     //mealCompositions is equal to an array;
     this.mealCompositions = mealCompositions;
   }
@@ -57,6 +58,15 @@ class Meal {
     '">see foods</a></li><ul id="' +
      this.id +
     '"></ul></ul>'
+  }
+  liLink() {
+    return '<ul><li><a href="/meals/' +
+    this.id +
+    '">' +
+    this.time +
+    '</a></li></ul><p class="calories-list">- ' +
+    this.calories +
+    'calories</p>'
   }
 }
 
