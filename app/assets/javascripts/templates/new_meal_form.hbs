@@ -156,7 +156,7 @@
     </select>
   </div>
   <div id="add-food">
-    <select>
+    <select name="meal[food_attributes][][food_id]">
       <option value>select food</option>
       {{#each foods}}
       <option value="{{this.id}}">{{this.name}}</option>
@@ -166,15 +166,15 @@
   </div>
   <div id="create-food">
     <br>
-    <input type="text" name="food[name]" id="name" placeholder="food name"><br>
+    <input type="text" name="meal[new_foods][][food_name]" id="name" placeholder="food name"><br>
     <label for="macronutrients">Macronutrients(in grams)</label><br>
-    <input type="hidden" name="food[macronutrients_grams][][id]" value="1">
-    Carbohydrates:<input type="text" name="food[macronutrients_grams][][grams]" id="carbohydrate-grams" value='0'><br>
-    <input type="hidden" name="food[macronutrients_grams][][id]" value="2">
-    Proteins:<input type="text" name="food[macronutrients_grams][][grams]" id="protein-grams" value='0'><br>
-    <input type="hidden" name="food[macronutrients_grams][][id]" value="3">
-    Fats:<input type="text" name="food[macronutrients_grams][][grams]" id="fat-grams" value='0'><br>
-    Servings:<input type="text" name="food_servings" id="food_servings"><br>
+    <input type="hidden" name="meal[new_foods][][macronutrient_categories][][macronutrient_id]" value="1">
+    Carbohydrates:<input type="text" name="meal[new_foods][][macronutrient_categories][][grams]" id="carbohydrate-grams" value='0'><br>
+    <input type="hidden" name="meal[new_foods][][macronutrient_categories][][macronutrient_id]" value="2">
+    Proteins:<input type="text" name="meal[new_foods][][macronutrient_categories][][grams]" id="protein-grams" value='0'><br>
+    <input type="hidden" name="meal[new_foods][][macronutrient_categories][][macronutrient_id]" value="3">
+    Fats:<input type="text" name="meal[new_foods][][macronutrient_categories][][grams]" id="fat-grams" value='0'><br>
+    Servings:<input type="text" name="meal[new_foods][][food_servings]" id="food_servings"><br>
   </div>
   <input type="submit" value="create meal">
 </form>
