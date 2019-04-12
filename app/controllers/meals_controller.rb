@@ -17,6 +17,7 @@ class MealsController < ApplicationController
   end
 
   def create
+    binding.pry
     @meal = Meal.new(meal_params)
     @meal.user = current_user
 

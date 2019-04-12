@@ -17,4 +17,7 @@ class NewTableDataService
     }
   end
 
+  def call_todays_meals
+  end 
+
 end

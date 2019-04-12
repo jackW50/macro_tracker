@@ -118,7 +118,7 @@
       })
     }
 
-    function newMealFormListener() {
+    function createMealLinkListener() {
       $('#new-meal-form-link').on('click', function(e) {
         e.preventDefault();
         $('#new-meal-form-link').hide();
@@ -134,14 +134,27 @@
             $('#new-meal-form').prepend(newMealForm);
             $('#new-meal-form').before('<a href="#" id="hide-new-meal-form">hide form</a>')
             $('body').data('new-meal-form', newMealForm);
+            newMealFormListener();
           })
-        } //if statement block
+        }
+
+      })
+    }
+
+    function newMealFormListener() {
+      $('#meal-form').on('submit', function(event) {
+        debugger
+        event.preventDefault();
+        $.post("/meals", function(data) {
+          console.log('I just created a new meal', data);
+        }, "json");
       })
     }
 
     //show meals when i hit see all meals
       //each meal will have a link attached that will show us the foods for that particular meal.
     seeMealsListener();
-    newMealFormListener();
+    createMealLinkListener();
+    //newMealFormListener();
   })
 </script>
