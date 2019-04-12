@@ -1,12 +1,14 @@
-<% meals.each do |meal| %>
-  <%= content_tag :ul do %>
-    <%= content_tag :li do %>
-      <%= meal_time_link(meal, current_user) %>
+<div id="todays-meal-list">
+  <% meals.each do |meal| %>
+    <%= content_tag :ul do %>
+      <%= content_tag :li do %>
+        <%= meal_time_link(meal, current_user) %>
+      <% end %>
     <% end %>
-  <% end %>
 
-  <%= content_tag :p, class: "calories-list" do %>
-    - <%= meal.calories %> calories
-  <% end %>
+    <%= content_tag :p, class: "calories-list" do %>
+      - <%= meal.calories %> calories
+    <% end %>
 
-<% end %>
+  <% end %>
+</div>
