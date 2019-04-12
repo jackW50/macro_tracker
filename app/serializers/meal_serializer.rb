@@ -1,5 +1,5 @@
 class MealSerializer < ActiveModel::Serializer
-  attributes :id, :time, :todays_meal?
+  attributes :id, :time, :todays_meal?, :calories 
   has_many :meal_compositions
 
   def time
@@ -7,7 +7,10 @@ class MealSerializer < ActiveModel::Serializer
   end
 
   def todays_meal?
-    true 
+    true
     #true or false if it is a meal for today
+  end
+
+  def calories
   end
 end
