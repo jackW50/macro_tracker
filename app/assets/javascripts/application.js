@@ -66,7 +66,7 @@ class Meal {
     this.time +
     '</a></li></ul><p class="calories-list">- ' +
     this.calories +
-    'calories</p>'
+    ' calories</p>'
   }
 }
 
