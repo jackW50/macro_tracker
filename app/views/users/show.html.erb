@@ -158,10 +158,17 @@
           console.log("I created a new meal", data);
           //debugger
           if (data.meal["todays_meal?"]) {
-            debugger
             const meal = new Meal(data.meal.id, data.meal.time, data.meal.meal_compositions);
+            const macronutrientTable = new MacronutrientTable(data.meta.table_data.carbohydrate, data.meta.table_data.percent_calories_of_carbohydrate,
+            data.meta.table_data.protein, data.meta.table_data.percent_calories_of_protein, data.meta.table_data.fat,
+            data.meta.table_data.percent_calories_of_fat);
+
             meal.calories = data.meal.calories;
             $("#todays-meal-list").append(meal.liLink())
+            macronutrientTable.updateTable();
+            $('#new-meal-form').remove();
+            $('#new-meal-form-link').show();
+            $('#hide-new-meal-form').hide();
           }
         }
       })

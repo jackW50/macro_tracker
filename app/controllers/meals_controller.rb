@@ -25,7 +25,7 @@ class MealsController < ApplicationController
       #redirect_to user_path(current_user)
       respond_to do |format|
         format.html { redirect_to user_path(current_user) }
-        format.json { render json: @meal, meta: { table: NewTableDataService.new.call_todays_meals(current_user) }, adapter: :json }
+        format.json { render json: @meal, meta: { table_data: NewTableDataService.new.call_todays_meals(current_user) }, adapter: :json }
       end
     else
       @foods = Food.all
