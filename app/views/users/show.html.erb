@@ -136,6 +136,8 @@
             $('body').data('new-meal-form', newMealForm);
             newMealFormListener();
           })
+        } else {
+          $('#new-meal-form').prepend(('body').data('new-meal-form'));
         }
 
       })
@@ -172,9 +174,17 @@
           } else {
             $('#new-meal-form').remove();
             $('#new-meal-form-link').show();
-            $('#hide-new-meal-form').hide();
           }
         }
+      })
+    }
+
+    function hideFormListener() {
+      $('#hide-link-form').on('click', function(e) {
+        e.preventDefault();
+        console.log('link hides form');
+        $('#new-meal-form-link').show();
+        $('#new-meal-form').detach();
       })
     }
 
