@@ -134,12 +134,15 @@
             $('#new-meal-form').prepend(newMealForm);
             //$('#new-meal-form').before('<a href="#" id="hide-new-meal-form">hide form</a>')
             $('body').data('new-meal-form', newMealForm);
+            hideFormListener();
             newMealFormListener();
           })
         } else {
-          $('#new-meal-form').prepend(('body').data('new-meal-form'));
+          $('#new-meal-form').prepend($('body').data('new-meal-form'));
+          hideFormListener();
+          newMealFormListener();
         }
-
+        //hideFormListener();
       })
     }
 
@@ -182,9 +185,12 @@
     function hideFormListener() {
       $('#hide-link-form').on('click', function(e) {
         e.preventDefault();
+        //debugger
         console.log('link hides form');
         $('#new-meal-form-link').show();
-        $('#new-meal-form').detach();
+        debugger
+        $('#new-meal-form').empty();
+
       })
     }
 
