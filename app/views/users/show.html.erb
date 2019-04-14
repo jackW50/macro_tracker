@@ -132,7 +132,7 @@
               foods: data
             })
             $('#new-meal-form').prepend(newMealForm);
-            $('#new-meal-form').before('<a href="#" id="hide-new-meal-form">hide form</a>')
+            //$('#new-meal-form').before('<a href="#" id="hide-new-meal-form">hide form</a>')
             $('body').data('new-meal-form', newMealForm);
             newMealFormListener();
           })
@@ -166,6 +166,10 @@
             meal.calories = data.meal.calories;
             $("#todays-meal-list").append(meal.liLink())
             macronutrientTable.updateTable();
+            $('#new-meal-form').remove();
+            $('#new-meal-form-link').show();
+            $('#hide-new-meal-form').hide();
+          } else {
             $('#new-meal-form').remove();
             $('#new-meal-form-link').show();
             $('#hide-new-meal-form').hide();
