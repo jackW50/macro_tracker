@@ -43,6 +43,8 @@
     function seeMealsListener() {
       $('#all-meals').on('click', function(e) {
         e.preventDefault();
+        const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
+
         if ($('body').data('meals') === undefined) {
           $.getJSON('/meals', function(data) {
             console.log('got data back for meals', data);
@@ -56,42 +58,88 @@
               $('#show-meals').append(meal.mealListItem());
             })
           });
+          seeFoodsLinkListener();
+          hideMealsListener(seeMealsLink);
+          hideFoodsListener();
         } else {
           $('#show-meals').show();
+          seeFoodsLinkListener();
+          hideMealsListener(seeMealsLink);
+          hideFoodsListener();
         }
 
         //hide see meals link and show a hide meals link or replace the link with hide meals
-        const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
+        //const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
 
-        $('#hide-meals').on('click', function(e) {
-          e.preventDefault();
-          $('#show-meals').hide();
-          $('#hide-meals').replaceWith(seeMealsLink)
-          seeMealsListener();
+        // $('#hide-meals').on('click', function(e) {
+        //   e.preventDefault();
+        //   $('#show-meals').hide();
+        //   $('#hide-meals').replaceWith(seeMealsLink)
+        //   seeMealsListener();
+        // })
+
+        // $('#show-meals a').on('click', function(e) {
+        //   e.preventDefault();
+        //   console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
+        //   const mealId = this.attributes.data.value;
+        //   const meal = $('body').data('meals').find( e => {
+        //     return e.id === parseInt(mealId);
+        //   })
+        //   meal.foods().forEach( e => {
+        //     return $('ul#' + mealId).append(e.foodLink())
+        //   })
+
+          // const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
+          // let hideFoods;
+          //
+          // $('#hide-foods-' + mealId).on('click', function(e) {
+          //   e.preventDefault();
+          //   foodList = $('ul#' + mealId)
+          //   foodList.hide("slow")
+          //   hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
+          //   seeFoodsListener(seeFoodsLink, foodList)
+          // })
         })
+      }
+    //}
 
-        $('#show-meals a').on('click', function(e) {
-          e.preventDefault();
-          console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
-          const mealId = this.attributes.data.value;
-          const meal = $('body').data('meals').find( e => {
-            return e.id === parseInt(mealId);
-          })
-          meal.foods().forEach( e => {
-            return $('ul#' + mealId).append(e.foodLink())
-          })
+    function hideMealsListener(mealsLink) {
+      $('#hide-meals').on('click', function(e) {
+        //debugger
+        e.preventDefault();
+        $('#show-meals').hide();
+        $('#hide-meals').replaceWith(mealsLink)
+        seeMealsListener();
+      })
+    }
 
-          const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
-          let hideFoods;
-
-          $('#hide-foods-' + mealId).on('click', function(e) {
-            e.preventDefault();
-            foodList = $('ul#' + mealId)
-            foodList.hide("slow")
-            hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
-            seeFoodsListener(seeFoodsLink, foodList)
-          })
+    function seeFoodsLinkListener() {
+      $('#show-meals a').on('click', function(e) {
+        e.preventDefault();
+        console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
+        const mealId = this.attributes.data.value;
+        const meal = $('body').data('meals').find( e => {
+          return e.id === parseInt(mealId);
         })
+        meal.foods().forEach( e => {
+          return $('ul#' + mealId).append(e.foodLink())
+        })
+        const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods">hide foods</a>');
+      })
+    }
+
+
+    function hideFoodsListener() {
+      //const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
+      let hideFoods;
+
+      $('#hide-foods').on('click', function(e) {
+        e.preventDefault();
+        const mealId = this.attributes.data.value;
+        foodList = $('ul#' + mealId)
+        foodList.hide("slow")
+        hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
+        //seeFoodsListener(seeFoodsLink, foodList)
       })
     }
 
@@ -179,16 +227,16 @@
             $('#new-meal-form-link').show();
           }
         }
-      })
+      });
     }
+
+
 
     function hideFormListener() {
       $('#hide-link-form').on('click', function(e) {
         e.preventDefault();
-        //debugger
         console.log('link hides form');
         $('#new-meal-form-link').show();
-        debugger
         $('#new-meal-form').empty();
 
       })
