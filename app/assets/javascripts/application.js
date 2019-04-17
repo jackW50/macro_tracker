@@ -53,7 +53,7 @@ class Meal {
   mealListItem() {
     return '<ul><li>' +
     this.time +
-    '</li><li><a href="#" data="' +
+    '</li><li><a href="#" id="see-foods-' + this.id + '" data="' +
     this.id +
     '">see foods</a></li><ul id="' +
      this.id +

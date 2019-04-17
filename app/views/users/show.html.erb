@@ -57,58 +57,23 @@
             $('body').data('meals', meals);
 
             let counter = 0;
+            //const link = $('#show-meals a')
             meals.forEach( meal => {
               counter++
               $('#show-meals').append(meal.mealListItem());
               if (counter === meals.length) {
-                seeFoodsLinkListener();
+                const links = '#show-meals a'
+                seeFoodsLinkListener(links);
               }
             })
           });
-          //seeFoodsLinkListener();
           hideMealsListener(seeMealsLink);
-          //hideFoodsListener();
         } else {
           $('#show-meals').show();
-          //seeFoodsLinkListener();
-          hideMealsListener(seeMealsLink);
-          //hideFoodsListener();
         }
+      });
+    }
 
-
-        //hide see meals link and show a hide meals link or replace the link with hide meals
-        //const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
-        // $('#hide-meals').on('click', function(e) {
-        //   e.preventDefault();
-        //   $('#show-meals').hide();
-        //   $('#hide-meals').replaceWith(seeMealsLink)
-        //   seeMealsListener();
-        // })
-
-        // $('#show-meals a').on('click', function(e) {
-        //   e.preventDefault();
-        //   console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
-        //   const mealId = this.attributes.data.value;
-        //   const meal = $('body').data('meals').find( e => {
-        //     return e.id === parseInt(mealId);
-        //   })
-        //   meal.foods().forEach( e => {
-        //     return $('ul#' + mealId).append(e.foodLink())
-        //   })
-
-          // const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
-          // let hideFoods;
-          //
-          // $('#hide-foods-' + mealId).on('click', function(e) {
-          //   e.preventDefault();
-          //   foodList = $('ul#' + mealId)
-          //   foodList.hide("slow")
-          //   hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
-          //   seeFoodsListener(seeFoodsLink, foodList)
-          // })
-        });
-      }
-    //}
 
     function hideMealsListener(mealsLink) {
       $('#hide-meals').on('click', function(e) {
@@ -119,46 +84,41 @@
       })
     }
 
-     function seeFoodsLinkListener() {
-       $('#show-meals a').on('click', function(e) {
+     function seeFoodsLinkListener(link) {
+       $(link).on('click', function(e) {
          e.preventDefault();
          console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
          const mealId = this.attributes.data.value;
-         debugger
+         let seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '" data="' + mealId + '">hide foods</a>');
+
          if ($('body').data('foodList' + mealId) === undefined) {
            const meal = $('body').data('meals').find( e => {
              return e.id === parseInt(mealId);
            })
+           $('body').data('foodList' + mealId, $('ul#' + mealId))
            meal.foods().forEach( e => {
              return $('ul#' + mealId).append(e.foodLink())
            })
+           hideFoodsListener(seeFoodsLink)
          } else {
-           $('ul#' + mealId).show("slow");
+           $('body').data('foodList' + mealId).show("slow");
+           hideFoodsListener(seeFoodsLink)
          }
-         // const meal = $('body').data('meals').find( e => {
-         //   return e.id === parseInt(mealId);
-         // })
-         // meal.foods().forEach( e => {
-         //   return $('ul#' + mealId).append(e.foodLink())
-         // })
-         const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods"data="' + mealId + '">hide foods</a>');
-         hideFoodsListener(seeFoodsLink);
        })
      }
 
 
     function hideFoodsListener(seeFoodsLink) {
-      //const seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
-      let hideFoods;
 
-      $('#hide-foods').on('click', function(e) {
+      const mealId = seeFoodsLink[0].attributes.data.value;
+      $('#hide-foods-' + mealId).on('click', function(e) {
         e.preventDefault();
-        const mealId = this.attributes.data.value;
+
         let foodList = $('ul#' + mealId)
-        $('body').data('foodList' + mealId, foodList)
+
         foodList.hide("slow")
-        $(this).replaceWith(seeFoodsLink);
-        seeFoodsLinkListener();
+        $(this).replaceWith(seeFoodsLink)
+        seeFoodsLinkListener('#see-foods-' + mealId);
       })
     }
 
@@ -264,7 +224,7 @@
     //show meals when i hit see all meals
       //each meal will have a link attached that will show us the foods for that particular meal.
     seeMealsListener();
-    seeFoodsLinkListener()
+    //seeFoodsLinkListener()
     createMealLinkListener();
 
   })
