@@ -138,11 +138,15 @@
             $('body').data('new-meal-form', newMealForm);
             hideFormListener();
             newMealFormListener();
+            createNewFoodFormLinkListener();
+            addFoodFormLinkListener();
           })
         } else {
           $('#new-meal-form').prepend($('body').data('new-meal-form'));
           hideFormListener();
           newMealFormListener();
+          createNewFoodFormLinkListener();
+          addFoodFormLinkListener();
         }
       })
     }
