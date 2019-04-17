@@ -57,7 +57,6 @@
             $('body').data('meals', meals);
 
             let counter = 0;
-            //const link = $('#show-meals a')
             meals.forEach( meal => {
               counter++
               $('#show-meals').append(meal.mealListItem());
@@ -97,14 +96,14 @@
            })
            $('body').data('foodList' + mealId, $('ul#' + mealId))
            meal.foods().forEach( e => {
-             return $('ul#' + mealId).append(e.foodLink())
+             return $('ul#' + mealId).append(e.foodLink());
            })
            hideFoodsListener(seeFoodsLink)
          } else {
            $('body').data('foodList' + mealId).show("slow");
-           hideFoodsListener(seeFoodsLink)
+           hideFoodsListener(seeFoodsLink);
          }
-       })
+       });
      }
 
 
@@ -119,29 +118,6 @@
         foodList.hide("slow")
         $(this).replaceWith(seeFoodsLink)
         seeFoodsLinkListener('#see-foods-' + mealId);
-      })
-    }
-
-    function seeFoodsListener(link, foodList) {
-      $(link).on('click', function(e) {
-        e.preventDefault();
-        console.log('I just clicked to see the foods for this link', link);
-        const mealId = this.attributes.data.value;
-        const meal = $('body').data('meals').find( e => {
-          return e.id === parseInt(mealId);
-        })
-        foodList.show();
-
-        const seeFoodsLink = $(link).replaceWith('<a href="#" id="hide-foods-' + mealId + '">hide foods</a>');
-        let hideFoods;
-
-        $('#hide-foods-' + mealId).on('click', function(e) {
-          e.preventDefault();
-          foodList = $('ul#' + mealId)
-          foodList.hide("slow")
-          hideFoods = $('#hide-foods-' + mealId).replaceWith(seeFoodsLink);
-          seeFoodsListener(seeFoodsLink, foodList)
-        })
       })
     }
 
