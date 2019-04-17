@@ -69,16 +69,17 @@
           hideMealsListener(seeMealsLink);
         } else {
           $('#show-meals').show();
+          hideMealsListener(seeMealsLink);
         }
       });
     }
-
 
     function hideMealsListener(mealsLink) {
       $('#hide-meals').on('click', function(e) {
         e.preventDefault();
         $('#show-meals').hide();
         $('#hide-meals').replaceWith(mealsLink)
+        $('#all-meals').off()
         seeMealsListener();
       })
     }
@@ -105,7 +106,6 @@
          }
        });
      }
-
 
     function hideFoodsListener(seeFoodsLink) {
 
@@ -135,7 +135,6 @@
               foods: data
             })
             $('#new-meal-form').prepend(newMealForm);
-            //$('#new-meal-form').before('<a href="#" id="hide-new-meal-form">hide form</a>')
             $('body').data('new-meal-form', newMealForm);
             hideFormListener();
             newMealFormListener();
@@ -145,7 +144,6 @@
           hideFormListener();
           newMealFormListener();
         }
-        //hideFormListener();
       })
     }
 
@@ -164,7 +162,7 @@
 
         function success(data) {
           console.log("I created a new meal", data);
-          //debugger
+
           if (data.meal["todays_meal?"]) {
             const meal = new Meal(data.meal.id, data.meal.time, data.meal.meal_compositions);
             const macronutrientTable = new MacronutrientTable(data.meta.table_data.carbohydrate, data.meta.table_data.percent_calories_of_carbohydrate,
@@ -185,22 +183,21 @@
       });
     }
 
-
-
     function hideFormListener() {
       $('#hide-link-form').on('click', function(e) {
         e.preventDefault();
         console.log('link hides form');
         $('#new-meal-form-link').show();
         $('#new-meal-form').empty();
-
+        $('#new-meal-form-link').off();
+        createMealLinkListener();
       })
     }
 
     //show meals when i hit see all meals
       //each meal will have a link attached that will show us the foods for that particular meal.
     seeMealsListener();
-    //seeFoodsLinkListener()
+
     createMealLinkListener();
 
   })
