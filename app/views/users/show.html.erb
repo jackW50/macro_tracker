@@ -176,12 +176,15 @@
             meal.calories = data.meal.calories;
             $("#todays-meal-list").append(meal.liLink())
             macronutrientTable.updateTable();
-            $('#new-meal-form').remove();
+            $('#new-meal-form').empty();
             $('#new-meal-form-link').show();
-            $('#hide-new-meal-form').hide();
+            $('#new-meal-form-link').off();
+            createMealLinkListener();
           } else {
-            $('#new-meal-form').remove();
+            $('#new-meal-form').empty();
             $('#new-meal-form-link').show();
+            $('#new-meal-form-link').off();
+            createMealLinkListener();
           }
         }
       });
