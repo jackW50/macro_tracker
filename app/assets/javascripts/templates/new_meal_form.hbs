@@ -163,6 +163,9 @@
       {{/each}}
     </select>
     <input type="text" name="meal[food_attributes][][servings]" id="meal_food_attributes_servings" placeholder="servings">
+    <div id="add-add-food-form"><div>
+    <a href="#" id="add-food-form-link">Add another food</a>
+    </div>
   </div>
   <div id="create-food">
     <br>
@@ -175,6 +178,9 @@
     <input type="hidden" name="meal[new_foods][][macronutrient_categories][][macronutrient_id]" value="3">
     Fats:<input type="text" name="meal[new_foods][][macronutrient_categories][][grams]" id="fat-grams" value='0'><br>
     Servings:<input type="text" name="meal[new_foods][][food_servings]" id="food_servings"><br>
+    <div id="add-new-food-form">
+      <a href="#" id="create-new-food-form-link">Create another food</a>
+    </div>
   </div>
   <input type="submit" value="create meal">
   <a href="#" id="hide-link-form">hide</a>
