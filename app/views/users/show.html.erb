@@ -194,10 +194,38 @@
       })
     }
 
+    function createNewFoodFormLinkListener() {
+      $('#create-new-food-form-link').on('click', function(e) {
+        e.preventDefault();
+        console.log('In the new food form click');
+
+        const newFoodForm = HandlebarsTemplates['new_meal_food'];
+        $('#add-new-food-form').prepend(newFoodForm);
+      });
+    }
+
+    function addFoodFormLinkListener() {
+      $('#add-food-form-link').on('click', function(e) {
+        e.preventDefault();
+        console.log('In the add food form click');
+        $.get('/foods', function(data) {
+          console.log(data)
+          const foods = data;
+          const addFoodForm = HandlebarsTemplates['add_meal_food']({
+            foods: foods
+          })
+          $('#add-add-food-form').prepend(addFoodForm);
+        })
+      });
+    }
+
     //show meals when i hit see all meals
       //each meal will have a link attached that will show us the foods for that particular meal.
     seeMealsListener();
-
+    //will show new meal form with links to add foods or create foods links
+    //Upon submission will create a meal and display it if it is a meal for today
+    //Will update table data if it is a meal for today
+    //when submitted the form will retract
     createMealLinkListener();
 
   })
