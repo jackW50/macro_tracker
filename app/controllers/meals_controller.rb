@@ -17,12 +17,10 @@ class MealsController < ApplicationController
   end
 
   def create
-    #binding.pry
     @meal = Meal.new(meal_params)
     @meal.user = current_user
 
     if @meal.save
-      #redirect_to user_path(current_user)
       respond_to do |format|
         format.html { redirect_to user_path(current_user) }
         format.json { render json: @meal, meta: { table_data: NewTableDataService.new.call_todays_meals(current_user) }, adapter: :json }
@@ -46,7 +44,6 @@ class MealsController < ApplicationController
 
   def update
     @food = Food.find(params[:meal][:add_food][:food_id]) if params[:meal][:add_food]
-    #binding.pry
     if @meal.update(meal_params)
       respond_to do |format|
         format.html { redirect_to meal_path(@meal) }
