@@ -9,5 +9,9 @@
   $(document).on('turbolinks:load', function() {
     console.log('in turbolinks load');
 
+    $('#see-creator').on('click', function(e) {
+      e.preventDefault();
+      console.log('just clicked on this meal creator link', this);
+    })
   })
 </script>
