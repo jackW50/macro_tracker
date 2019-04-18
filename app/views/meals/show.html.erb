@@ -79,6 +79,9 @@
     $(document).on('turbolinks:load', function() {
       console.log('turbolinks loads');
       $('#see-foods').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('#see-foods').off();
         console.log('You just clicked the button');
         const mealId = this.attributes.data.value;
         $.getJSON('/meals/' + mealId, function(data) {
@@ -120,8 +123,8 @@
           $('#create-title').text("");
           $('#new-food-link').show();
         })
-        $('#new-food-form').on('submit', function(event) {
-          event.preventDefault();
+        $('#new-food-form').on('submit', function(e) {
+          e.preventDefault();
           $('#new-food-link').show();
           let mealId = $('#new-food-form')[0].attributes.data.value;
           let values = $(this).serialize();
@@ -180,8 +183,8 @@
           }
         })
       })
-      $('#add-food-form').submit(function(event) {
-        event.preventDefault();
+      $('#add-food-form').submit(function(e) {
+        e.preventDefault();
 
         console.log('I submitted the add food form', this);
         let values = $(this).serialize();
