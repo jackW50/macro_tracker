@@ -1,5 +1,5 @@
 class MealSerializer < ActiveModel::Serializer
-  attributes :id, :time, :todays_meal?, :calories
+  attributes :id, :time, :todays_meal?, :calories, :user 
   has_many :meal_compositions
 
   def time
