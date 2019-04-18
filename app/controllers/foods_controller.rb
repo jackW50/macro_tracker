@@ -34,7 +34,6 @@ class FoodsController < ApplicationController
   end
 
   def show
-    #binding.pry
     find_meal if params[:meal_id]
     respond_to do |format|
       format.html { render :show }

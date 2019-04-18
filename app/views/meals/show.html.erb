@@ -51,7 +51,9 @@
     console.log('hello on show');
 
     function removeFoodListener() {
-      $('button#remove-food').on('click', function() {
+      $('button#remove-food').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         console.log('In the remove food function', this);
 
         let mealCompositionId = this.attributes.data.value;
@@ -77,6 +79,10 @@
       })
     }
     $(document).on('turbolinks:load', function() {
+      $('#see-foods').off();
+      $('#new-food-link').off();
+      $('#add-food-form').off("submit");
+
       console.log('turbolinks loads');
       $('#see-foods').on('click', function(e) {
         e.preventDefault();
@@ -98,6 +104,7 @@
       })
       $('#new-food-link').on('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         console.log('just clicked to create a new food for meal.');
         $('#create-title').text("Create Foods");
         if ($('body').data('new-form') === undefined) {
@@ -119,12 +126,14 @@
 
         $('#hide-form').on('click', function(e) {
           e.preventDefault();
+          e.stopPropagation();
           $('#new-food-form').detach();
           $('#create-title').text("");
           $('#new-food-link').show();
         })
         $('#new-food-form').on('submit', function(e) {
           e.preventDefault();
+          e.stopPropagation();
           $('#new-food-link').show();
           let mealId = $('#new-food-form')[0].attributes.data.value;
           let values = $(this).serialize();
@@ -150,6 +159,7 @@
               const $arrList = $('#foods li button')
               $arrList.last().on('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 console.log('In the remove food function', this);
 
                 let mealCompositionId = this.attributes.data.value;
@@ -185,6 +195,7 @@
       })
       $('#add-food-form').submit(function(e) {
         e.preventDefault();
+        e.stopPropagation();
 
         console.log('I submitted the add food form', this);
         let values = $(this).serialize();
@@ -213,6 +224,7 @@
             const $arrList = $('#foods li button')
             $arrList.last().on('click', function(e) {
               e.preventDefault();
+              e.stopPropagation();
               console.log('In the remove food function', this);
 
               let mealCompositionId = this.attributes.data.value;
