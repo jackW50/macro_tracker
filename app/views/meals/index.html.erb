@@ -4,12 +4,12 @@
 <%= render 'meals_list', meals: @all_meals %>
 
 <script type="text/javascript" charset="utf-8">
-  console.log('hello on user profile.');
+  console.log('hello on meals index.');
 
   $(document).on('turbolinks:load', function() {
     console.log('in turbolinks load');
 
-    $('#see-creator').on('click', function(e) {
+    $('.see-creator').on('click', function(e) {
 
       e.preventDefault();
       console.log('just clicked on this meal creator link', this);
@@ -19,6 +19,7 @@
       //return individual meal, and create a meal object, then use the meal object to display that meals user in <li></li> tags.
 
       const mealId =this.attributes.data.value;
+      $(this).hide();
 
       $.get('/meals/' + mealId, function(data) {
         //want json back
@@ -26,8 +27,16 @@
         //use this meal object to display the user for the meal in <li></li> tags
         console.log('in ajax success function', data);
         const meal = new Meal(data.id, data.time, data.meal_compositions);
-        meal.user = data.user.username;
-        
+        if (data.user === null) {
+          meal.user = "This meal does not have a user."
+        } else {
+          meal.user = data.user.username;
+        }
+
+        const userLi = '<ul><li>' + meal.user + '</li></ul>';
+
+        $('#meal-creator-' + meal.id).append(userLi);
+
       }, "json");
     })
   })
