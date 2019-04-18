@@ -93,6 +93,16 @@
     float: left;
   }
 
+  .col-2 {
+    float: center;
+  }
+
+  .clearfix {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
   #meal_show_macro {
     margin-left: 50%;
   }

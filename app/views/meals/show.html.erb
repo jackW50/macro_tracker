@@ -9,7 +9,7 @@
   <h3 id="title"></h3>
   <%= content_tag :ul, nil, class: "col-1", id: "foods" %>
 
-
+<div class="col-2">
   <h5 id="meal_show_macro"> Macronutrient Tracker </h5>
   <table class="pure-table">
       <thead>
@@ -23,10 +23,10 @@
         <%= render 'macronutrients_table', macronutrients: @macronutrients, item: @meal %>
       </tbody>
   </table>
-
+</div>
 
   <!-- dropdown menu to add existing foods to current meal -->
-  <div id="form"></div>
+  <div id="form" class="col-2"></div>
   <%= form_tag(meal_path(@meal), method: :patch, id: "add-food-form", data: @meal.id) do %>
     <%= meal_errors_present?(@meal) do %>
       <%= select_tag 'meal[add_food][food_id]', options_from_collection_for_select(Food.all, :id, :name), prompt: "Select Food"  %>
@@ -35,14 +35,14 @@
     <% end %>
   <% end %>
 
-<h4 id="create-title"><h4>
+<h4 id="create-title" class="col-2"><h4>
   <%= content_tag :p, id: "add-form" do %>
     <%= link_to "Create Food", new_meal_food_path(@meal), id: "new-food-link", data: "#{@meal.id}" %>
   <% end %>
 
 <!-- link to edit meals time -->
 <div>
-  <%= content_tag :div do %>
+  <%= content_tag :div, class: "col-2" do %>
    <%= link_to "Update Meal Time", edit_meal_path(@meal) %>
   <% end %>
 </div>
