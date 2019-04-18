@@ -25,6 +25,7 @@ class Meal {
     this.id = id;
     this.time = time;
     this.calories = ''
+    this.user = ''
     //mealCompositions is equal to an array;
     this.mealCompositions = mealCompositions;
   }
