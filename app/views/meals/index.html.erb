@@ -10,7 +10,7 @@
     console.log('in turbolinks load');
 
     $('#see-creator').on('click', function(e) {
-      debugger
+
       e.preventDefault();
       console.log('just clicked on this meal creator link', this);
       //get meal using AJAX
@@ -20,11 +20,15 @@
 
       const mealId =this.attributes.data.value;
 
-      $.get('/meals' + mealId, function(data) {
+      $.get('/meals/' + mealId, function(data) {
         //want json back
         //use data to create a meal object with a username
         //use this meal object to display the user for the meal in <li></li> tags
-      })
+        console.log('in ajax success function', data);
+        const meal = new Meal(data.id, data.time, data.meal_compositions);
+        meal.user = data.user.username;
+        
+      }, "json");
     })
   })
 </script>

@@ -1,9 +1,9 @@
 class MealSerializer < ActiveModel::Serializer
-  attributes :id, :time, :todays_meal?, :calories, :user 
+  attributes :id, :time, :todays_meal?, :calories, :user
   has_many :meal_compositions
 
   def time
-    time = self.object.time.strftime('@ %l:%M %p')
+    time = self.object.time.strftime('%b %d, @ %l:%M %p')
   end
 
   def todays_meal?
