@@ -38,7 +38,7 @@ class Meal {
       return '<li>' +
       '<a href="/foods/' +
       element.food_id +
-      '">' +
+      '?meal_id=' + element.meal_id + '">' +
       element.food_name +
       '</a>' +
       '<ul><li>Servings: ' +
