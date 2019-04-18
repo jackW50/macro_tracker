@@ -25,7 +25,7 @@ module MealsHelper
   end
 
   def meal_hour_min(meal)
-    meal.time.strftime('@ %l:%M %p')
+    meal.time.strftime('%b %d, @ %l:%M %p')
   end
 
   def div_tag_for_food_attributes

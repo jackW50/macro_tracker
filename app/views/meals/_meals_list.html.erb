@@ -8,6 +8,7 @@
 
     <%= content_tag :p, class: "calories-list" do %>
       - <%= meal.calories %> calories
+        <small><%= link_to ' see meal creator', '#' %></small>
     <% end %>
 
   <% end %>
