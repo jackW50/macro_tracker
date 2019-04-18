@@ -16,7 +16,7 @@ module MealsHelper
     if user.nil?
       link_to meal_time(meal), meal_path(meal)
     else
-      link_to meal_hour_min(meal), meal_path(meal)
+      link_to meal_hour_min(meal), meal_path(meal), rel: "shortcut icon"
     end
   end
 

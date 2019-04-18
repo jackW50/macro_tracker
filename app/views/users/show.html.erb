@@ -44,6 +44,7 @@
     function seeMealsListener() {
       $('#all-meals').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
 
         if ($('body').data('meals') === undefined) {
@@ -77,6 +78,7 @@
     function hideMealsListener(mealsLink) {
       $('#hide-meals').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         $('#show-meals').hide();
         $('#hide-meals').replaceWith(mealsLink)
         $('#all-meals').off()
@@ -87,6 +89,7 @@
      function seeFoodsLinkListener(link) {
        $(link).on('click', function(e) {
          e.preventDefault();
+         e.stopPropagation();
          console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
          const mealId = this.attributes.data.value;
          let seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '" data="' + mealId + '">hide foods</a>');
@@ -112,6 +115,7 @@
       const mealId = seeFoodsLink[0].attributes.data.value;
       $('#hide-foods-' + mealId).on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
 
         let foodList = $('ul#' + mealId)
 
@@ -124,6 +128,7 @@
     function createMealLinkListener() {
       $('#new-meal-form-link').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         $('#new-meal-form-link').hide();
 
         if ($('body').data('new-meal-form') === undefined) {
@@ -152,8 +157,9 @@
     }
 
     function newMealFormListener() {
-      $('#meal-form').on('submit', function(event) {
-        event.preventDefault();
+      $('#meal-form').on('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         let values = $(this).serialize();
 
         $.ajax({
@@ -193,6 +199,7 @@
     function hideFormListener() {
       $('#hide-link-form').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         console.log('link hides form');
         $('#new-meal-form-link').show();
         $('#new-meal-form').empty();
@@ -204,6 +211,7 @@
     function createNewFoodFormLinkListener() {
       $('#create-new-food-form-link').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         console.log('In the new food form click');
 
         const newFoodForm = HandlebarsTemplates['new_meal_food'];
@@ -214,6 +222,7 @@
     function addFoodFormLinkListener() {
       $('#add-food-form-link').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         console.log('In the add food form click');
         $.get('/foods', function(data) {
           console.log(data)
