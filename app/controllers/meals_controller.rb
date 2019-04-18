@@ -5,6 +5,7 @@ class MealsController < ApplicationController
 
   def index
     @meals = current_user.meals
+    @all_meals = Meal.all
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @meals, status: 200 }

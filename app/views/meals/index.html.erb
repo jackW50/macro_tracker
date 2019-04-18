@@ -1,4 +1,13 @@
-<%= content_tag :h1, current_user.username %>
+<h1> All Meals </h1>
 
 <h3> Meals </h3>
-<%= render 'meals_list', meals: @meals %>
+<%= render 'meals_list', meals: @all_meals %>
+
+<script type="text/javascript" charset="utf-8">
+  console.log('hello on user profile.');
+
+  $(document).on('turbolinks:load', function() {
+    console.log('in turbolinks load');
+
+  })
+</script>
