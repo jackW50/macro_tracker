@@ -89,6 +89,8 @@ class Food {
     return '<li>' +
     '<a href="/foods/' +
     this.id +
+    '?meal_id=' +
+    meal_composition.mealId +
     '">' +
     this.name +
     '</a>' +
