@@ -10,12 +10,21 @@
     console.log('in turbolinks load');
 
     $('#see-creator').on('click', function(e) {
+      debugger
       e.preventDefault();
       console.log('just clicked on this meal creator link', this);
       //get meal using AJAX
       //link should contain meals id in a data attribute
       //grab data id, and send with /meals to hit meal show route
       //return individual meal, and create a meal object, then use the meal object to display that meals user in <li></li> tags.
+
+      const mealId =this.attributes.data.value;
+
+      $.get('/meals' + mealId, function(data) {
+        //want json back
+        //use data to create a meal object with a username
+        //use this meal object to display the user for the meal in <li></li> tags
+      })
     })
   })
 </script>
