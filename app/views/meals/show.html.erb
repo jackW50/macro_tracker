@@ -49,7 +49,11 @@
 
   <script type="text/javascript" charset="utf-8">
     console.log('hello on show');
-
+    //This function adds a listener to the remove button in the foods list
+    function resetSubmit() {
+      $('#add-food-form input[type="submit"]').prop('disabled', false);
+    }
+    
     function removeFoodListener() {
       $('button#remove-food').on('click', function(e) {
         e.preventDefault();
@@ -58,6 +62,7 @@
 
         let mealCompositionId = this.attributes.data.value;
         let mealId = $('body').data('meal-foods').id
+        //removing the parent li this button is under from the DOM.
         $(this).closest('ul').closest('li').remove();
 
         $.ajax({
@@ -84,24 +89,30 @@
       $('#add-food-form').off("submit");
 
       console.log('turbolinks loads');
+      //See Foods button listener
       $('#see-foods').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         $('#see-foods').off();
         console.log('You just clicked the button');
+        //identifying which meal it is through the data attribute on the button which contains the meal id.
         const mealId = this.attributes.data.value;
         $.getJSON('/meals/' + mealId, function(data) {
           console.log('in the get response');
+          //create a meal object with the json response
           let meal = new Meal(data.id, data.time, data.meal_compositions);
           $("body").data( "meal-foods", meal);
           $('#title').text('Foods');
+          //Adding each meal composition to the DOM
           meal.foodList().forEach( element => {
             console.log('we are in the iteration');
             $('#foods').append(element);
           })
+          //Once the foods are displayed, this attaches a listener for the remove button for each list item.
           removeFoodListener();
         })
       })
+      //Attach listener for the new food link
       $('#new-food-link').on('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -113,29 +124,37 @@
           let newFoodForm = HandlebarsTemplates['new_food_form']({
             mealId: id
           })
+          //Adds to the DOM a new food form for the meal.
           $('#add-form').prepend(newFoodForm);
           $('body').data('new-form', newFoodForm);
+          //adds a hide form link to form.
           $('#hide-form').prepend('<a id="hide-form-link" href="#">hide form</a>')
           $('#new-food-link').hide();
         } else {
           console.log('In the else statement');
           $('#add-form').prepend($('body').data('new-form'))
+          //display none for the new food link, and saving theis display property in jQuery data cache
           $('#new-food-link').hide();
           $('#hide-form').prepend('<a id="hide-form-link" href="#">hide form</a>')
         }
-
+        //Once the form displays, attach a hide listener for the hide form link now dispayed on DOM.
         $('#hide-form').on('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
+          //Remove form from DOM, but retains jQuery data associated
           $('#new-food-form').detach();
           $('#create-title').text("");
+          //Callling on the jQuery data cache to restore new-food-link initial display.
           $('#new-food-link').show();
         })
+        //attaching a listener on the new food form
         $('#new-food-form').on('submit', function(e) {
           e.preventDefault();
           e.stopPropagation();
+          //Callling on the jQuery data cache to restore new-food-link initial display.
           $('#new-food-link').show();
           let mealId = $('#new-food-form')[0].attributes.data.value;
+          //creates a text string in standard URL-encoded notation
           let values = $(this).serialize();
 
           $.ajax({
@@ -147,16 +166,19 @@
           });
 
           function success(data) {
+            //When POST req is successful, create a food object and mealComposition object from json response data.
             let food = new Food(data.food.id, data.food.name);
             let mealComposition = new MealComposition(data.meal_composition.id,
             data.meal_composition.food_id, data.meal_composition.food_servings, data.meal_composition.meal_id)
-
+            //checking to see if the foods list is displayed. When foods list is displayed meal-foods will have a value other than undefined attached to body.
             if ($('body').data('meal-foods') === undefined) {
+              //Dont show on DOM
               alert('You just created a food for this meal')
             } else {
-              //the add food to list function takes a meal composition object as an argument
+              //the add food to list function takes a meal composition object as an argument, and adds it the end of the list of foods
               $('#foods').append(food.addFoodToList(mealComposition));
               const $arrList = $('#foods li button')
+              //Grabs the last remove button and attach a listener to this button.
               $arrList.last().on('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -193,11 +215,13 @@
           }
         })
       })
+      //attach a listener to the add food form.
       $('#add-food-form').submit(function(e) {
         e.preventDefault();
         e.stopPropagation();
 
         console.log('I submitted the add food form', this);
+        //creates a text string in standard URL-encoded notation(query string)
         let values = $(this).serialize();
         let mealId = $(this)[0].attributes.data.value;
         $.ajax({
@@ -253,7 +277,9 @@
           data.table_data.protein,data.table_data.percent_calories_of_protein, data.table_data.fat, data.table_data.percent_calories_of_fat)
 
           macronutrientTable.updateTable();
+          //reset form
           $('#add-food-form').trigger('reset');
+          //re-enable button
           resetSubmit();
         }
       })
