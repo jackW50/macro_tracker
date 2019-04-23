@@ -14,7 +14,7 @@
   <%= link_to "See All Meals", meals_path(@meal), id: "all-meals" %>
   <div id="show-meals"></div>
 <% end %>
-
+<div id="sort-meals"></div>
 <h5 id="todays_meals_show_macro"> Macronutrient Tracker </h5>
 <table class="pure-table">
     <thead>
@@ -40,35 +40,47 @@
   $('.see-creator').remove();
   $(document).on('turbolinks:load', function() {
     console.log('turbolinks loads');
-
+    //attach listener to the see all meals link
     function seeMealsListener() {
       $('#all-meals').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        //return value is the $('#all-meals') original link
         const seeMealsLink = $('#all-meals').replaceWith('<a href="#" id="hide-meals">hide meals</a>')
+        const sortMealsLink = `<a href="#" id="click-sort">Sort Meals</a>`
 
+        //Checking to see is the meals list has already been displayed.
         if ($('body').data('meals') === undefined) {
+          $('#sort-meals').append(sortMealsLink)
+          addSortMealsListener();
+          //If the meals list has not yet been displayed, then it sends an AJAX GET req.
           $.getJSON('/meals', function(data) {
             console.log('got data back for meals', data);
+            //meals is equal to an array of meal objects created from the AJAX JSON response
             const meals = data.map( e => {
               return new Meal(e.id, e.time, e.meal_compositions);
             })
             console.log(meals);
 
             $('body').data('meals', meals);
-
+            //const sortMealsLink = `<a href="#" id="click-sort">Sort Meals</a>`
+            //$('#sort-meal').append(sortMealsLink)
             let counter = 0;
             meals.forEach( meal => {
               counter++
               $('#show-meals').append(meal.mealListItem());
               if (counter === meals.length) {
+                //After each meal is added to DOM, attach a listener to all the see foods links for each meal list item.
                 const links = '#show-meals a'
                 seeFoodsLinkListener(links);
               }
             })
           });
+          //attach a hide meals listener once the meals are displayed.
           hideMealsListener(seeMealsLink);
+
         } else {
+          //if the meals have been displayed then just grab the data and show it back. No AJAX GET request is required here.
           $('#show-meals').show();
           hideMealsListener(seeMealsLink);
         }
@@ -92,18 +104,24 @@
          e.stopPropagation();
          console.log('I just clicked to see the foods for this meal', this.attributes.data.value);
          const mealId = this.attributes.data.value;
+         //replace the see foods link with a hide link, and store the see foods original link in the variable.
          let seeFoodsLink = $(this).replaceWith('<a href="#" id="hide-foods-' + mealId + '" data="' + mealId + '">hide foods</a>');
-
+         //Check to see if the food list has been displayed yet.
          if ($('body').data('foodList' + mealId) === undefined) {
+           //if no foods list is present, then grab the meal in the body data 'meals'
            const meal = $('body').data('meals').find( e => {
              return e.id === parseInt(mealId);
            })
+           //attach a foodsList identifier property to the body data based off the meal Id
            $('body').data('foodList' + mealId, $('ul#' + mealId))
+           //for each food in the meal, add it to the list identifier
            meal.foods().forEach( e => {
              return $('ul#' + mealId).append(e.foodLink());
            })
+           //attach listener to the hide link
            hideFoodsListener(seeFoodsLink)
          } else {
+           //if food list has already been displayed, go into the body data and show it.
            $('body').data('foodList' + mealId).show("slow");
            hideFoodsListener(seeFoodsLink);
          }
@@ -120,33 +138,46 @@
         let foodList = $('ul#' + mealId)
 
         foodList.hide("slow")
+        //replace the hide foods link with the original see foods link stored in the seeFoodsLink variable.
         $(this).replaceWith(seeFoodsLink)
+        //Attach Listener specifically to the link that will be identified by the meal id.
         seeFoodsLinkListener('#see-foods-' + mealId);
       })
     }
 
     function createMealLinkListener() {
+      //attach listener on the new meal form link.
       $('#new-meal-form-link').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         $('#new-meal-form-link').hide();
-
+        //check to see if the form has been displayed yet
         if ($('body').data('new-meal-form') === undefined) {
           console.log('no form saved')
+          //If no form displayed yet, send AJAX GET req to get all the foods for the drop down select menu to pick from.
           $.get('/foods', function(data) {
             console.log(data);
+            //If AJAX GET req successful store all the foods in the database in the body
             $('body').data('all-foods', data);
+            //Pass the json data into the template as a foods varibale to iterate through and create a form with appropriate data.
             const newMealForm = HandlebarsTemplates['new_meal_form']({
               foods: data
             })
+            //Add the form to DOM.
             $('#new-meal-form').prepend(newMealForm);
+            //Store the form to the body data.
             $('body').data('new-meal-form', newMealForm);
+            //Attach a listener to the hide link in the form.
             hideFormListener();
+            //attach listener for when the form is submitted
             newMealFormListener();
+            //attach a listener when the create another food link in the form is clicked on.
             createNewFoodFormLinkListener();
+            //attach a listener when the add another food link in the form is clicked on.
             addFoodFormLinkListener();
           })
         } else {
+          //if form has already been displayed, just retrieve it from the body data ad display it to DOM.
           $('#new-meal-form').prepend($('body').data('new-meal-form'));
           hideFormListener();
           newMealFormListener();
@@ -157,6 +188,7 @@
     }
 
     function newMealFormListener() {
+      //Listener for when the form is submitted to create a new meal.
       $('#meal-form').on('submit', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -172,17 +204,22 @@
 
         function success(data) {
           console.log("I created a new meal", data);
-
+          //If the post request is successful, the return JSON data will include a property that returns a boolean that you check to see if the meal is of the current day.
           if (data.meal["todays_meal?"]) {
+            //if the meal if of the current day, then create a meal object, and new macronutrientTable Object with data.
             const meal = new Meal(data.meal.id, data.meal.time, data.meal.meal_compositions);
             const macronutrientTable = new MacronutrientTable(data.meta.table_data.carbohydrate, data.meta.table_data.percent_calories_of_carbohydrate,
             data.meta.table_data.protein, data.meta.table_data.percent_calories_of_protein, data.meta.table_data.fat,
             data.meta.table_data.percent_calories_of_fat);
 
             meal.calories = data.meal.calories;
+            //Add meal to DOM
             $("#todays-meal-list").append(meal.liLink())
+            //Add new table data to DOM.
             macronutrientTable.updateTable();
+            //remove form data and form event handlers
             $('#new-meal-form').empty();
+            //re-display the create meal link
             $('#new-meal-form-link').show();
             $('#new-meal-form-link').off();
             createMealLinkListener();
@@ -233,6 +270,35 @@
           $('#add-add-food-form').prepend(addFoodForm);
         })
       });
+    }
+    function addSortMealsListener() {
+      $('#sort-meals').on('click', function(e) {
+        e.preventDefault();
+        $('#show-meals').empty();
+        $('#show-meals a').off();
+
+        $('body').data('meals').sort( function(a, b) {
+          if (a.time < b.time) {
+            return -1;
+          } if (a.time > b.time) {
+            return 1;
+          }
+          return 0;
+        });
+
+        let counter = 0;
+        $('body').data('meals').forEach( meal => {
+          counter++
+          $('#show-meals').append(meal.mealListItem());
+          $('body').removeData('foodList' + meal.id)
+          if (counter === $('body').data('meals').length) {
+            //After each meal is added to DOM, attach a listener to all the see foods links for each meal list item.
+            const links = '#show-meals a'
+            seeFoodsLinkListener(links);
+          }
+        })
+        $('#sort-meals').remove();
+      })
     }
 
     //show meals when i hit see all meals
