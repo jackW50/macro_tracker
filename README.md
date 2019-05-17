@@ -2,6 +2,8 @@
 
 This is a Rails application that allows users to create meals, and to keep track of the macronutrient compositions of those meals. For this app, a macronutrient composition is represented as the total grams of the macronutrient and the percentage of calories the macronutrient contributes to the meal. It was designed with the intention to help users create meals that could align with certain dietary goals concerning amounts of carbohydrates, proteins, and fats.
 
+Here is a walktrhough of the app: https://www.youtube.com/watch?v=7vr6ZsJ25_A
+
 
 ## Installation
 
