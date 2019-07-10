@@ -50,10 +50,6 @@
   <script type="text/javascript" charset="utf-8">
     console.log('hello on show');
     //This function adds a listener to the remove button in the foods list
-    function resetSubmit() {
-      $('#add-food-form input[type="submit"]').prop('disabled', false);
-    }
-    
     function removeFoodListener() {
       $('button#remove-food').on('click', function(e) {
         e.preventDefault();
@@ -83,6 +79,10 @@
         }
       })
     }
+    function resetSubmit() {
+      $('#add-food-form input[type="submit"]').prop('disabled', false);
+    }
+
     $(document).on('turbolinks:load', function() {
       $('#see-foods').off();
       $('#new-food-link').off();

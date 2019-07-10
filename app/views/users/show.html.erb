@@ -287,7 +287,9 @@
         });
 
         let counter = 0;
-        $('body').data('meals').forEach( meal => {
+        const newArr = $('body').data('meals').filter( (e) =>
+          e.time[0] === 'A' );
+        newArr.forEach( meal => {
           counter++
           $('#show-meals').append(meal.mealListItem());
           $('body').removeData('foodList' + meal.id)
@@ -297,6 +299,7 @@
             seeFoodsLinkListener(links);
           }
         })
+
         $('#sort-meals').remove();
       })
     }
